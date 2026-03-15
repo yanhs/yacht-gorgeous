@@ -1,0 +1,36 @@
+[
+  {
+    "id": 1773160152205,
+    "timestamp": "2026-03-10T16:29:12.205724",
+    "name": "Test User",
+    "email": "test@example.com",
+    "phone": "+1555123456",
+    "date": "2026-03-15",
+    "cruise": "🌅 Sunset Cruise",
+    "cruiseType": "sunset",
+    "time": "4:00 PM",
+    "duration": "2 hours",
+    "guests": 4,
+    "price": 750,
+    "paymentMethod": "card",
+    "status": "confirmed",
+    "notes": ""
+  },
+  {
+    "id": 1773160277837,
+    "timestamp": "2026-03-10T16:31:17.837729",
+    "name": "Marina Test",
+    "email": "marina@test.com",
+    "phone": "+1 555-999-1234",
+    "date": "2026-03-20",
+    "cruise": "🌅 Sunset Cruise — from $750",
+    "cruiseType": "sunset",
+    "time": "5:00 PM",
+    "duration": "3 hours",
+    "guests": 6,
+    "price": 950,
+    "paymentMethod": "request",
+    "status": "new",
+    "notes": ""
+  }
+]

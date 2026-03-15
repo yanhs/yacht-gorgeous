@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Captain's Dashboard — Yacht Gorgeous</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    background: #0a1a35;
+    color: #e8d4b0;
+    font-family: Georgia, serif;
+    min-height: 100vh;
+  }
+  /* Header */
+  .header {
+    background: rgba(10,26,53,0.95);
+    border-bottom: 1px solid rgba(212,175,55,0.15);
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header h1 {
+    font-size: 1.1rem;
+    color: #D4AF37;
+    letter-spacing: 0.1em;
+  }
+  .header h1 span { color: #e8d4b0; font-weight: 400; font-size: 0.85rem; }
+  .header-actions { display: flex; gap: 10px; }
+  .btn-refresh {
+    background: rgba(212,175,55,0.15);
+    border: 1px solid rgba(212,175,55,0.3);
+    color: #D4AF37;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    font-size: 0.8rem;
+    transition: background 0.2s;
+  }
+  .btn-refresh:hover { background: rgba(212,175,55,0.25); }
+
+  /* Login */
+  .login-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+  .login-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,175,55,0.2);
+    border-radius: 16px;
+    padding: 40px 32px;
+    text-align: center;
+    max-width: 360px;
+    width: 100%;
+  }
+  .login-box h2 { color: #D4AF37; font-size: 1.3rem; margin-bottom: 8px; }
+  .login-box p { font-size: 0.85rem; opacity: 0.6; margin-bottom: 24px; }
+  .login-box input {
+    width: 100%;
+    padding: 14px 16px;
+    border-radius: 8px;
+    border: 1px solid rgba(212,175,55,0.2);
+    background: rgba(255,255,255,0.05);
+    color: #e8d4b0;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    outline: none;
+    margin-bottom: 16px;
+  }
+  .login-box input:focus { border-color: rgba(212,175,55,0.5); }
+  .login-box button {
+    width: 100%;
+    padding: 14px;
+    border-radius: 8px;
+    border: none;
+    background: linear-gradient(135deg, #D4AF37, #b8972e);
+    color: #0a1a35;
+    font-family: Georgia, serif;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .login-error { color: #e74c3c; font-size: 0.8rem; margin-top: 8px; display: none; }
+
+  /* Stats */
+  .stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 12px;
+    padding: 20px 24px;
+  }
+  .stat-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,175,55,0.1);
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+  }
+  .stat-num {
+    font-size: 1.8rem;
+    color: #D4AF37;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+  .stat-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    opacity: 0.6;
+    margin-top: 4px;
+  }
+
+  /* Filters */
+  .filters {
+    padding: 0 24px 12px;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 6px 14px;
+    border-radius: 20px;
+    border: 1px solid rgba(212,175,55,0.2);
+    background: transparent;
+    color: #e8d4b0;
+    font-family: Georgia, serif;
+    font-size: 0.75rem;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .filter-btn.active {
+    background: rgba(212,175,55,0.2);
+    border-color: #D4AF37;
+    color: #D4AF37;
+  }
+
+  /* Bookings */
+  .bookings { padding: 0 24px 40px; }
+  .booking-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,175,55,0.1);
+    border-radius: 12px;
+    padding: 16px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+  .booking-card:hover { border-color: rgba(212,175,55,0.3); }
+  .booking-card.today { border-left: 3px solid #D4AF37; }
+  .booking-card.past { opacity: 0.5; }
+
+  .bc-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 10px;
+  }
+  .bc-cruise {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #D4AF37;
+  }
+  .bc-price {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #D4AF37;
+  }
+  .bc-date {
+    font-size: 0.85rem;
+    opacity: 0.8;
+    margin-bottom: 8px;
+  }
+  .bc-client {
+    font-size: 0.85rem;
+    margin-bottom: 4px;
+  }
+  .bc-client strong { color: #fff; }
+  .bc-details {
+    font-size: 0.75rem;
+    opacity: 0.6;
+    margin-bottom: 10px;
+  }
+  .bc-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 600;
+  }
+  .bc-badge.card { background: rgba(52,152,219,0.2); color: #5dade2; }
+  .bc-badge.crypto { background: rgba(243,156,18,0.2); color: #f39c12; }
+  .bc-badge.cash { background: rgba(46,204,113,0.2); color: #2ecc71; }
+
+  .bc-actions {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid rgba(212,175,55,0.08);
+  }
+  .bc-action {
+    padding: 6px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(212,175,55,0.15);
+    background: rgba(212,175,55,0.05);
+    color: #e8d4b0;
+    font-size: 0.72rem;
+    text-decoration: none;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    transition: background 0.2s;
+  }
+  .bc-action:hover { background: rgba(212,175,55,0.15); }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    opacity: 0.5;
+  }
+  .empty-state .emoji { font-size: 3rem; margin-bottom: 12px; }
+
+  .loading {
+    text-align: center;
+    padding: 60px 20px;
+    color: #D4AF37;
+  }
+
+  /* Dashboard wrapper */
+  .dashboard { display: none; }
+
+  @media (max-width: 500px) {
+    .stats { grid-template-columns: repeat(2, 1fr); gap: 8px; }
+    .header h1 { font-size: 0.9rem; }
+    .bc-actions { gap: 6px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Login Screen -->
+<div class="login-screen" id="loginScreen">
+  <div class="login-box">
+    <h2>⚓ Captain's Dashboard</h2>
+    <p>Yacht Gorgeous — Admin Panel</p>
+    <input type="password" id="passInput" placeholder="Enter access code" onkeydown="if(event.key==='Enter')doLogin()">
+    <button onclick="doLogin()">Enter Bridge 🚢</button>
+    <div class="login-error" id="loginError">Wrong code. Try again.</div>
+  </div>
+</div>
+
+<!-- Dashboard -->
+<div class="dashboard" id="dashboard">
+  <div class="header">
+    <h1>⚓ CAPTAIN'S LOG <span>— Yacht Gorgeous</span></h1>
+    <div class="header-actions">
+      <button class="btn-refresh" onclick="loadBookings()">↻ Refresh</button>
+    </div>
+  </div>
+
+  <div class="stats" id="stats">
+    <div class="stat-card">
+      <div class="stat-num" id="statTotal">0</div>
+      <div class="stat-label">Total Bookings</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="statUpcoming">0</div>
+      <div class="stat-label">Upcoming</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="statGuests">0</div>
+      <div class="stat-label">Total Guests</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-num" id="statRevenue">$0</div>
+      <div class="stat-label">Revenue</div>
+    </div>
+  </div>
+
+  <div class="filters">
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
+    <button class="filter-btn" data-filter="upcoming" onclick="setFilter('upcoming')">Upcoming</button>
+    <button class="filter-btn" data-filter="today" onclick="setFilter('today')">Today</button>
+    <button class="filter-btn" data-filter="past" onclick="setFilter('past')">Past</button>
+  </div>
+
+  <div class="bookings" id="bookingsList">
+    <div class="loading">Loading bookings...</div>
+  </div>
+</div>
+
+<script>
+  const API = '/yacht/api';
+  const ADMIN_KEY = 'gorgeous2026';
+  let allBookings = [];
+  let currentFilter = 'all';
+
+  // Login
+  function doLogin() {
+    const pass = document.getElementById('passInput').value;
+    if (pass === ADMIN_KEY) {
+      document.getElementById('loginScreen').style.display = 'none';
+      document.getElementById('dashboard').style.display = 'block';
+      sessionStorage.setItem('yacht_admin', '1');
+      loadBookings();
+    } else {
+      document.getElementById('loginError').style.display = 'block';
+    }
+  }
+
+  // Auto-login if already authenticated this session
+  if (sessionStorage.getItem('yacht_admin') === '1') {
+    document.getElementById('loginScreen').style.display = 'none';
+    document.getElementById('dashboard').style.display = 'block';
+    loadBookings();
+  }
+
+  // Load bookings from API
+  async function loadBookings() {
+    document.getElementById('bookingsList').innerHTML = '<div class="loading">Loading bookings...</div>';
+    try {
+      const res = await fetch(API + '/bookings', {
+        headers: { 'X-Admin-Key': ADMIN_KEY }
+      });
+      if (!res.ok) throw new Error('Failed');
+      allBookings = await res.json();
+      allBookings.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+      updateStats();
+      renderBookings();
+    } catch (e) {
+      document.getElementById('bookingsList').innerHTML =
+        '<div class="empty-state"><div class="emoji">⚠️</div><p>Could not load bookings</p></div>';
+    }
+  }
+
+  // Stats
+  function updateStats() {
+    const today = new Date().toISOString().slice(0, 10);
+    const upcoming = allBookings.filter(b => b.date >= today);
+    const totalGuests = allBookings.reduce((s, b) => s + (parseInt(b.guests) || 0), 0);
+    const totalRev = allBookings.reduce((s, b) => s + (parseFloat(b.price) || 0), 0);
+
+    document.getElementById('statTotal').textContent = allBookings.length;
+    document.getElementById('statUpcoming').textContent = upcoming.length;
+    document.getElementById('statGuests').textContent = totalGuests;
+    document.getElementById('statRevenue').textContent = '$' + totalRev.toLocaleString();
+  }
+
+  // Filter
+  function setFilter(f) {
+    currentFilter = f;
+    document.querySelectorAll('.filter-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.filter === f);
+    });
+    renderBookings();
+  }
+
+  // Render
+  function renderBookings() {
+    const today = new Date().toISOString().slice(0, 10);
+    let list = allBookings;
+
+    if (currentFilter === 'upcoming') list = list.filter(b => b.date >= today);
+    else if (currentFilter === 'today') list = list.filter(b => b.date === today);
+    else if (currentFilter === 'past') list = list.filter(b => b.date < today);
+
+    if (list.length === 0) {
+      document.getElementById('bookingsList').innerHTML =
+        '<div class="empty-state"><div class="emoji">🛥️</div><p>No bookings found</p></div>';
+      return;
+    }
+
+    const html = list.map(b => {
+      const isPast = b.date < today;
+      const isToday = b.date === today;
+      const cls = isToday ? 'today' : (isPast ? 'past' : '');
+      const payBadge = b.paymentMethod || 'card';
+      const cruiseName = (b.cruise || '').split('—')[0].split('from')[0].trim();
+
+      // Format date nicely
+      let dateStr = b.date || 'N/A';
+      try {
+        const d = new Date(b.date + 'T12:00:00');
+        dateStr = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+      } catch(e) {}
+
+      // Action links
+      const emailSubject = encodeURIComponent(`Yacht Gorgeous — Your ${cruiseName} on ${b.date}`);
+      const emailBody = encodeURIComponent(`Hi ${b.name},\n\nThank you for booking with Yacht Gorgeous!\n\nYour ${cruiseName}:\n📅 ${b.date} at ${b.time}\n⏱ ${b.duration} · ${b.guests} guests\n💰 $${parseFloat(b.price).toLocaleString()}\n\nSee you at the marina!\n\nCaptain Ian`);
+      const phoneClean = (b.phone || '').replace(/[^+\d]/g, '');
+
+      let actions = `<a class="bc-action" href="mailto:${b.email}?subject=${emailSubject}&body=${emailBody}">✉️ Email</a>`;
+      if (phoneClean) {
+        actions += `<a class="bc-action" href="tel:${phoneClean}">📞 Call</a>`;
+        actions += `<a class="bc-action" href="https://wa.me/${phoneClean.replace('+','')}" target="_blank">💬 WhatsApp</a>`;
+      }
+
+      return `<div class="booking-card ${cls}">
+        <div class="bc-top">
+          <div class="bc-cruise">${cruiseName}</div>
+          <div class="bc-price">$${parseFloat(b.price || 0).toLocaleString()}</div>
+        </div>
+        <div class="bc-date">📅 ${dateStr} · ${b.time || ''} · ${b.duration || ''}</div>
+        <div class="bc-client"><strong>${b.name || 'N/A'}</strong></div>
+        <div class="bc-client">📧 ${b.email || '—'} ${b.phone ? '· 📱 ' + b.phone : ''}</div>
+        <div class="bc-details">👥 ${b.guests || '?'} guests · <span class="bc-badge ${payBadge}">💳 ${payBadge}</span> · ${b.status || 'confirmed'}</div>
+        <div class="bc-actions">${actions}</div>
+      </div>`;
+    }).join('');
+
+    document.getElementById('bookingsList').innerHTML = html;
+  }
+
+  // Auto-refresh every 60s
+  setInterval(() => {
+    if (document.getElementById('dashboard').style.display === 'block') {
+      loadBookings();
+    }
+  }, 60000);
+</script>
+</body>
+</html>

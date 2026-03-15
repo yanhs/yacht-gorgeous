@@ -1,0 +1,5097 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Yacht Gorgeous</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    background: #0a1a35;
+    overflow: hidden;
+  }
+  body {
+    font-family: 'Georgia', serif;
+    color: #e8d4b0;
+  }
+  #pageContent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    scroll-padding-top: 52px;
+  }
+
+  /* ===== SCREEN 1 — Welcome ===== */
+  .welcome {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: #0a0e1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .welcome-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://yanhs.stream/tgimg/54d1d7f12fde4300b0495acd8f759b95.jpg') center center/cover no-repeat;
+  }
+
+  .welcome-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 14, 26, 0.45) 0%,
+      rgba(10, 14, 26, 0.35) 60%,
+      rgba(10, 14, 26, 0.85) 90%,
+      #0a1a35 100%
+    );
+  }
+
+  .welcome-text {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 20px;
+    margin-top: 0;
+  }
+
+  .welcome-text h1 {
+    color: #e8d4b0;
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    line-height: 1.2;
+    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    animation: fadeInUp 1.5s ease-out;
+  }
+
+  .welcome-text h1 span {
+    color: #D4AF37;
+    font-weight: 400;
+    font-style: italic;
+  }
+
+  .welcome-line {
+    width: 80px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    margin: 24px auto;
+    animation: fadeInUp 1.5s ease-out 0.3s both;
+  }
+
+  .welcome-sub {
+    color: rgba(232, 220, 200, 0.85);
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    animation: fadeInUp 1.5s ease-out 0.5s both;
+    text-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+
+  /* Steering wheel scroll hint */
+  .scroll-hint {
+    display: block;
+    margin: 24px auto;
+    width: 60px;
+    z-index: 2;
+    animation: fadeInUp 1.5s ease-out 0.6s both;
+    cursor: pointer;
+  }
+
+  .steering-wheel {
+    width: 60px;
+    height: 60px;
+    animation: bounce 2s ease-in-out infinite, wheelSpin 20s linear infinite;
+    will-change: transform;
+  }
+
+  .steering-wheel:hover {
+    animation: bounce 2s ease-in-out infinite, wheelSpin 3s linear infinite;
+  }
+
+  .welcome-scroll {
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+    z-index: 2;
+    width: 80px;
+    height: 50px;
+    cursor: pointer;
+  }
+
+  .seagull {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 42px;
+    height: auto;
+    animation: gull1 6s ease-in-out infinite;
+  }
+
+  .seagull2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: auto;
+    animation: gull2 6.5s ease-in-out infinite;
+  }
+
+  @keyframes gull1 {
+    0%   { transform: translate(0, 0) rotate(-3deg); }
+    20%  { transform: translate(5px, -4px) rotate(0deg); }
+    40%  { transform: translate(2px, 2px) rotate(-5deg); }
+    60%  { transform: translate(-3px, -2px) rotate(-1deg); }
+    80%  { transform: translate(-1px, 3px) rotate(-4deg); }
+    100% { transform: translate(0, 0) rotate(-3deg); }
+  }
+
+  @keyframes gull2 {
+    0%   { transform: translate(0, 0) rotate(3deg); }
+    18%  { transform: translate(-3px, 3px) rotate(0deg); }
+    38%  { transform: translate(4px, -2px) rotate(5deg); }
+    58%  { transform: translate(2px, 4px) rotate(1deg); }
+    78%  { transform: translate(-4px, -1px) rotate(4deg); }
+    100% { transform: translate(0, 0) rotate(3deg); }
+  }
+
+  .wing-left {
+    animation: flapLeft 2.8s ease-in-out infinite;
+  }
+  .wing-right {
+    animation: flapRight 2.8s ease-in-out infinite;
+  }
+  .seagull2 .wing-left {
+    animation-duration: 3.2s;
+  }
+  .seagull2 .wing-right {
+    animation-duration: 3.2s;
+  }
+
+  @keyframes flapLeft {
+    0%   { transform: rotate(0deg); }
+    30%  { transform: rotate(6deg); }
+    60%  { transform: rotate(-3deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  @keyframes flapRight {
+    0%   { transform: rotate(0deg); }
+    30%  { transform: rotate(-6deg); }
+    60%  { transform: rotate(3deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  @keyframes fadeInUp {
+    0%   { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(10px); }
+  }
+
+  @keyframes wheelSpin {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }
+
+  /* ===== SVG WAVE TRANSITIONS (bottom of hero) ===== */
+  @keyframes waveScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ===== SCREEN 2 — Hero ===== */
+  .hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(10, 8, 18, 0.75) 0%,
+      rgba(10, 8, 18, 0.55) 30%,
+      rgba(10, 8, 18, 0.1) 55%,
+      transparent 70%
+    );
+  }
+
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: clamp(30px, 6vw, 80px);
+    transform: translateY(-50%);
+    max-width: 480px;
+  }
+
+  .hero-content h2 {
+    color: #e8d4b0;
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.6em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  }
+
+  .hero-content p {
+    color: rgba(200, 190, 175, 0.85);
+    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    margin-bottom: 2em;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 36px;
+    color: #0B1D3A;
+    background: #D4AF37;
+    border: none;
+    border-radius: 40px;
+    font-family: 'Georgia', serif;
+    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 20px rgba(200, 160, 80, 0.3);
+  }
+
+  .btn:hover {
+    background: #E6C55A;
+    box-shadow:
+      0 6px 28px rgba(212, 175, 55, 0.45),
+      0 0 40px rgba(212, 175, 55, 0.25);
+    transform: translateY(-2px) scale(1.04);
+  }
+
+  .scroll-down {
+    margin-top: 24px;
+    color: rgba(200, 190, 175, 0.45);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  /* About highlights */
+  .about-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    margin-top: 20px;
+  }
+
+  .about-highlights span {
+    color: rgba(212, 175, 55, 0.8);
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+  }
+
+  @media (max-width: 768px) {
+    .about-highlights {
+      justify-content: center;
+    }
+  }
+
+  /* Hero bottom waves */
+  .wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 80px;
+    pointer-events: none;
+  }
+
+  .wave svg { width: 100%; height: 100%; }
+
+  .wave-1 { animation: waveScroll 8s linear infinite; opacity: 0.3; will-change: transform; }
+  .wave-2 { animation: waveScroll 11s linear infinite reverse; bottom: 6px; opacity: 0.2; will-change: transform; }
+
+  /* ===== ROPE ACCENT (thin rope under titles) ===== */
+  .rope-accent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 300px;
+    margin: 16px auto 0;
+    gap: 12px;
+  }
+
+  .rope-accent svg { width: 100%; height: 12px; }
+
+  .rope-accent .rope-knot-sm {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+
+  /* ===== ROPE DIVIDER ===== */
+  .rope-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    background: #0a1a35;
+  }
+
+  .rope-line {
+    flex: 1;
+    max-width: 300px;
+    height: 12px;
+    position: relative;
+  }
+
+  .rope-line svg { width: 100%; height: 100%; }
+
+  .rope-knot {
+    margin: 0 20px;
+    flex-shrink: 0;
+  }
+
+  .rope-knot svg {
+    width: 40px;
+    height: 40px;
+  }
+
+  /* ===== SECTION — About (with porthole) ===== */
+  .section-about {
+    background: #0a1a35;
+    padding: 60px 20px 80px;
+  }
+
+  /* Scroll hint for inner sections */
+  .section-scroll {
+    text-align: center;
+    margin-top: 2em;
+    padding-top: 1em;
+  }
+  .section-scroll span {
+    display: block;
+    color: rgba(212, 175, 55, 0.4);
+    font-size: 1.4rem;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .section-scroll p {
+    color: rgba(200, 190, 175, 0.3);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    margin-top: 4px;
+  }
+
+  /* ===== HOW IT WORKS ===== */
+  .how-it-works {
+    background: #0a1a35;
+    padding: 70px 20px;
+    text-align: center;
+  }
+  .how-it-works h3 {
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    margin-bottom: 40px;
+  }
+  .steps-grid {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    max-width: 800px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  .step-item {
+    flex: 1;
+    min-width: 180px;
+    max-width: 220px;
+  }
+  .step-num {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 2px solid #D4AF37;
+    color: #D4AF37;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 14px;
+  }
+  .step-item h4 {
+    color: #e8d4b0;
+    font-size: 1rem;
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+  .step-item p {
+    color: rgba(200,195,185,0.5);
+    font-size: 0.85rem;
+    line-height: 1.5;
+  }
+
+  /* ===== TRUSTED EXPERIENCE ===== */
+  .trusted {
+    background: #0a1a35;
+    padding: 70px 20px;
+    text-align: center;
+  }
+  .trusted h3 {
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    margin-bottom: 35px;
+  }
+  .trust-grid {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    max-width: 700px;
+    margin: 0 auto;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    color: #e8d4b0;
+    font-size: 1rem;
+    min-width: 200px;
+  }
+  .trust-check {
+    color: #D4AF37;
+    font-size: 1.2rem;
+    flex-shrink: 0;
+  }
+
+  /* ===== DEPARTURE LOCATION ===== */
+  .location {
+    background: #0a1a35;
+    padding: 70px 20px;
+    text-align: center;
+  }
+  .location h3 {
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+  .location .loc-sub {
+    color: rgba(200,195,185,0.5);
+    font-size: 0.9rem;
+    margin-bottom: 25px;
+  }
+  .location .loc-address {
+    color: #e8d4b0;
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+  }
+  .location .loc-address span {
+    color: #D4AF37;
+  }
+  .location iframe {
+    border-radius: 12px;
+    border: 1px solid rgba(212,175,55,0.2);
+    max-width: 700px;
+    width: 100%;
+  }
+
+  @media (max-width: 600px) {
+    .steps-grid { flex-direction: column; align-items: center; gap: 30px; }
+    .trust-grid { flex-direction: column; align-items: center; }
+  }
+
+  .section-about .section-title {
+    text-align: center;
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 40px;
+  }
+
+  .section-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: clamp(30px, 6vw, 80px);
+  }
+
+  .section-inner.reverse { flex-direction: row-reverse; }
+
+  /* Porthole photo frame */
+  .porthole-frame {
+    flex-shrink: 0;
+    width: clamp(200px, 30vw, 340px);
+    height: clamp(200px, 30vw, 340px);
+    border-radius: 50%;
+    position: relative;
+    background: conic-gradient(
+      from 0deg,
+      #8B7340, #c4a85a, #6b5a30, #a8924a,
+      #8B7340, #c4a85a, #6b5a30, #a8924a,
+      #8B7340
+    );
+    padding: 14px;
+    box-shadow:
+      0 0 30px rgba(0,0,0,0.5),
+      inset 0 0 20px rgba(0,0,0,0.3);
+  }
+
+  .porthole-glass {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    position: relative;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
+  }
+
+  .porthole-glass img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  /* Glass reflection */
+  .porthole-glass::after {
+    content: '';
+    position: absolute;
+    top: 10%; left: 15%;
+    width: 40%; height: 25%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.12), transparent);
+    border-radius: 50%;
+    transform: rotate(-15deg);
+    pointer-events: none;
+  }
+
+  /* Brass bolts */
+  .porthole-bolt {
+    position: absolute;
+    width: 14px; height: 14px;
+    background: radial-gradient(circle at 35% 35%, #c4a85a, #5a4a28);
+    border-radius: 50%;
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.3), 0 1px 3px rgba(0,0,0,0.5);
+  }
+
+  .bolt-t  { top: 4px;    left: 50%;  transform: translateX(-50%); }
+  .bolt-b  { bottom: 4px; left: 50%;  transform: translateX(-50%); }
+  .bolt-l  { left: 4px;   top: 50%;   transform: translateY(-50%); }
+  .bolt-r  { right: 4px;  top: 50%;   transform: translateY(-50%); }
+  .bolt-tl { top: 22px;   left: 22px; }
+  .bolt-tr { top: 22px;   right: 22px; }
+  .bolt-bl { bottom: 22px; left: 22px; }
+  .bolt-br { bottom: 22px; right: 22px; }
+
+  .section-text h3 {
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.5em;
+  }
+
+  .section-text p {
+    color: rgba(200, 195, 185, 0.75);
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    line-height: 1.8;
+    letter-spacing: 0.01em;
+  }
+
+  /* ===== SECTION — Features ===== */
+  .section-features {
+    background: #0a1a35;
+    padding: 80px 20px;
+  }
+
+  .section-features h3 {
+    text-align: center;
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 50px;
+  }
+
+  .features-grid {
+    max-width: 960px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 30px;
+  }
+
+  .feature-card {
+    text-align: center;
+    padding: 30px 20px;
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 12px;
+    background: rgba(212, 175, 55, 0.03);
+    transition: all 0.3s ease;
+  }
+
+  .feature-card:hover {
+    border-color: rgba(212, 175, 55, 0.35);
+    background: rgba(212, 175, 55, 0.06);
+    transform: translateY(-4px);
+  }
+
+  .feature-icon {
+    font-size: 2.5rem;
+    margin-bottom: 16px;
+  }
+
+  .feature-card h4 {
+    color: #e8d4b0;
+    font-size: 1.1rem;
+    font-weight: 400;
+    margin-bottom: 10px;
+    letter-spacing: 0.04em;
+  }
+
+  .feature-card p {
+    color: rgba(200, 195, 185, 0.6);
+    font-size: 0.95rem;
+    line-height: 1.6;
+  }
+
+  /* ===== TOURS ===== */
+  .tours {
+    background: #0a1a35;
+    padding: 80px 20px;
+  }
+
+  .tours h3 {
+    text-align: center;
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+
+  .tours > p {
+    text-align: center;
+    color: rgba(200, 195, 185, 0.55);
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    margin-bottom: 50px;
+    line-height: 1.6;
+  }
+
+  .tours-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+  }
+
+  .tour-card {
+    position: relative;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212, 175, 55, 0.12);
+    border-radius: 16px;
+    padding: 36px 24px 30px;
+    text-align: center;
+    transition: all 0.4s ease;
+    overflow: hidden;
+  }
+
+  .tour-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .tour-card:hover {
+    border-color: rgba(212, 175, 55, 0.35);
+    background: rgba(212, 175, 55, 0.05);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 20px rgba(212, 175, 55, 0.08);
+  }
+
+  .tour-card:hover::before {
+    opacity: 1;
+  }
+
+  .tour-icon {
+    font-size: 3rem;
+    margin-bottom: 18px;
+    display: block;
+  }
+
+  .tour-card h4 {
+    color: #e8d4b0;
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+  }
+
+  .tour-card .tour-detail {
+    color: rgba(200, 195, 185, 0.5);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+
+  .tour-card .tour-btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 30px;
+    color: #D4AF37;
+    font-family: 'Georgia', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .tour-card .tour-btn:hover {
+    background: rgba(212, 175, 55, 0.12);
+    border-color: rgba(212, 175, 55, 0.6);
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.15);
+  }
+
+  @media (max-width: 600px) {
+    .tours-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .tour-card {
+      padding: 28px 16px 24px;
+    }
+
+    .tour-icon {
+      font-size: 2.4rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .tours-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+
+  /* ===== SAFETY & POLICIES ===== */
+  .safety-policies {
+    padding: 60px 20px 50px;
+    background: linear-gradient(180deg, #0a1a35 0%, #0d2240 100%);
+    color: #c8b89a;
+  }
+
+  .sp-title {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: #D4AF37;
+    letter-spacing: 0.08em;
+    margin-bottom: 40px;
+  }
+
+  .sp-block {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .sp-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    color: #e8d4b0;
+    margin-bottom: 16px;
+    letter-spacing: 0.03em;
+  }
+
+  .sp-intro {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(200, 184, 154, 0.8);
+    margin-bottom: 20px;
+  }
+
+  .sp-intro strong {
+    color: #D4AF37;
+  }
+
+  .sp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+  }
+
+  .sp-list li {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.06);
+    color: rgba(200, 184, 154, 0.75);
+  }
+
+  .sp-list li:last-child {
+    border-bottom: none;
+  }
+
+  .sp-divider {
+    max-width: 700px;
+    margin: 30px auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+  }
+
+  .sp-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: #D4AF37;
+    margin: 24px 0 10px;
+    letter-spacing: 0.03em;
+  }
+
+  .sp-text {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: rgba(200, 184, 154, 0.75);
+  }
+
+  .sp-text strong {
+    color: #e8d4b0;
+  }
+
+  /* ===== FOOTER ===== */
+  .footer {
+    background: #060e1e;
+    padding: 60px 20px 40px;
+  }
+
+  .footer-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 40px;
+    flex-wrap: wrap;
+  }
+
+  .footer-brand {
+    text-align: left;
+  }
+
+  .footer-wheel {
+    width: 36px;
+    height: 36px;
+    margin-bottom: 12px;
+    opacity: 0.4;
+  }
+
+  .footer-brand h4 {
+    color: #D4AF37;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    margin-bottom: 6px;
+  }
+
+  .footer-brand p {
+    color: rgba(200, 195, 185, 0.4);
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+  }
+
+  .footer-contact {
+    text-align: right;
+  }
+
+  .footer-contact h4 {
+    color: #D4AF37;
+    font-size: 0.9rem;
+    font-weight: 400;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .footer-contact ul {
+    list-style: none;
+  }
+
+  .footer-contact li {
+    color: rgba(200, 195, 185, 0.55);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    letter-spacing: 0.02em;
+  }
+
+  .footer-contact a {
+    color: rgba(200, 195, 185, 0.55);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  .footer-contact a:hover {
+    color: #D4AF37;
+  }
+
+  .footer-contact .contact-icon {
+    margin-right: 8px;
+    opacity: 0.7;
+  }
+
+  .footer-bottom {
+    max-width: 900px;
+    margin: 40px auto 0;
+    padding-top: 20px;
+    border-top: 1px solid rgba(212, 175, 55, 0.1);
+    text-align: center;
+  }
+
+  .footer-bottom p {
+    color: rgba(200, 195, 185, 0.3);
+    font-size: 0.8rem;
+    letter-spacing: 0.1em;
+  }
+
+  /* ===== GALLERY ===== */
+  .gallery {
+    background: #0a1a35;
+    padding: 80px 0;
+    overflow: hidden;
+  }
+
+  .gallery h3 {
+    text-align: center;
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 40px;
+  }
+
+  .carousel {
+    position: relative;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 60px;
+  }
+
+  .carousel-track {
+    display: flex;
+    gap: 20px;
+    overflow-x: auto;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    padding: 10px 0;
+  }
+
+  .carousel-track::-webkit-scrollbar { display: none; }
+
+  .carousel-slide {
+    flex: 0 0 calc(33.333% - 14px);
+    min-width: 260px;
+    scroll-snap-align: start;
+    position: relative;
+    border-radius: 12px;
+    overflow: hidden;
+    aspect-ratio: 4 / 3;
+    cursor: pointer;
+  }
+
+  .carousel-slide img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.5s ease;
+  }
+
+  .carousel-slide:hover img {
+    transform: scale(1.06);
+  }
+
+  .carousel-slide .slide-caption {
+    position: absolute;
+    bottom: 0;
+    left: 0; right: 0;
+    padding: 30px 16px 14px;
+    background: linear-gradient(to top, rgba(0,0,0,0.7), transparent);
+    color: rgba(232, 212, 176, 0.9);
+    font-size: 0.9rem;
+    letter-spacing: 0.05em;
+    transition: opacity 0.3s ease;
+  }
+
+  /* Porthole-style frame on each slide */
+  .carousel-slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 12px;
+    box-shadow: inset 0 0 20px rgba(0,0,0,0.3);
+    border: 2px solid rgba(139, 115, 64, 0.25);
+    pointer-events: none;
+  }
+
+  .carousel-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    background: rgba(11, 29, 58, 0.9);
+    color: #D4AF37;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 3;
+  }
+
+  .carousel-btn:hover {
+    background: rgba(212, 175, 55, 0.15);
+    border-color: rgba(212, 175, 55, 0.6);
+  }
+
+  .carousel-btn.prev { left: 8px; }
+  .carousel-btn.next { right: 8px; }
+
+  /* Dots */
+  .carousel-dots {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 24px;
+  }
+
+  .carousel-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: rgba(212, 175, 55, 0.2);
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .carousel-dot.active {
+    background: #D4AF37;
+    transform: scale(1.3);
+  }
+
+  @media (max-width: 768px) {
+    .carousel-slide {
+      flex: 0 0 calc(50% - 10px);
+      min-width: 220px;
+    }
+    .carousel { padding: 0 50px; }
+  }
+
+  @media (max-width: 480px) {
+    .carousel-slide {
+      flex: 0 0 85%;
+      min-width: 0;
+    }
+    .carousel { padding: 0 44px; }
+  }
+
+  /* Lightbox */
+  .lightbox {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(0,0,0,0.92);
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+  }
+
+  .lightbox.active { display: flex; }
+
+  .lightbox img {
+    max-width: 90vw;
+    max-height: 90vh;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 0 60px rgba(0,0,0,0.5);
+  }
+
+  .lightbox-close {
+    position: absolute;
+    top: 20px; right: 24px;
+    color: rgba(212, 175, 55, 0.7);
+    font-size: 2rem;
+    cursor: pointer;
+    background: none;
+    border: none;
+    transition: color 0.3s ease;
+  }
+
+  .lightbox-close:hover { color: #D4AF37; }
+
+  /* ===== CAPTAIN ===== */
+  .captain {
+    background: #0a1a35;
+    padding: 80px 20px;
+  }
+
+  .captain-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: clamp(30px, 6vw, 70px);
+  }
+
+  .captain-photo {
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .captain-porthole {
+    width: clamp(200px, 28vw, 300px);
+    height: clamp(200px, 28vw, 300px);
+    border-radius: 50%;
+    position: relative;
+    background: conic-gradient(
+      from 0deg,
+      #8B7340, #c4a85a, #6b5a30, #a8924a,
+      #8B7340, #c4a85a, #6b5a30, #a8924a,
+      #8B7340
+    );
+    padding: 12px;
+    box-shadow:
+      0 0 30px rgba(0,0,0,0.5),
+      inset 0 0 20px rgba(0,0,0,0.3);
+  }
+
+  .captain-porthole .porthole-glass {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
+    position: relative;
+  }
+
+  .captain-porthole .porthole-glass img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+  }
+
+  .captain-wheel {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 60px;
+    height: 60px;
+    animation: wheelSpin 20s linear infinite;
+    will-change: transform;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+  }
+
+  .captain-label {
+    text-align: center;
+    margin-top: 14px;
+    color: rgba(200, 195, 185, 0.45);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .captain-text h3 {
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .captain-text h4 {
+    color: #e8d4b0;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 400;
+    margin-bottom: 1em;
+    font-style: italic;
+  }
+
+  .captain-text p {
+    color: rgba(200, 195, 185, 0.7);
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .captain-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  /* ===== BOOKING ===== */
+  .booking {
+    background: #0a1a35;
+    padding: 80px 20px;
+  }
+
+  .booking h3 {
+    text-align: center;
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+  }
+
+  .booking > p {
+    text-align: center;
+    color: rgba(200, 195, 185, 0.55);
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    margin-bottom: 40px;
+    line-height: 1.6;
+  }
+
+  .booking-form {
+    max-width: 560px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .booking-form .full-width {
+    grid-column: 1 / -1;
+  }
+
+  .booking-form label {
+    display: block;
+    color: rgba(200, 195, 185, 0.5);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+
+  .booking-form input,
+  .booking-form select {
+    width: 100%;
+    padding: 13px 18px;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    border-radius: 8px;
+    background: rgba(255,255,255,0.04);
+    color: #e8d4b0;
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+    -webkit-appearance: none;
+    appearance: none;
+  }
+
+  .booking-form select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23D4AF37' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  .booking-form select option {
+    background: #0a1a35;
+    color: #e8d4b0;
+  }
+
+  .booking-form input::placeholder {
+    color: rgba(200, 195, 185, 0.3);
+  }
+
+  .booking-form input:focus,
+  .booking-form select:focus {
+    border-color: rgba(212, 175, 55, 0.5);
+  }
+
+  .booking-form .btn-book {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+    padding: 16px 36px;
+    border: none;
+    border-radius: 40px;
+    background: #D4AF37;
+    color: #0B1D3A;
+    font-family: 'Georgia', serif;
+    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 20px rgba(200, 160, 80, 0.3);
+  }
+
+  .booking-form .btn-book:hover {
+    background: #E6C55A;
+    transform: translateY(-2px) scale(1.02);
+  }
+
+  @media (max-width: 480px) {
+    .booking-form {
+      grid-template-columns: 1fr;
+    }
+  }
+
+  /* ===== SUBSCRIBE ===== */
+  .subscribe {
+    background: #0a1a35;
+    padding: 70px 20px;
+    text-align: center;
+  }
+
+  .subscribe h3 {
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+
+  .subscribe p {
+    color: rgba(200, 195, 185, 0.55);
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    margin-bottom: 30px;
+    line-height: 1.6;
+  }
+
+  .subscribe-form {
+    display: flex;
+    max-width: 460px;
+    margin: 0 auto;
+    gap: 0;
+  }
+
+  .subscribe-form input {
+    flex: 1;
+    padding: 14px 20px;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    border-right: none;
+    border-radius: 40px 0 0 40px;
+    background: rgba(255,255,255,0.05);
+    color: #e8d4b0;
+    font-family: 'Georgia', serif;
+    font-size: 0.95rem;
+    outline: none;
+    transition: border-color 0.3s ease;
+  }
+
+  .subscribe-form input::placeholder {
+    color: rgba(200, 195, 185, 0.35);
+  }
+
+  .subscribe-form input:focus {
+    border-color: rgba(212, 175, 55, 0.5);
+  }
+
+  .subscribe-form button {
+    padding: 14px 28px;
+    border: none;
+    border-radius: 0 40px 40px 0;
+    background: #D4AF37;
+    color: #0B1D3A;
+    font-family: 'Georgia', serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+  }
+
+  .subscribe-form button:hover {
+    background: #E6C55A;
+  }
+
+  @media (max-width: 480px) {
+    .subscribe-form {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .subscribe-form input {
+      border-right: 1px solid rgba(212, 175, 55, 0.25);
+      border-radius: 40px;
+    }
+
+    .subscribe-form button {
+      border-radius: 40px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .footer-inner {
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .footer-brand, .footer-contact {
+      text-align: center;
+    }
+  }
+
+  /* ===== PRICING ===== */
+  .pricing {
+    background: #0a1a35;
+    padding: 80px 20px;
+  }
+
+  .pricing h3 {
+    text-align: center;
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+
+  .pricing > p {
+    text-align: center;
+    color: rgba(200, 195, 185, 0.55);
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    margin-bottom: 50px;
+    line-height: 1.6;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .pricing-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 24px;
+  }
+
+  .price-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212, 175, 55, 0.12);
+    border-radius: 16px;
+    padding: 36px 28px 30px;
+    text-align: center;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .price-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .price-card:hover {
+    border-color: #D4AF37;
+    background: rgba(212, 175, 55, 0.05);
+    transform: translateY(-8px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 24px rgba(212, 175, 55, 0.15);
+  }
+
+  .price-card:hover::before {
+    opacity: 1;
+  }
+
+  .price-card.popular {
+    border-color: rgba(212, 175, 55, 0.35);
+    background: rgba(212, 175, 55, 0.04);
+  }
+
+  .price-card.popular::before {
+    opacity: 1;
+  }
+
+  .popular-badge {
+    position: absolute;
+    top: 14px;
+    right: -32px;
+    background: #D4AF37;
+    color: #0a1a35;
+    font-size: 0.6rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 36px;
+    transform: rotate(45deg);
+  }
+
+  .price-card .price-icon {
+    font-size: 2.8rem;
+    margin-bottom: 14px;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+
+  .price-card:hover .price-icon {
+    transform: scale(1.25);
+  }
+
+  .price-card:hover .price-btn {
+    background: #E6C55A;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
+  }
+
+  .price-card h4 {
+    color: #e8d4b0;
+    font-size: 1.2rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .price-card .price-meta {
+    color: rgba(200, 195, 185, 0.4);
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+  }
+
+  .price-card .price-desc {
+    color: rgba(200, 195, 185, 0.6);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+
+  .price-card .price-amount {
+    color: #D4AF37;
+    font-size: 1.6rem;
+    font-weight: 400;
+    letter-spacing: 0.03em;
+    margin-bottom: 20px;
+  }
+
+  .price-card .price-btn {
+    display: inline-block;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 30px;
+    background: #D4AF37;
+    color: #0B1D3A;
+    font-family: 'Georgia', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .price-card .price-btn:hover {
+    background: #E6C55A;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.35);
+    transform: translateY(-2px);
+  }
+
+  /* ===== REVIEWS ===== */
+  .reviews {
+    background: #0a1a35;
+    padding: 80px 20px;
+  }
+
+  .reviews h3 {
+    text-align: center;
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 50px;
+  }
+
+  .reviews-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+
+  .review-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 16px;
+    padding: 32px 28px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .review-card:hover {
+    border-color: rgba(212, 175, 55, 0.25);
+    transform: translateY(-4px);
+  }
+
+  .review-stars {
+    color: #D4AF37;
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 18px;
+  }
+
+  .review-card blockquote {
+    color: rgba(200, 195, 185, 0.75);
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+
+  .review-card cite {
+    color: rgba(212, 175, 55, 0.6);
+    font-size: 0.9rem;
+    font-style: normal;
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== ROMANTIC ===== */
+  .romantic {
+    background: #0a1a35;
+    padding: 80px 20px;
+    text-align: center;
+  }
+
+  .romantic h3 {
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+
+  .romantic > p {
+    color: rgba(200, 195, 185, 0.6);
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    margin-bottom: 30px;
+    line-height: 1.6;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .romantic-features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+
+  .romantic-features span {
+    color: rgba(212, 175, 55, 0.8);
+    font-size: 1.05rem;
+    letter-spacing: 0.03em;
+  }
+
+  /* ===== NAUTICAL DIVIDERS ===== */
+
+  /* Photo wave divider — rope */
+  .wave-photo {
+    position: relative;
+    height: 30px;
+    overflow: hidden;
+    background: transparent;
+  }
+  .wave-photo img {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    object-position: center 35%;
+    transform: translateY(-50%);
+    opacity: 0.35;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 35%, rgba(0,0,0,0.8) 65%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 35%, rgba(0,0,0,0.8) 65%, transparent 100%);
+  }
+
+  /* ===== PORTHOLE MUSIC BUTTON ===== */
+  /* ===== PORTHOLE WITH HINGED LID ===== */
+  .porthole-wrapper {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 70px;
+    height: 70px;
+    z-index: 1000;
+    cursor: pointer;
+    perspective: 400px;
+  }
+
+  /* Glass window (behind lid) */
+  .porthole-glass {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #8a7a55;
+    background: #1a1a1a;
+    box-shadow: 0 0 12px rgba(212,175,55,0.2), inset 0 0 10px rgba(0,0,0,0.5);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .porthole-glass img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .porthole-glass .play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 0 8px rgba(0,0,0,0.8);
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  /* Brass lid — hinged at top */
+  .porthole-lid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .porthole-lid-face {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      #7a6a45, #b89850, #7a6a45, #5b4e2a,
+      #7a6a45, #b89850, #7a6a45, #5b4e2a,
+      #7a6a45
+    );
+    border: 3px solid #6b5e3a;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .porthole-lid-face::before {
+    content: '🎵';
+    font-size: 20px;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5));
+  }
+
+  /* 4 bolt dots on the lid */
+  .lid-bolt {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #c4a860, #6b5e3a);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.3), 0 1px 2px rgba(0,0,0,0.4);
+  }
+  .lid-bolt.bt { top: 6px; left: 50%; transform: translateX(-50%); }
+  .lid-bolt.bb { bottom: 6px; left: 50%; transform: translateX(-50%); }
+  .lid-bolt.bl { left: 6px; top: 50%; transform: translateY(-50%); }
+  .lid-bolt.br { right: 6px; top: 50%; transform: translateY(-50%); }
+
+  /* Hinge piece at top */
+  .porthole-hinge {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 8px;
+    background: linear-gradient(180deg, #a89460, #6b5e3a);
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #5a4e2a;
+    z-index: 3;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+
+  /* Latch at bottom */
+  .porthole-latch {
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%) rotate(0deg);
+    width: 12px;
+    height: 7px;
+    background: linear-gradient(180deg, #a89460, #7a6a45);
+    border-radius: 0 0 3px 3px;
+    border: 1px solid #5a4e2a;
+    z-index: 3;
+    transition: transform 0.3s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+
+  /* ---- OPEN STATE ---- */
+  .porthole-wrapper.lid-open .porthole-lid {
+    transform: rotateX(-170deg);
+  }
+
+  .porthole-wrapper.lid-open .porthole-latch {
+    transform: translateX(-50%) rotate(90deg) translateY(4px);
+  }
+
+  /* Hover effect */
+  .porthole-wrapper:hover .porthole-glass {
+    box-shadow: 0 0 20px rgba(212,175,55,0.35), inset 0 0 10px rgba(0,0,0,0.5);
+  }
+
+  /* Playing glow on the glass */
+  .porthole-wrapper.playing .porthole-glass {
+    animation: portholeGlow 2s ease-in-out infinite;
+    will-change: box-shadow;
+  }
+
+  .porthole-wrapper.playing .play-icon {
+    opacity: 0;
+  }
+
+  @keyframes portholeGlow {
+    0%, 100% { box-shadow: 0 0 15px rgba(212,175,55,0.3), inset 0 0 10px rgba(0,0,0,0.4); }
+    50% { box-shadow: 0 0 25px rgba(212,175,55,0.6), 0 0 40px rgba(212,175,55,0.15), inset 0 0 10px rgba(0,0,0,0.4); }
+  }
+
+  /* ===== VINYL PLAYLIST PANEL ===== */
+  .playlist-panel {
+    position: fixed;
+    bottom: 170px;
+    right: 20px;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    border: 3px solid rgba(212,175,55,0.3);
+    padding: 0;
+    z-index: 999;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    transform: translateY(20px) scale(0.8);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s, transform 0.35s;
+    overflow: hidden;
+  }
+  .playlist-panel.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+  }
+
+  /* Spinning background image via pseudo-element */
+  .playlist-panel::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: -5px; right: -5px; bottom: -5px;
+    background: url('https://yanhs.stream/tgimg/13d2ba95b7ea48a381a7c1258ecfbac1.jpg') center/cover no-repeat;
+    border-radius: 50%;
+    z-index: 0;
+    transition: transform 0.3s;
+  }
+  .playlist-panel.spinning::before {
+    animation: vinylSpin 6s linear infinite;
+  }
+
+  .vinyl-overlay {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 45%, rgba(0,0,0,0.45) 100%);
+    border-radius: 50%;
+    padding: 20px 15px;
+  }
+
+  /* Vinyl record - hidden, panel IS the record now */
+  .vinyl-wrap {
+    display: none;
+  }
+  .vinyl {
+    display: none;
+  }
+
+  @keyframes vinylSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Play button on disc */
+  .vinyl-play-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.5);
+    border: 2px solid rgba(212,175,55,0.5);
+    color: #D4AF37;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 2px auto 4px;
+    transition: background 0.2s, transform 0.15s;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  }
+  .vinyl-play-btn:hover {
+    background: rgba(212,175,55,0.25);
+    transform: scale(1.1);
+  }
+
+  /* Circular text around the disc — on the blue ring */
+  .vinyl-circle-text {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* Emoji icon centered */
+  .vinyl-track-icon {
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 2px;
+    line-height: 1;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5));
+  }
+
+  /* Navigation — prev/next at edges of disc */
+  .vinyl-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,175,55,0.35);
+    background: rgba(0,0,0,0.5);
+    color: #D4AF37;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    z-index: 3;
+  }
+  .vinyl-nav-left { left: 4px; }
+  .vinyl-nav-right { right: 4px; }
+  .vinyl-nav-btn:hover {
+    background: rgba(212,175,55,0.3);
+  }
+  .vinyl-dots {
+    display: flex;
+    gap: 5px;
+    margin-top: 4px;
+  }
+  .vinyl-dot-ind {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(212,175,55,0.2);
+    transition: background 0.3s;
+  }
+  .vinyl-dot-ind.active {
+    background: #D4AF37;
+  }
+
+  /* Volume */
+  .vinyl-vol {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    width: 130px;
+  }
+  .vinyl-vol .vol-icon {
+    width: 13px; height: 13px; flex-shrink: 0; cursor: pointer;
+  }
+  .vinyl-vol .vol-icon svg {
+    width: 13px; height: 13px; fill: none; stroke: #D4AF37;
+    stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: 0.8;
+  }
+  .vinyl-vol input[type="range"] {
+    -webkit-appearance: none; appearance: none; flex: 1; height: 3px; border-radius: 2px;
+    background: linear-gradient(90deg, #D4AF37 0%, #D4AF37 var(--val, 80%), rgba(255,255,255,0.12) var(--val, 80%), rgba(255,255,255,0.12) 100%);
+    outline: none; cursor: pointer;
+  }
+  .vinyl-vol input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 10px; height: 10px; border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #fff8e8, #D4AF37 50%, #a8862a);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4); cursor: pointer;
+  }
+  .vinyl-vol input[type="range"]::-moz-range-thumb {
+    width: 10px; height: 10px; border: none; border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #fff8e8, #D4AF37 50%, #a8862a);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4); cursor: pointer;
+  }
+  .vinyl-vol .vol-pct {
+    font-size: 0.45rem; color: #D4AF37; min-width: 20px; text-align: center; opacity: 0.7;
+  }
+
+  @media (max-width: 600px) {
+    .porthole-wrapper {
+      width: 58px;
+      height: 58px;
+      bottom: 15px;
+      right: 15px;
+    }
+    .playlist-panel {
+      right: 10px;
+      bottom: 120px;
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  .anchor-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 20px;
+  }
+
+  .anchor-divider .divider-line {
+    flex: 1;
+    max-width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.25), transparent);
+  }
+
+  .anchor-divider .anchor-icon {
+    color: rgba(212, 175, 55, 0.35);
+    font-size: 1.4rem;
+  }
+
+  /* Journey narrative hints */
+  .journey-hint {
+    text-align: center;
+    padding: 30px 20px;
+    color: rgba(200, 195, 185, 0.3);
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    .section-inner,
+    .section-inner.reverse {
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .porthole-frame {
+      width: 240px;
+      height: 240px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .hero-overlay {
+      background: linear-gradient(
+        0deg,
+        rgba(10, 8, 18, 0.8) 0%,
+        rgba(10, 8, 18, 0.5) 40%,
+        rgba(10, 8, 18, 0.1) 70%,
+        transparent 100%
+      );
+    }
+
+    .hero-content {
+      top: auto;
+      bottom: clamp(30px, 8vh, 60px);
+      left: 20px;
+      right: 20px;
+      transform: none;
+      max-width: none;
+      text-align: center;
+    }
+  }
+
+  /* ===== NAVBAR ===== */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 10000;
+    background: rgba(10, 26, 53, 0.95);
+    border-bottom: none;
+  }
+
+  .nav-rope {
+    width: 100%;
+    height: 5px;
+    background: repeating-linear-gradient(
+      45deg,
+      #D4AF37 0px,
+      #D4AF37 6px,
+      #a8862a 6px,
+      #a8862a 12px
+    );
+  }
+
+  /* ===== TAB SECTIONS ===== */
+  .tab-content-wrapper {
+    display: none;
+  }
+
+  .tab-content-wrapper.active {
+    display: block;
+    animation: sectionFadeIn 0.5s ease-out;
+  }
+
+  @keyframes sectionFadeIn {
+    0%   { opacity: 0; transform: translateY(20px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Back to top button inside sections */
+  .back-to-top {
+    display: block;
+    text-align: center;
+    padding: 24px 0 40px;
+    background: #0a1a35;
+  }
+
+  .back-to-top a {
+    color: rgba(212, 175, 55, 0.5);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .back-to-top a:hover {
+    color: #D4AF37;
+  }
+
+  /* ===== CALCULATOR ===== */
+  .calculator {
+    background: #0a1a35;
+    padding: clamp(40px, 6vw, 80px) 20px;
+    text-align: center;
+  }
+
+  .calculator h3 {
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .calculator > p {
+    color: rgba(232, 212, 176, 0.5);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 2em;
+  }
+
+  .calc-form {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .calc-field {
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+  }
+
+  .calc-field label {
+    color: rgba(232, 212, 176, 0.6);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    margin-bottom: 6px;
+  }
+
+  .calc-field select,
+  .calc-field input[type="number"] {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    color: #e8d4b0;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    padding: 14px 16px;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+    appearance: none;
+    -webkit-appearance: none;
+  }
+
+  .calc-field select {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23D4AF37' stroke-width='1.5' fill='none'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 16px center;
+    padding-right: 40px;
+    cursor: pointer;
+  }
+
+  .calc-field select:focus,
+  .calc-field input[type="number"]:focus {
+    border-color: rgba(212, 175, 55, 0.5);
+  }
+
+  .calc-field select option {
+    background: #0a1a35;
+    color: #e8d4b0;
+  }
+
+  .calc-result {
+    margin-top: 12px;
+    padding: 24px;
+    background: rgba(212, 175, 55, 0.06);
+    border: 1px solid rgba(212, 175, 55, 0.15);
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .calc-result-label {
+    color: rgba(232, 212, 176, 0.5);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    margin-bottom: 8px;
+  }
+
+  .calc-price {
+    color: #D4AF37;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 300;
+    letter-spacing: 0.02em;
+    transition: all 0.3s ease;
+  }
+
+  .calc-price-note {
+    color: rgba(232, 212, 176, 0.35);
+    font-size: 0.7rem;
+    margin-top: 6px;
+    letter-spacing: 0.08em;
+  }
+
+  .calc-book {
+    margin-top: 20px;
+  }
+
+  /* ===== PERFECT FOR ===== */
+  .perfect-for {
+    background: #0a1a35;
+    padding: clamp(40px, 6vw, 80px) 20px;
+    text-align: center;
+  }
+
+  .perfect-for h3 {
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .perfect-for > p {
+    color: rgba(232, 212, 176, 0.5);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 2.5em;
+  }
+
+  .pf-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    max-width: 960px;
+    margin: 0 auto;
+  }
+
+  .pf-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 16px;
+    padding: 32px 20px;
+    transition: transform 0.3s, border-color 0.3s, background 0.3s;
+    cursor: default;
+  }
+
+  .pf-card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212, 175, 55, 0.3);
+    background: rgba(212, 175, 55, 0.04);
+  }
+
+  .pf-icon {
+    font-size: 2.4rem;
+    display: block;
+    margin-bottom: 14px;
+  }
+
+  .pf-card h4 {
+    color: #e8d4b0;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 8px;
+  }
+
+  .pf-card p {
+    color: rgba(232, 212, 176, 0.45);
+    font-size: 0.8rem;
+    line-height: 1.5;
+    letter-spacing: 0.03em;
+  }
+
+  /* ===== SCREEN 2 — AVAILABILITY ===== */
+  .screen2 {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: -2px;
+  }
+
+  .screen2-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://yanhs.stream/tgimg/ea1176934b0d48b79977bbb30c99479d.jpg') center/cover no-repeat;
+  }
+
+  .screen2-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 14, 26, 0.82);
+  }
+
+  /* ===== SCREEN 3 — Location ===== */
+  .screen3 {
+    position: relative;
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    content-visibility: auto;
+    contain-intrinsic-size: 100vw 100vh;
+  }
+
+  .screen3-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://yanhs.stream/tgimg/b1f36357b8874ffb8be34a184f83dacf.jpg') center/cover no-repeat;
+  }
+
+  .screen3-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: rgba(10, 14, 26, 0.78);
+  }
+
+  .screen3-content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    width: 100%;
+    padding: clamp(80px, 8vw, 120px) 20px clamp(40px, 6vw, 80px);
+  }
+
+  .screen3-content h3 {
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .screen3-content .loc-sub {
+    color: rgba(232, 212, 176, 0.5);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5em;
+  }
+
+  .screen3-content .loc-address {
+    color: #e8d4b0;
+    font-size: 1.1rem;
+    margin-bottom: 1.5em;
+    letter-spacing: 0.04em;
+  }
+
+  .screen3-content .loc-address span {
+    color: rgba(212, 175, 55, 0.7);
+  }
+
+  .screen3-content iframe {
+    border-radius: 12px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    max-width: 600px;
+    width: 100%;
+  }
+
+  .availability {
+    position: relative;
+    z-index: 2;
+    padding: clamp(80px, 8vw, 120px) 20px clamp(40px, 6vw, 80px);
+    text-align: center;
+    width: 100%;
+  }
+
+  .availability h3 {
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    margin-bottom: 8px;
+  }
+
+  .availability > p {
+    color: rgba(232, 212, 176, 0.5);
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 2em;
+  }
+
+  .avail-form {
+    max-width: 480px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    background: rgba(10, 26, 53, 0.75);
+    padding: 28px 24px;
+    border-radius: 16px;
+    border: 1px solid rgba(212, 175, 55, 0.1);
+  }
+
+  .avail-form .calc-field input[type="date"] {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    color: #e8d4b0;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    padding: 14px 16px;
+    border-radius: 8px;
+    outline: none;
+    transition: border-color 0.3s;
+    color-scheme: dark;
+  }
+
+  .avail-form .calc-field input[type="date"]:focus {
+    border-color: rgba(212, 175, 55, 0.5);
+  }
+
+  .avail-result {
+    margin-top: 12px;
+    padding: 24px;
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.4s ease;
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  .avail-result.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .avail-result.available {
+    background: rgba(46, 204, 113, 0.08);
+    border: 1px solid rgba(46, 204, 113, 0.25);
+  }
+
+  .avail-result.unavailable {
+    background: rgba(231, 76, 60, 0.08);
+    border: 1px solid rgba(231, 76, 60, 0.25);
+  }
+
+  .avail-status {
+    font-size: clamp(1.2rem, 3vw, 1.6rem);
+    font-weight: 400;
+    margin-bottom: 6px;
+  }
+
+  .avail-result.available .avail-status {
+    color: #2ecc71;
+  }
+
+  .avail-result.unavailable .avail-status {
+    color: #e74c3c;
+  }
+
+  .avail-note {
+    color: rgba(232, 212, 176, 0.45);
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
+  }
+
+  /* ===== LIVE PRICE DISPLAY ===== */
+  .live-price {
+    margin-top: 18px;
+    padding: 20px 24px;
+    background: linear-gradient(135deg, rgba(212,175,55,0.10), rgba(212,175,55,0.04));
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 12px;
+    text-align: center;
+    transition: all 0.4s ease;
+  }
+  .live-price-label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: rgba(212,175,55,0.6);
+    margin-bottom: 4px;
+  }
+  .live-price-amount {
+    font-family: 'Georgia', serif;
+    font-size: clamp(2rem, 5vw, 2.8rem);
+    font-weight: 700;
+    color: #D4AF37;
+    text-shadow: 0 0 20px rgba(212,175,55,0.3);
+    transition: transform 0.25s ease;
+  }
+  .live-price-amount.bump {
+    transform: scale(1.08);
+  }
+  .live-price-detail {
+    font-size: 0.8rem;
+    color: rgba(232,212,176,0.5);
+    margin-top: 4px;
+    letter-spacing: 0.04em;
+  }
+
+  /* ===== PAYMENT MODAL ===== */
+  .pay-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .pay-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .pay-modal {
+    background: linear-gradient(145deg, #0e2240, #0a1a35);
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 16px;
+    padding: 28px 24px;
+    width: 90%;
+    max-width: 400px;
+    position: relative;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+  }
+  .pay-close {
+    position: absolute;
+    top: 12px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: rgba(232,212,176,0.5);
+    font-size: 1.4rem;
+    cursor: pointer;
+  }
+  .pay-close:hover { color: #e8d4b0; }
+  .pay-title {
+    color: #D4AF37;
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+    text-align: center;
+    margin-bottom: 4px;
+  }
+  .pay-amount {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: 700;
+    color: #D4AF37;
+    margin-bottom: 20px;
+    text-shadow: 0 0 12px rgba(212,175,55,0.25);
+  }
+  .pay-field {
+    margin-bottom: 14px;
+  }
+  .pay-field label {
+    display: block;
+    color: rgba(232,212,176,0.6);
+    font-size: 0.7rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+  .pay-field input {
+    width: 100%;
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(212,175,55,0.2);
+    color: #e8d4b0;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    padding: 12px 14px;
+    border-radius: 8px;
+    outline: none;
+    letter-spacing: 0.08em;
+    transition: border-color 0.3s;
+  }
+  .pay-field input:focus {
+    border-color: rgba(212,175,55,0.5);
+  }
+  .pay-field input::placeholder {
+    color: rgba(232,212,176,0.25);
+  }
+  .pay-row {
+    display: flex;
+    gap: 12px;
+  }
+  .pay-row .pay-field { flex: 1; }
+  .pay-card-icon {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 18px;
+  }
+  .pay-card-icon span {
+    font-size: 1.5rem;
+    opacity: 0.4;
+    transition: opacity 0.3s;
+  }
+  .pay-card-icon span.active { opacity: 1; }
+  .pay-btn {
+    width: 100%;
+    padding: 14px;
+    background: #D4AF37;
+    color: #0B1D3A;
+    border: none;
+    border-radius: 40px;
+    font-family: 'Georgia', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 6px;
+  }
+  .pay-btn:hover { background: #E6C55A; }
+  .pay-btn:disabled {
+    background: rgba(212,175,55,0.3);
+    cursor: not-allowed;
+  }
+  .pay-secure {
+    text-align: center;
+    margin-top: 12px;
+    color: rgba(232,212,176,0.35);
+    font-size: 0.65rem;
+    letter-spacing: 0.08em;
+  }
+  /* Payment method tabs */
+  .pay-tabs {
+    display: flex;
+    gap: 0;
+    margin-bottom: 18px;
+    border-radius: 8px;
+    overflow: hidden;
+    border: 1px solid rgba(212,175,55,0.2);
+  }
+  .pay-tab {
+    flex: 1;
+    padding: 10px 8px;
+    text-align: center;
+    font-size: 0.75rem;
+    letter-spacing: 0.06em;
+    color: rgba(232,212,176,0.45);
+    background: rgba(255,255,255,0.03);
+    cursor: pointer;
+    transition: background 0.3s, color 0.3s;
+    border: none;
+    font-family: 'Georgia', serif;
+  }
+  .pay-tab:not(:last-child) {
+    border-right: 1px solid rgba(212,175,55,0.15);
+  }
+  .pay-tab.active {
+    background: rgba(212,175,55,0.12);
+    color: #D4AF37;
+  }
+  .pay-tab:hover:not(.active) {
+    background: rgba(212,175,55,0.06);
+  }
+  .pay-method { display: none; }
+  .pay-method.active { display: block; }
+  /* Crypto */
+  .crypto-coins {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    justify-content: center;
+  }
+  .crypto-coin {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid rgba(212,175,55,0.15);
+    background: rgba(255,255,255,0.03);
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.3s, background 0.3s;
+    min-width: 60px;
+  }
+  .crypto-coin:hover {
+    border-color: rgba(212,175,55,0.3);
+  }
+  .crypto-coin.selected {
+    border-color: #D4AF37;
+    background: rgba(212,175,55,0.1);
+  }
+  .crypto-coin .coin-icon {
+    font-size: 1.3rem;
+    display: block;
+    margin-bottom: 2px;
+  }
+  .crypto-coin .coin-name {
+    font-size: 0.55rem;
+    color: rgba(232,212,176,0.5);
+    letter-spacing: 0.05em;
+  }
+  .crypto-coin.selected .coin-name {
+    color: #D4AF37;
+  }
+  .crypto-addr {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,175,55,0.15);
+    border-radius: 8px;
+    padding: 12px;
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .crypto-addr-label {
+    font-size: 0.6rem;
+    color: rgba(232,212,176,0.4);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .crypto-addr-val {
+    font-family: monospace;
+    font-size: 0.65rem;
+    color: #e8d4b0;
+    word-break: break-all;
+    line-height: 1.4;
+    user-select: all;
+  }
+  .crypto-amount {
+    text-align: center;
+    margin-bottom: 14px;
+  }
+  .crypto-amount .amt {
+    font-size: 1.1rem;
+    color: #D4AF37;
+    font-weight: 700;
+  }
+  .crypto-amount .usd {
+    font-size: 0.7rem;
+    color: rgba(232,212,176,0.4);
+    margin-top: 2px;
+  }
+  .crypto-copy-btn {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 0.65rem;
+    color: #D4AF37;
+    border: 1px solid rgba(212,175,55,0.3);
+    border-radius: 20px;
+    background: none;
+    cursor: pointer;
+    margin-top: 6px;
+    transition: background 0.2s;
+    font-family: 'Georgia', serif;
+  }
+  .crypto-copy-btn:hover {
+    background: rgba(212,175,55,0.1);
+  }
+  .pay-spinner {
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(11,29,58,0.3);
+    border-top-color: #0B1D3A;
+    border-radius: 50%;
+    animation: paySpin 0.6s linear infinite;
+    vertical-align: middle;
+    margin-right: 6px;
+  }
+  @keyframes paySpin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* ===== VISUAL CALENDAR ===== */
+  .cal-wrapper {
+    user-select: none;
+  }
+
+  .cal-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 12px;
+  }
+
+  .cal-header h4 {
+    color: #e8d4b0;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: 0.06em;
+  }
+
+  .cal-nav {
+    background: none;
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    color: #D4AF37;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.3s;
+  }
+
+  .cal-nav:hover {
+    background: rgba(212, 175, 55, 0.1);
+  }
+
+  .cal-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    margin-bottom: 4px;
+  }
+
+  .cal-weekdays span {
+    text-align: center;
+    color: rgba(212, 175, 55, 0.5);
+    font-size: 0.65rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 0;
+  }
+
+  .cal-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+
+  .cal-day {
+    position: relative;
+    text-align: center;
+    padding: 8px 2px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: rgba(232, 212, 176, 0.6);
+    cursor: pointer;
+    transition: all 0.2s;
+    min-height: 38px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .cal-day:hover:not(.cal-past):not(.cal-booked):not(.cal-empty) {
+    background: rgba(212, 175, 55, 0.1);
+    color: #e8d4b0;
+  }
+
+  .cal-day.cal-today {
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    color: #D4AF37;
+  }
+
+  .cal-day.cal-selected {
+    background: rgba(212, 175, 55, 0.2);
+    color: #D4AF37;
+    font-weight: 600;
+    border: 1px solid #D4AF37;
+  }
+
+  .cal-day.cal-free::after {
+    content: '🛥️';
+    font-size: 0.5rem;
+    display: block;
+    line-height: 1;
+    margin-top: 1px;
+    opacity: 0.6;
+  }
+
+  .cal-day.cal-past {
+    color: rgba(232, 212, 176, 0.15);
+    cursor: default;
+  }
+
+  .cal-day.cal-booked {
+    color: rgba(232, 212, 176, 0.25);
+    cursor: default;
+    background: rgba(231, 76, 60, 0.06);
+  }
+
+  .cal-day.cal-booked::after {
+    content: '⚓';
+    font-size: 0.55rem;
+    display: block;
+    line-height: 1;
+    margin-top: 1px;
+    opacity: 0.7;
+  }
+
+  .cal-day.cal-empty {
+    cursor: default;
+  }
+
+  .cal-legend {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    margin-top: 10px;
+    flex-wrap: wrap;
+  }
+
+  .cal-legend span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 0.65rem;
+    color: rgba(232, 212, 176, 0.4);
+    letter-spacing: 0.05em;
+  }
+
+  .cal-legend-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  .cal-legend-dot.dot-available {
+    background: rgba(212, 175, 55, 0.4);
+  }
+
+  .cal-legend-dot.dot-booked {
+    background: rgba(231, 76, 60, 0.3);
+  }
+
+  .cal-legend-dot.dot-today {
+    border: 1px solid rgba(212, 175, 55, 0.5);
+    background: transparent;
+  }
+
+  .avail-slots {
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin-top: 14px;
+  }
+
+  .avail-slot {
+    background: rgba(212, 175, 55, 0.08);
+    border: 1px solid rgba(212, 175, 55, 0.2);
+    color: #e8d4b0;
+    padding: 8px 18px;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .avail-slot:hover, .avail-slot.selected {
+    background: rgba(212, 175, 55, 0.2);
+    border-color: #D4AF37;
+    color: #D4AF37;
+  }
+
+  /* ===== PRICE TABLE IN AVAILABILITY ===== */
+  .avail-prices {
+    max-width: 520px;
+    margin: 0 auto 2em;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .avail-price-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 18px;
+    background: rgba(255, 255, 255, 0.025);
+    border: 1px solid rgba(212, 175, 55, 0.08);
+    border-radius: 10px;
+    transition: border-color 0.3s, background 0.3s;
+  }
+
+  .avail-price-row:hover {
+    border-color: rgba(212, 175, 55, 0.25);
+    background: rgba(212, 175, 55, 0.03);
+  }
+
+  .avail-price-row .apr-left {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .avail-price-row .apr-icon {
+    font-size: 1.3rem;
+    width: 32px;
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  .avail-price-row .apr-info {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .avail-price-row .apr-name {
+    color: #e8d4b0;
+    font-size: 0.9rem;
+    letter-spacing: 0.03em;
+  }
+
+  .avail-price-row .apr-detail {
+    color: rgba(232, 212, 176, 0.35);
+    font-size: 0.7rem;
+    margin-top: 2px;
+  }
+
+  .avail-price-row .apr-price {
+    color: #D4AF37;
+    font-size: 1.05rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    flex-shrink: 0;
+    min-width: 90px;
+    text-align: right;
+  }
+
+  .avail-price-row.apr-featured {
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    background: linear-gradient(135deg, rgba(212,175,55,0.06) 0%, rgba(212,175,55,0.02) 100%);
+    box-shadow: 0 0 12px rgba(212, 175, 55, 0.06), inset 0 0 20px rgba(212, 175, 55, 0.03);
+  }
+
+  .nav-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 44px;
+  }
+
+  .nav-logo {
+    color: rgba(212, 175, 55, 0.7);
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-decoration: none;
+    font-style: italic;
+    transition: color 0.3s;
+  }
+
+  .nav-logo:hover {
+    color: #D4AF37;
+  }
+
+  .nav-links {
+    display: flex;
+    list-style: none;
+    gap: 0;
+    align-items: center;
+  }
+
+  .nav-links li a {
+    color: rgba(232, 212, 176, 0.4);
+    text-decoration: none;
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    padding: 6px 14px;
+    transition: color 0.3s;
+  }
+
+  .nav-links li a:hover,
+  .nav-links li a.active {
+    color: rgba(212, 175, 55, 0.85);
+  }
+
+  .nav-cta {
+    color: rgba(212, 175, 55, 0.6) !important;
+    border: none !important;
+    background: none !important;
+    padding: 6px 14px !important;
+    border-radius: 0 !important;
+    font-weight: 400;
+    transition: color 0.3s !important;
+  }
+
+  .nav-cta:hover {
+    color: #D4AF37 !important;
+    background: none !important;
+  }
+
+  /* Hamburger */
+  .nav-toggle {
+    display: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 6px;
+    flex-direction: column;
+    gap: 4px;
+  }
+
+  .nav-toggle span {
+    display: block;
+    width: 20px;
+    height: 1px;
+    background: rgba(212, 175, 55, 0.5);
+    transition: transform 0.3s, opacity 0.3s;
+  }
+
+  .nav-toggle.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+  .nav-toggle.open span:nth-child(2) {
+    opacity: 0;
+  }
+  .nav-toggle.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  @media (max-width: 768px) {
+    .nav-toggle {
+      display: flex;
+    }
+
+    .nav-links {
+      position: absolute;
+      top: 44px;
+      left: 0;
+      right: 0;
+      flex-direction: column;
+      background: #0a1a35;
+      border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+      padding: 0;
+      gap: 0;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, padding 0.3s ease;
+    }
+
+    .nav-links.open {
+      max-height: 400px;
+      padding: 12px 0;
+    }
+
+    .nav-links li a {
+      display: block;
+      padding: 10px 32px;
+      font-size: 0.7rem;
+      color: rgba(232, 212, 176, 0.45);
+    }
+
+    .nav-cta {
+      margin: 4px 24px !important;
+      text-align: center;
+      display: block !important;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- ===== Navigation Menu ===== -->
+<nav class="navbar" id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">⚓ GORGEOUS</a>
+    <button class="nav-toggle" id="navToggle" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </button>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#about">About</a></li>
+      <li><a href="#cruises">Cruises</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#captain">Captain</a></li>
+      <li><a class="nav-cta" href="#booking">Book Now</a></li>
+    </ul>
+  </div>
+  <div class="nav-rope"></div>
+</nav>
+
+<div id="pageContent">
+
+<!-- ===== Screen 1 — Welcome ===== -->
+<section class="welcome">
+  <div class="welcome-bg"></div>
+  <div class="welcome-text">
+    <h1>Welcome Aboard <span>Gorgeous</span></h1>
+    <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(1rem, 2.5vw, 1.4rem); letter-spacing:0.08em; color:rgba(232,220,200,0.6); margin-top:0.6em; font-style:italic; font-weight:300;">Sail. Relax. Enjoy.</p>
+    <div class="welcome-line"></div>
+    <svg class="steering-wheel" viewBox="0 0 100 100" fill="none" stroke="#D4AF37" stroke-width="2"><circle cx="50" cy="50" r="35"/><circle cx="50" cy="50" r="8"/><line x1="50" y1="15" x2="50" y2="42"/><line x1="50" y1="58" x2="50" y2="85"/><line x1="15" y1="50" x2="42" y2="50"/><line x1="58" y1="50" x2="85" y2="50"/><line x1="25" y1="25" x2="44" y2="44"/><line x1="56" y1="56" x2="75" y2="75"/><line x1="75" y1="25" x2="56" y2="44"/><line x1="44" y1="56" x2="25" y2="75"/></svg>
+    <a href="#cruises" class="btn" style="margin-top:1.5em; font-size:1.15rem; padding: 14px 40px;">🟡 Book Your Cruise</a>
+  </div>
+  <div class="welcome-scroll" onclick="document.getElementById('cruises').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+    <svg class="seagull" viewBox="0 0 50 20" fill="none">
+      <g class="wing-left" style="transform-origin:25px 12px">
+        <path d="M25 12 C20 8, 12 3, 4 6 C2 7, 0 10, 0 12" stroke="rgba(255,255,255,0.9)" stroke-width="1.8" fill="none"/>
+      </g>
+      <g class="wing-right" style="transform-origin:25px 12px">
+        <path d="M25 12 C30 8, 38 3, 46 6 C48 7, 50 10, 50 12" stroke="rgba(255,255,255,0.9)" stroke-width="1.8" fill="none"/>
+      </g>
+    </svg>
+    <svg class="seagull seagull2" viewBox="0 0 50 20" fill="none">
+      <g class="wing-left" style="transform-origin:25px 12px">
+        <path d="M25 12 C20 8, 12 3, 4 6 C2 7, 0 10, 0 12" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" fill="none"/>
+      </g>
+      <g class="wing-right" style="transform-origin:25px 12px">
+        <path d="M25 12 C30 8, 38 3, 46 6 C48 7, 50 10, 50 12" stroke="rgba(255,255,255,0.7)" stroke-width="1.8" fill="none"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<!-- ===== Sunset Today ===== -->
+<div style="background:linear-gradient(135deg, #0d1f3c 0%, #0a1a35 50%, #0d1f3c 100%); padding:40px 20px; text-align:center; border-top:1px solid rgba(212,175,55,0.08); border-bottom:1px solid rgba(212,175,55,0.08);">
+  <div style="max-width:520px; margin:0 auto;">
+    <h2 style="font-family:'Cormorant Garamond',serif; font-size:1.4rem; color:#D4AF37; letter-spacing:0.08em; margin-bottom:24px;">Today's Sunset in Los Angeles 🌅</h2>
+
+    <div style="display:inline-grid; grid-template-columns:auto auto; gap:8px 20px; text-align:left; margin-bottom:24px;">
+      <span style="font-size:1rem; color:rgba(232,220,200,0.6);">🌤 Sunrise</span>
+      <span id="sunriseTime" style="font-size:1rem; color:#e8d4b0; font-weight:600;">...</span>
+
+      <span style="font-size:1rem; color:rgba(232,220,200,0.6);">☀️ Solar Noon</span>
+      <span id="solarNoonTime" style="font-size:1rem; color:#e8d4b0; font-weight:600;">...</span>
+
+      <span style="font-size:1.15rem; color:rgba(255,200,80,0.8);">🌇 Golden Hour</span>
+      <span id="goldenHourTime" style="font-size:1.15rem; color:#D4AF37; font-weight:700;">...</span>
+
+      <span style="font-size:1.4rem; color:#D4AF37;">🌅 Sunset</span>
+      <span id="sunsetTime" style="font-size:1.4rem; color:#D4AF37; font-weight:700;">...</span>
+
+      <span style="font-size:1rem; color:rgba(232,220,200,0.6);">🌆 Twilight Ends</span>
+      <span id="twilightEndTime" style="font-size:1rem; color:#e8d4b0; font-weight:600;">...</span>
+
+      <span style="font-size:0.9rem; color:rgba(232,220,200,0.4);">⏱ Day Length</span>
+      <span id="dayLength" style="font-size:0.9rem; color:rgba(232,220,200,0.55); font-weight:600;">...</span>
+    </div>
+
+    <p style="font-size:0.9rem; color:rgba(232,220,200,0.5); margin-bottom:24px; font-style:italic;">Perfect moment for a luxury sunset cruise</p>
+    <a href="#cruises" style="background:#D4AF37; color:#0b1e2d; padding:14px 28px; border-radius:30px; text-decoration:none; font-weight:bold; display:inline-block; font-size:0.85rem; letter-spacing:0.05em;">Book Your Sunset Cruise</a>
+  </div>
+</div>
+
+<!-- ===== Screen 2 — Availability ===== -->
+<div class="screen2">
+<div class="screen2-bg"></div>
+<a id="availability"></a>
+<section class="availability" id="cruises">
+  <h3>📅 Check Availability</h3>
+  <p>Find the perfect date for your cruise</p>
+
+  <div class="avail-prices">
+    <div class="avail-price-row apr-featured">
+      <div class="apr-left">
+        <span class="apr-icon">🌅</span>
+        <div class="apr-info">
+          <div class="apr-name">Sunset Cruise</div>
+          <div class="apr-detail">2 hours · Up to 12 guests</div>
+        </div>
+      </div>
+      <span class="apr-price">from $750</span>
+    </div>
+    <div class="avail-price-row">
+      <div class="apr-left">
+        <span class="apr-icon">🐬</span>
+        <div class="apr-info">
+          <div class="apr-name">Dolphin Watching</div>
+          <div class="apr-detail">2–3 hours · Up to 12 guests</div>
+        </div>
+      </div>
+      <span class="apr-price">from $900</span>
+    </div>
+    <div class="avail-price-row">
+      <div class="apr-left">
+        <span class="apr-icon">💍</span>
+        <div class="apr-info">
+          <div class="apr-name">Romantic Cruise</div>
+          <div class="apr-detail">2 hours · Private for couples</div>
+        </div>
+      </div>
+      <span class="apr-price">from $850</span>
+    </div>
+    <div class="avail-price-row">
+      <div class="apr-left">
+        <span class="apr-icon">🎉</span>
+        <div class="apr-info">
+          <div class="apr-name">Celebration Cruise</div>
+          <div class="apr-detail">3 hours · Birthdays & parties</div>
+        </div>
+      </div>
+      <span class="apr-price">from $1,200</span>
+    </div>
+    <div class="avail-price-row">
+      <div class="apr-left">
+        <span class="apr-icon">🏢</span>
+        <div class="apr-info">
+          <div class="apr-name">Corporate Event</div>
+          <div class="apr-detail">3–4 hours · Team building</div>
+        </div>
+      </div>
+      <span class="apr-price">from $1,500</span>
+    </div>
+  </div>
+
+  <div class="avail-form" id="booking">
+    <input type="hidden" id="availDate">
+    <div class="calc-field">
+      <label>Select Date</label>
+      <div class="cal-wrapper" id="calWrapper">
+        <div class="cal-header">
+          <button class="cal-nav" onclick="calNav(-1)">‹</button>
+          <h4 id="calTitle"></h4>
+          <button class="cal-nav" onclick="calNav(1)">›</button>
+        </div>
+        <div class="cal-weekdays">
+          <span>Sun</span><span>Mon</span><span>Tue</span><span>Wed</span><span>Thu</span><span>Fri</span><span>Sat</span>
+        </div>
+        <div class="cal-days" id="calDays"></div>
+        <div class="cal-legend">
+          <span>🛥️ Available</span>
+          <span>⚓ Booked</span>
+          <span><span class="cal-legend-dot dot-today"></span> Today</span>
+        </div>
+      </div>
+    </div>
+    <div class="calc-field">
+      <label>Cruise Type</label>
+      <select id="availCruise" onchange="updateLivePrice();checkAvailability()">
+        <option value="sunset">🌅 Sunset Cruise — from $750</option>
+        <option value="dolphin">🐬 Dolphin Watching — from $900</option>
+        <option value="celebration">🎉 Celebration Cruise — from $1,200</option>
+        <option value="romantic">💍 Romantic Cruise — from $850</option>
+        <option value="corporate">🏢 Corporate Event — from $1,500</option>
+      </select>
+    </div>
+    <div class="calc-field">
+      <label>Preferred Time</label>
+      <select id="availTime" onchange="checkAvailability()">
+        <option value="9:00 AM">9:00 AM — Morning</option>
+        <option value="11:00 AM">11:00 AM — Late Morning</option>
+        <option value="2:00 PM">2:00 PM — Afternoon</option>
+        <option value="4:00 PM" selected>4:00 PM — Golden Hour</option>
+        <option value="5:00 PM">5:00 PM — Sunset</option>
+        <option value="6:00 PM">6:00 PM — Evening</option>
+      </select>
+    </div>
+    <div class="calc-field">
+      <label>Duration</label>
+      <select id="availDuration" onchange="updateLivePrice();checkAvailability()">
+        <option value="2">2 hours</option>
+        <option value="3">3 hours — +$200–320</option>
+        <option value="4">4 hours — +$400–640</option>
+        <option value="6">6 hours — +$800–1,280</option>
+        <option value="8">8 hours Full Day — +$1,200–1,920</option>
+      </select>
+    </div>
+    <div class="calc-field">
+      <label>Number of Guests</label>
+      <select id="availGuests" onchange="updateLivePrice();checkAvailability()">
+        <option value="2">2 guests</option>
+        <option value="4">4 guests</option>
+        <option value="6">6 guests</option>
+        <option value="8">8 guests</option>
+        <option value="10">10 guests</option>
+        <option value="12">12 guests</option>
+      </select>
+    </div>
+    <div class="calc-field">
+      <label>Your Name</label>
+      <input type="text" id="availName" placeholder="John Smith" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.2); color:#e8d4b0; font-family:'Georgia',serif; font-size:1rem; padding:14px 16px; border-radius:8px; outline:none;">
+    </div>
+    <div class="calc-field">
+      <label>Email</label>
+      <input type="email" id="availEmail" placeholder="john@example.com" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.2); color:#e8d4b0; font-family:'Georgia',serif; font-size:1rem; padding:14px 16px; border-radius:8px; outline:none;">
+    </div>
+    <div class="calc-field">
+      <label>Phone</label>
+      <input type="tel" id="availPhone" placeholder="+1 (555) 123-4567" style="background:rgba(255,255,255,0.05); border:1px solid rgba(212,175,55,0.2); color:#e8d4b0; font-family:'Georgia',serif; font-size:1rem; padding:14px 16px; border-radius:8px; outline:none;">
+    </div>
+    <div class="live-price" id="livePrice">
+      <div class="live-price-label">Estimated Total</div>
+      <div class="live-price-amount" id="livePriceAmount">$750</div>
+      <div class="live-price-detail" id="livePriceDetail">🌅 Sunset Cruise · 2 hrs · 2 guests</div>
+    </div>
+    <div style="margin-top:16px; padding:14px 16px; background:rgba(255,255,255,0.03); border:1px solid rgba(212,175,55,0.12); border-radius:10px;">
+      <div style="font-size:0.75rem; text-transform:uppercase; letter-spacing:0.12em; color:#D4AF37; margin-bottom:8px;">Pay After Confirmation</div>
+      <div style="font-size:0.8rem; opacity:0.65; margin-bottom:8px;">Book first — pay only after Captain Ian confirms your cruise</div>
+      <div style="display:flex; flex-direction:column; gap:6px; font-size:0.82rem; margin-top:4px;">
+        <span>💳 Credit / Debit Cards</span>
+        <span>₿ Cryptocurrency</span>
+        <span>💵 Cash</span>
+      </div>
+    </div>
+    <div style="margin-top:8px;">
+      <button class="btn" style="font-size:1rem; padding:14px 36px; border:none; cursor:pointer;" onclick="checkAvailability()">🟡 Check Availability</button>
+    </div>
+    <div class="avail-result" id="availResult">
+      <p class="avail-status" id="availStatus"></p>
+      <div class="avail-slots" id="availSlots"></div>
+      <p class="avail-note" id="availNote"></p>
+      <div id="availBook" style="margin-top:16px; display:none;">
+        <button class="btn" style="font-size:1rem; padding:12px 32px; border:none; cursor:pointer;" onclick="submitBooking()">🟡 Request Booking</button>
+      </div>
+    </div>
+  </div>
+</section>
+</div><!-- /screen2 -->
+
+<!-- ===== Screen 3 — Location ===== -->
+<div class="screen3">
+<div class="screen3-bg"></div>
+<div class="screen3-content">
+  <h3>📍 Departure Location</h3>
+  <p class="loc-sub">We depart from a marina near Los Angeles</p>
+  <p class="loc-address">Marina del Rey, <span>Los Angeles, CA</span></p>
+  <!-- Map temporarily removed -->
+  <div style="margin-top:2em;">
+    <a href="#availability" class="btn">🟡 Book Your Cruise</a>
+  </div>
+</div>
+</div><!-- /screen3 -->
+
+<!-- ===== TAB: About ===== -->
+<div class="tab-content-wrapper" data-tab="about">
+<div class="wave-photo">
+  <img src="https://yanhs.stream/tgimg/eae4de1c6f134e9d8ae703d79ad12f84.jpg" alt="" loading="lazy">
+</div>
+<section class="section-about" id="about">
+  <h3 class="section-title">⚓ About the Yacht</h3>
+  <div class="rope-accent">
+    <svg viewBox="0 0 300 12" preserveAspectRatio="none"><path d="M0,6 Q15,0 30,6 Q45,12 60,6 Q75,0 90,6 Q105,12 120,6 Q135,0 150,6 Q165,12 180,6 Q195,0 210,6 Q225,12 240,6 Q255,0 270,6 Q285,12 300,6" fill="none" stroke="#8B7340" stroke-width="2" stroke-linecap="round" opacity="0.5"/></svg>
+    <svg class="rope-knot-sm" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6" fill="none" stroke="#8B7340" stroke-width="1.5" opacity="0.5"/><circle cx="10" cy="10" r="2.5" fill="none" stroke="#a8924a" stroke-width="1" opacity="0.4"/></svg>
+    <svg viewBox="0 0 300 12" preserveAspectRatio="none"><path d="M0,6 Q15,0 30,6 Q45,12 60,6 Q75,0 90,6 Q105,12 120,6 Q135,0 150,6 Q165,12 180,6 Q195,0 210,6 Q225,12 240,6 Q255,0 270,6 Q285,12 300,6" fill="none" stroke="#8B7340" stroke-width="2" stroke-linecap="round" opacity="0.5"/></svg>
+  </div>
+  <div class="section-inner">
+    <div class="porthole-frame">
+      <div class="porthole-glass">
+        <img src="https://yanhs.stream/tgimg/0b1437987c7c4ce8bc4cb9298db35843.jpg" alt="Dolphins through porthole" loading="lazy">
+      </div>
+      <div class="porthole-bolt bolt-t"></div>
+      <div class="porthole-bolt bolt-b"></div>
+      <div class="porthole-bolt bolt-l"></div>
+      <div class="porthole-bolt bolt-r"></div>
+      <div class="porthole-bolt bolt-tl"></div>
+      <div class="porthole-bolt bolt-tr"></div>
+      <div class="porthole-bolt bolt-bl"></div>
+      <div class="porthole-bolt bolt-br"></div>
+    </div>
+    <div class="section-text">
+      <h3>Welcome Aboard Gorgeous</h3>
+      <p>Step aboard Gorgeous, a private luxury yacht offering unforgettable ocean experiences along the stunning Pacific coastline.</p>
+      <p>Whether you're celebrating a special occasion, planning a romantic sunset cruise, or simply looking to relax on the water, Gorgeous provides the perfect setting for an extraordinary escape.</p>
+      <p>Enjoy breathtaking ocean views, fresh sea breeze, and the chance to see dolphins playing in the waves while sailing in comfort and style.</p>
+      <div style="margin-top:2em;">
+        <a href="#availability" class="btn">Book Your Cruise</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</div><!-- /tab about -->
+
+<!-- ===== TAB: Perfect For ===== -->
+<div class="tab-content-wrapper" data-tab="perfect-for">
+<div class="wave-photo">
+  <img src="https://yanhs.stream/tgimg/eae4de1c6f134e9d8ae703d79ad12f84.jpg" alt="" loading="lazy">
+</div>
+<section class="perfect-for" id="perfect-for">
+  <h3>Perfect For</h3>
+  <p>Every occasion deserves the ocean</p>
+  <div class="pf-grid">
+    <div class="pf-card">
+      <span class="pf-icon">💍</span>
+      <h4>Proposals</h4>
+      <p>Say "yes" under the sunset on the Pacific. An intimate, unforgettable moment on the water.</p>
+    </div>
+    <div class="pf-card">
+      <span class="pf-icon">🎉</span>
+      <h4>Birthdays</h4>
+      <p>Celebrate another year with ocean views, champagne, and friends aboard a private yacht.</p>
+    </div>
+    <div class="pf-card">
+      <span class="pf-icon">🥂</span>
+      <h4>Celebrations</h4>
+      <p>Anniversaries, graduations, or just because — every toast is better on the ocean.</p>
+    </div>
+    <div class="pf-card">
+      <span class="pf-icon">🏢</span>
+      <h4>Corporate Events</h4>
+      <p>Team building, client entertainment, or executive retreats with a premium experience.</p>
+    </div>
+  </div>
+  <div style="margin-top:2.5em;">
+    <a href="#availability" class="btn" style="font-size:1.05rem; padding:14px 36px;">🟡 Book Your Cruise</a>
+  </div>
+</section>
+</div><!-- /tab perfect-for -->
+
+<!-- ===== TAB: How It Works ===== -->
+<div class="tab-content-wrapper" data-tab="how-it-works">
+<div class="wave-photo">
+  <img src="https://yanhs.stream/tgimg/eae4de1c6f134e9d8ae703d79ad12f84.jpg" alt="" loading="lazy">
+</div>
+<section class="how-it-works" id="how-it-works">
+  <h3>How It Works</h3>
+  <div class="steps-grid">
+    <div class="step-item">
+      <div class="step-num">1</div>
+      <h4>Choose Your Cruise</h4>
+      <p>Pick from sunset, dolphin, romantic, celebration or corporate cruises</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num">2</div>
+      <h4>Pick a Date</h4>
+      <p>Select your preferred date and number of guests (up to 12)</p>
+    </div>
+    <div class="step-item">
+      <div class="step-num">3</div>
+      <h4>Enjoy the Ocean</h4>
+      <p>Board Gorgeous and sail into an unforgettable Pacific experience</p>
+    </div>
+  </div>
+  <div style="margin-top:2.5em;">
+    <a href="#availability" class="btn">🟡 Book Your Cruise</a>
+  </div>
+</section>
+
+</div><!-- /tab how-it-works -->
+
+<!-- ===== TAB: Calculator ===== -->
+<div class="tab-content-wrapper" data-tab="calculator">
+<div class="wave-photo">
+  <img src="https://yanhs.stream/tgimg/eae4de1c6f134e9d8ae703d79ad12f84.jpg" alt="" loading="lazy">
+</div>
+<section class="calculator" id="calculator">
+  <h3>💰 Estimate Your Cruise</h3>
+  <p>Get an instant price estimate for your dream voyage</p>
+  <div class="calc-form">
+    <div class="calc-field">
+      <label>Cruise Type</label>
+      <select id="calcType" onchange="updateCalcPrice()">
+        <option value="sunset">🌅 Sunset Cruise</option>
+        <option value="dolphin">🐬 Dolphin Watching</option>
+        <option value="celebration">🎉 Celebration Cruise</option>
+        <option value="romantic">💍 Romantic Cruise</option>
+        <option value="corporate">🏢 Corporate Event</option>
+      </select>
+    </div>
+    <div class="calc-field">
+      <label>Duration</label>
+      <select id="calcDuration" onchange="updateCalcPrice()">
+        <option value="2">2 hours</option>
+        <option value="3">3 hours</option>
+        <option value="4">4 hours</option>
+        <option value="6">6 hours</option>
+        <option value="8">8 hours — Full Day</option>
+      </select>
+    </div>
+    <div class="calc-field">
+      <label>Number of Guests</label>
+      <select id="calcGuests" onchange="updateCalcPrice()">
+        <option value="2">2 guests</option>
+        <option value="4">4 guests</option>
+        <option value="6">6 guests</option>
+        <option value="8">8 guests</option>
+        <option value="10">10 guests</option>
+        <option value="12">12 guests</option>
+      </select>
+    </div>
+    <div class="calc-result">
+      <p class="calc-result-label">Estimated Price</p>
+      <p class="calc-price" id="calcPrice">$750</p>
+      <p class="calc-price-note">Final price may vary · No hidden fees</p>
+    </div>
+    <div class="calc-book">
+      <a href="#availability" class="btn" style="font-size:1.1rem; padding: 14px 40px;">🟡 Book Your Cruise</a>
+    </div>
+  </div>
+</section>
+</div><!-- /tab calculator -->
+
+<!-- ===== TAB: Cruises ===== -->
+<div class="tab-content-wrapper" data-tab="pricing">
+<div class="wave-photo">
+  <img src="https://yanhs.stream/tgimg/eae4de1c6f134e9d8ae703d79ad12f84.jpg" alt="" loading="lazy">
+</div>
+<section class="pricing" id="pricing">
+  <h3>🌊 Our Cruises</h3>
+  <div class="rope-accent">
+    <svg viewBox="0 0 300 12" preserveAspectRatio="none"><path d="M0,6 Q15,0 30,6 Q45,12 60,6 Q75,0 90,6 Q105,12 120,6 Q135,0 150,6 Q165,12 180,6 Q195,0 210,6 Q225,12 240,6 Q255,0 270,6 Q285,12 300,6" fill="none" stroke="#8B7340" stroke-width="2" stroke-linecap="round" opacity="0.5"/></svg>
+    <svg class="rope-knot-sm" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6" fill="none" stroke="#8B7340" stroke-width="1.5" opacity="0.5"/><circle cx="10" cy="10" r="2.5" fill="none" stroke="#a8924a" stroke-width="1" opacity="0.4"/></svg>
+    <svg viewBox="0 0 300 12" preserveAspectRatio="none"><path d="M0,6 Q15,0 30,6 Q45,12 60,6 Q75,0 90,6 Q105,12 120,6 Q135,0 150,6 Q165,12 180,6 Q195,0 210,6 Q225,12 240,6 Q255,0 270,6 Q285,12 300,6" fill="none" stroke="#8B7340" stroke-width="2" stroke-linecap="round" opacity="0.5"/></svg>
+  </div>
+  <p style="font-size:clamp(1.1rem, 2vw, 1.3rem); color:#8B6914; margin-bottom:8px;">Choose Your Perfect Ocean Experience</p>
+  <p>Explore unforgettable moments aboard Gorgeous on the beautiful Pacific Ocean.</p>
+  <div class="pricing-grid">
+    <div class="price-card popular">
+      <span class="popular-badge">Most Popular</span>
+      <span class="price-icon">🌅</span>
+      <h4>Sunset Cruise</h4>
+      <p class="price-desc">Enjoy a breathtaking sunset while cruising along the coastline.</p>
+      <p class="price-meta">Duration: 2 hours · Guests: up to 12</p>
+      <div class="price-amount">From $750</div>
+      <a href="#availability" class="price-btn">Book Sunset Cruise</a>
+    </div>
+    <div class="price-card">
+      <span class="price-icon">🐬</span>
+      <h4>Dolphin Watching Cruise</h4>
+      <p class="price-desc">Watch dolphins swimming and playing in the waves beside the yacht.</p>
+      <p class="price-meta">Duration: 2–3 hours · Guests: up to 12</p>
+      <div class="price-amount">From $900</div>
+      <a href="#availability" class="price-btn">Reserve Dolphin Cruise</a>
+    </div>
+    <div class="price-card">
+      <span class="price-icon">🎉</span>
+      <h4>Celebration Cruise</h4>
+      <p class="price-desc">Perfect for birthdays, parties and unforgettable moments with friends.</p>
+      <p class="price-meta">Duration: 3 hours · Guests: up to 12</p>
+      <div class="price-amount">From $1200</div>
+      <a href="#availability" class="price-btn">Book Celebration Cruise</a>
+    </div>
+    <div class="price-card">
+      <span class="price-icon">💍</span>
+      <h4>Romantic Cruise</h4>
+      <p class="price-desc">A magical private cruise designed for couples and special moments.</p>
+      <p class="price-meta">Duration: 2 hours · Guests: up to 12</p>
+      <div class="price-amount">From $850</div>
+      <a href="#availability" class="price-btn">Plan Romantic Cruise</a>
+    </div>
+    <div class="price-card">
+      <span class="price-icon">🏢</span>
+      <h4>Corporate Cruise</h4>
+      <p class="price-desc">A unique ocean experience for team events and business gatherings.</p>
+      <p class="price-meta">Duration: 3–4 hours · Guests: up to 12</p>
+      <div class="price-amount">From $1500</div>
+      <a href="#availability" class="price-btn">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+</div><!-- /tab pricing -->
+
+<!-- ===== TAB: Gallery ===== -->
+<div class="tab-content-wrapper" data-tab="gallery">
+<div class="wave-photo">
+  <img src="https://yanhs.stream/tgimg/eae4de1c6f134e9d8ae703d79ad12f84.jpg" alt="" loading="lazy">
+</div>
+<section class="gallery" id="gallery">
+  <h3>Gallery</h3>
+  <div class="rope-accent">
+    <svg viewBox="0 0 300 12" preserveAspectRatio="none"><path d="M0,6 Q15,0 30,6 Q45,12 60,6 Q75,0 90,6 Q105,12 120,6 Q135,0 150,6 Q165,12 180,6 Q195,0 210,6 Q225,12 240,6 Q255,0 270,6 Q285,12 300,6" fill="none" stroke="#8B7340" stroke-width="2" stroke-linecap="round" opacity="0.5"/></svg>
+    <svg class="rope-knot-sm" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6" fill="none" stroke="#8B7340" stroke-width="1.5" opacity="0.5"/><circle cx="10" cy="10" r="2.5" fill="none" stroke="#a8924a" stroke-width="1" opacity="0.4"/></svg>
+    <svg viewBox="0 0 300 12" preserveAspectRatio="none"><path d="M0,6 Q15,0 30,6 Q45,12 60,6 Q75,0 90,6 Q105,12 120,6 Q135,0 150,6 Q165,12 180,6 Q195,0 210,6 Q225,12 240,6 Q255,0 270,6 Q285,12 300,6" fill="none" stroke="#8B7340" stroke-width="2" stroke-linecap="round" opacity="0.5"/></svg>
+  </div>
+  <div class="carousel">
+    <button class="carousel-btn prev" onclick="carouselScroll(-1)">&#10094;</button>
+    <div class="carousel-track" id="carouselTrack">
+      <div class="carousel-slide" onclick="openLightbox(this)">
+        <img src="https://yanhs.stream/tgimg/e04a65e0edfc409bbd1276809f770413.jpg" alt="Sunset at the marina" loading="lazy">
+        <div class="slide-caption">Sunset at the Marina</div>
+      </div>
+      <div class="carousel-slide" onclick="openLightbox(this)">
+        <img src="https://yanhs.stream/tgimg/b36251937d924b58960ee7b8ffb39236.jpg" alt="Captain at the helm" loading="lazy">
+        <div class="slide-caption">Life Aboard Gorgeous</div>
+      </div>
+    </div>
+    <button class="carousel-btn next" onclick="carouselScroll(1)">&#10095;</button>
+    <div class="carousel-dots" id="carouselDots"></div>
+  </div>
+</section>
+
+<!-- Lightbox -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close">&times;</button>
+  <img id="lightboxImg" src="" alt="Gallery photo">
+</div>
+
+</div><!-- /tab gallery -->
+
+<!-- ===== TAB: Reviews ===== -->
+<div class="tab-content-wrapper" data-tab="reviews">
+<div class="wave-photo">
+  <img src="https://yanhs.stream/tgimg/eae4de1c6f134e9d8ae703d79ad12f84.jpg" alt="" loading="lazy">
+</div>
+<section class="reviews" id="reviews">
+  <h3>What Our Guests Say</h3>
+  <div class="rope-accent">
+    <svg viewBox="0 0 300 12" preserveAspectRatio="none"><path d="M0,6 Q15,0 30,6 Q45,12 60,6 Q75,0 90,6 Q105,12 120,6 Q135,0 150,6 Q165,12 180,6 Q195,0 210,6 Q225,12 240,6 Q255,0 270,6 Q285,12 300,6" fill="none" stroke="#8B7340" stroke-width="2" stroke-linecap="round" opacity="0.5"/></svg>
+    <svg class="rope-knot-sm" viewBox="0 0 20 20"><circle cx="10" cy="10" r="6" fill="none" stroke="#8B7340" stroke-width="1.5" opacity="0.5"/><circle cx="10" cy="10" r="2.5" fill="none" stroke="#a8924a" stroke-width="1" opacity="0.4"/></svg>
+    <svg viewBox="0 0 300 12" preserveAspectRatio="none"><path d="M0,6 Q15,0 30,6 Q45,12 60,6 Q75,0 90,6 Q105,12 120,6 Q135,0 150,6 Q165,12 180,6 Q195,0 210,6 Q225,12 240,6 Q255,0 270,6 Q285,12 300,6" fill="none" stroke="#8B7340" stroke-width="2" stroke-linecap="round" opacity="0.5"/></svg>
+  </div>
+  <div class="reviews-grid">
+    <div class="review-card">
+      <div class="review-stars">⭐ ⭐ ⭐ ⭐ ⭐</div>
+      <blockquote>"The sunset cruise was absolutely magical. We even saw dolphins!"</blockquote>
+      <cite>— Sarah M.</cite>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">⭐ ⭐ ⭐ ⭐ ⭐</div>
+      <blockquote>"A perfect birthday celebration with friends. Highly recommend!"</blockquote>
+      <cite>— David L.</cite>
+    </div>
+    <div class="review-card">
+      <div class="review-stars">⭐ ⭐ ⭐ ⭐ ⭐</div>
+      <blockquote>"Captain Ian made the whole experience unforgettable."</blockquote>
+      <cite>— Jessica R.</cite>
+    </div>
+  </div>
+</section>
+
+</div><!-- /tab reviews -->
+
+<!-- ===== TAB: Captain ===== -->
+<div class="tab-content-wrapper" data-tab="captain">
+<div class="wave-photo">
+  <img src="https://yanhs.stream/tgimg/eae4de1c6f134e9d8ae703d79ad12f84.jpg" alt="" loading="lazy">
+</div>
+<section class="captain" id="captain">
+  <div class="captain-inner">
+    <div class="captain-photo">
+      <div class="captain-porthole">
+        <div class="porthole-glass">
+          <img src="https://yanhs.stream/tgimg/b36251937d924b58960ee7b8ffb39236.jpg" alt="Captain Ian" loading="lazy">
+        </div>
+        <div class="porthole-bolt bolt-t"></div>
+        <div class="porthole-bolt bolt-b"></div>
+        <div class="porthole-bolt bolt-l"></div>
+        <div class="porthole-bolt bolt-r"></div>
+        <svg class="captain-wheel" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="50" cy="50" r="44" stroke="#D4AF37" stroke-width="4"/>
+          <circle cx="50" cy="50" r="16" stroke="#D4AF37" stroke-width="3"/>
+          <line x1="50" y1="6" x2="50" y2="34" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+          <line x1="50" y1="66" x2="50" y2="94" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+          <line x1="6" y1="50" x2="34" y2="50" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+          <line x1="66" y1="50" x2="94" y2="50" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+          <line x1="15" y1="15" x2="38" y2="38" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="85" y1="85" x2="62" y2="62" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="85" y1="15" x2="62" y2="38" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round"/>
+          <line x1="15" y1="85" x2="38" y2="62" stroke="#D4AF37" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="50" cy="6" r="3" fill="#D4AF37"/>
+          <circle cx="50" cy="94" r="3" fill="#D4AF37"/>
+          <circle cx="6" cy="50" r="3" fill="#D4AF37"/>
+          <circle cx="94" cy="50" r="3" fill="#D4AF37"/>
+        </svg>
+      </div>
+    </div>
+    <div class="captain-text">
+      <h3>Your Captain &amp; Trusted Experience</h3>
+      <h4>Captain Ian</h4>
+      <p>Captain Ian welcomes you aboard and ensures every cruise is safe, relaxing and unforgettable.</p>
+    </div>
+  </div>
+</section>
+
+</div><!-- /tab captain -->
+
+<!-- ===== Safety & Policies ===== -->
+<section class="safety-policies" id="safety">
+  <h2 class="sp-title">Safety & Policies</h2>
+
+  <div class="sp-block">
+    <h3 class="sp-subtitle">🛟 Safety On Board</h3>
+    <p class="sp-intro">Your safety is our top priority. All cruises aboard <strong>Gorgeous</strong> are operated by a professional captain and follow safety procedures to ensure a comfortable and secure journey.</p>
+    <ul class="sp-list">
+      <li>🛟 Life jackets and safety equipment available on board</li>
+      <li>⚓ Licensed captain with navigation experience</li>
+      <li>👥 Maximum recommended capacity: 12 guests</li>
+      <li>👶 Children must be supervised by adults</li>
+      <li>🚫 Please avoid standing on railings or unsafe areas</li>
+      <li>📢 In case of emergency follow the captain's instructions</li>
+    </ul>
+  </div>
+
+  <div class="sp-divider"></div>
+
+  <div class="sp-block">
+    <h3 class="sp-subtitle">📋 Guest Rules & Policies</h3>
+
+    <h4 class="sp-heading">Guest Guidelines</h4>
+    <ul class="sp-list">
+      <li>⏰ Please arrive 10–15 minutes before departure</li>
+      <li>👥 Maximum recommended capacity: 12 guests</li>
+      <li>⚓ Follow the captain's instructions at all times</li>
+      <li>🤝 Please respect the yacht and other guests</li>
+      <li>🚬 Smoking only in designated areas</li>
+      <li>⚠️ The captain reserves the right to refuse service if behavior is unsafe</li>
+    </ul>
+
+    <h4 class="sp-heading">Cancellation Policy</h4>
+    <p class="sp-text">Cancellations made <strong>48 hours before departure</strong> are eligible for a full refund. Cancellations made less than 48 hours before the cruise may not be refunded.</p>
+
+    <h4 class="sp-heading">Weather Policy</h4>
+    <p class="sp-text">In case of unsafe weather conditions, the cruise may be <strong>rescheduled or refunded</strong>.</p>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer class="footer" id="siteFooter" style="display:none;">
+  <div class="footer-inner">
+    <div class="footer-brand">
+      <svg class="footer-wheel" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <circle cx="50" cy="50" r="44" stroke="#D4AF37" stroke-width="4"/>
+        <circle cx="50" cy="50" r="16" stroke="#D4AF37" stroke-width="3"/>
+        <line x1="50" y1="6" x2="50" y2="34" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+        <line x1="50" y1="66" x2="50" y2="94" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+        <line x1="6" y1="50" x2="34" y2="50" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+        <line x1="66" y1="50" x2="94" y2="50" stroke="#D4AF37" stroke-width="3" stroke-linecap="round"/>
+      </svg>
+      <h4>YACHT GORGEOUS</h4>
+      <p>Private luxury yacht cruises on the Pacific Ocean.</p>
+    </div>
+    <div class="footer-contact">
+      <h4>Contact</h4>
+      <ul>
+        <li><span class="contact-icon">&#9906;</span> <a href="https://instagram.com/yachtgorgeous" target="_blank">@yachtgorgeous</a></li>
+        <li><span class="contact-icon">&#9993;</span> <a href="mailto:info@yachtgorgeous.com">info@yachtgorgeous.com</a></li>
+        <li><span class="contact-icon">&#9742;</span> <a href="tel:+13105550199">+1 (310) 555-0199</a></li>
+        <li><span class="contact-icon">📍</span> Los Angeles, CA</li>
+      </ul>
+    </div>
+  </div>
+  <div style="text-align:center; padding:30px 0 10px;">
+    <a href="#availability" class="btn">Book Your Cruise</a>
+  </div>
+  <div class="footer-bottom">
+    <p>GORGEOUS YACHT EXPERIENCE &copy; 2026. All rights reserved.</p>
+  </div>
+</footer>
+
+<!-- ===== Porthole Music Button ===== -->
+<div class="porthole-wrapper" id="musicBtn" onclick="togglePlaylist()">
+  <div class="porthole-hinge"></div>
+  <div class="porthole-lid">
+    <div class="porthole-lid-face">
+      <span class="lid-bolt bt"></span>
+      <span class="lid-bolt bb"></span>
+      <span class="lid-bolt bl"></span>
+      <span class="lid-bolt br"></span>
+    </div>
+  </div>
+  <div class="porthole-glass">
+    <img src="https://yanhs.stream/tgimg/908e2ddeefb54009a427674f626edd88.jpg" alt="Music" loading="lazy">
+    <span class="play-icon">▶</span>
+  </div>
+  <div class="porthole-latch"></div>
+</div>
+
+<div class="playlist-panel" id="playlistPanel">
+
+  <!-- Circular text SVG — track name top arc, cruise bottom arc -->
+  <svg class="vinyl-circle-text" viewBox="0 0 200 200">
+    <defs>
+      <!-- Top arc: left→right via top, radius 72, text on blue ring -->
+      <path id="topArc" d="M 28,100 A 72,72 0 0,1 172,100" fill="none"/>
+      <!-- Bottom arc: left→right via bottom, sweep=0 = goes underneath -->
+      <path id="bottomArc" d="M 28,108 A 72,72 0 0,0 172,108" fill="none"/>
+    </defs>
+    <text font-family="Georgia, serif" paint-order="stroke" stroke="#000" stroke-width="3" stroke-linejoin="round">
+      <textPath href="#topArc" startOffset="50%" text-anchor="middle" id="vTrackNameArc" fill="#fff" font-size="13" font-weight="600" letter-spacing="0.5" dy="4">Daydream</textPath>
+    </text>
+    <text font-family="Georgia, serif" paint-order="stroke" stroke="#000" stroke-width="2" stroke-linejoin="round">
+      <textPath href="#bottomArc" startOffset="50%" text-anchor="middle" id="vTrackCruiseArc" fill="#D4AF37" font-size="9" letter-spacing="2" dy="12">SUNSET CRUISE</textPath>
+    </text>
+  </svg>
+
+  <div class="vinyl-overlay">
+
+  <!-- Emoji + Play -->
+  <span class="vinyl-track-icon" id="vTrackIcon">🌅</span>
+  <div class="vinyl-play-btn" id="vinylPlayBtn" onclick="vinylTogglePlay()">▶</div>
+
+  <!-- Navigation dots -->
+  <div class="vinyl-dots" id="vinylDots"></div>
+
+  </div><!-- /vinyl-overlay -->
+
+  <!-- Prev/Next outside overlay, at edges -->
+  <div class="vinyl-nav-btn vinyl-nav-left" onclick="vinylPrev()">‹</div>
+  <div class="vinyl-nav-btn vinyl-nav-right" onclick="vinylNext()">›</div>
+
+  <!-- Hidden volume controls for JS compatibility -->
+  <div style="display:none;">
+    <svg id="volIcon" viewBox="0 0 24 24"></svg>
+    <input type="range" id="volSlider" value="80" style="--val:80%">
+    <span id="volLevel">80%</span>
+  </div>
+</div>
+
+<!-- SoundCloud iframes — outside playlist panel so SC API can init them -->
+<div id="scIframeContainer" style="position:fixed;left:-9999px;top:-9999px;width:300px;height:250px;pointer-events:none;opacity:0;z-index:-1;">
+  <iframe id="scWidget1" width="100%" height="44" scrolling="no" frameborder="no" allow="autoplay"
+    data-src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/swingbassevents/marvin-gaye-tammi-terrell-aint&auto_play=false&color=%23D4AF37&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false&show_artwork=true">
+  </iframe>
+  <iframe id="scWidget2" width="100%" height="44" scrolling="no" frameborder="no" allow="autoplay"
+    data-src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/moodswingsleeds/breaksmiths-like-it-like-that-1&auto_play=false&color=%23D4AF37&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false&show_artwork=true">
+  </iframe>
+  <iframe id="scWidget3" width="100%" height="44" scrolling="no" frameborder="no" allow="autoplay"
+    data-src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/voodoovibe/james-brown-i-got-you-i-feel-good-voodoovibe-dnb-edit-freedownload&auto_play=false&color=%23D4AF37&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false&show_artwork=true">
+  </iframe>
+  <iframe id="scWidget4" width="100%" height="44" scrolling="no" frameborder="no" allow="autoplay"
+    data-src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/mistatwitch/dont-worry-be-happy-mr-twitch-drum-bass-remix&auto_play=false&color=%23D4AF37&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false&show_artwork=true">
+  </iframe>
+  <iframe id="scWidget5" width="100%" height="44" scrolling="no" frameborder="no" allow="autoplay"
+    data-src="https://w.soundcloud.com/player/?url=https%3A//soundcloud.com/purplewerewolfs/the-guess-who-shakin-all-over&auto_play=false&color=%23D4AF37&hide_related=true&show_comments=false&show_user=true&show_reposts=false&show_teaser=false&visual=false&show_artwork=true">
+  </iframe>
+</div>
+
+<script>
+  let scApiLoaded = false;
+  function loadSCApi() {
+    if (scApiLoaded) return;
+    scApiLoaded = true;
+    const s = document.createElement('script');
+    s.src = 'https://w.soundcloud.com/player/api.js';
+    s.onload = () => { setTimeout(initWidgets, 300); };
+    document.head.appendChild(s);
+  }
+
+  let playlistOpen = false;
+  let isPlaying = false;
+  let playingCount = 0;
+  let lastVolume = 80;
+  const widgets = [];
+  const widgetIds = ['scWidget1', 'scWidget2', 'scWidget3', 'scWidget4', 'scWidget5'];
+
+  const volSlider = document.getElementById('volSlider');
+  const volLevel = document.getElementById('volLevel');
+  const volIconSvg = document.getElementById('volIcon');
+
+  // Seek positions per widget (ms)
+  // 0: 🌅 Daydream 0:39 | 1: 🐬 Really Sayin 0:40 | 2: 🎉 I Feel Good 0:20 | 3: 💍 Don't Worry 0:25 | 4: 🏢 Shakin — no seek
+  const seekConfig = [0, 80000, 20000, 25000, 0];
+  const seekDone = [false, false, false, false, false];
+  const widgetReady = [false, false, false, false, false];
+
+  function initWidgets() {
+    try {
+      widgetIds.forEach((id, idx) => {
+        const el = document.getElementById(id);
+        if (!el) return;
+        const w = SC.Widget(el);
+        widgets[idx] = w;
+        w.bind(SC.Widget.Events.READY, () => {
+          widgetReady[idx] = true;
+          w.setVolume(lastVolume);
+          console.log('SC widget ' + idx + ' ready');
+        });
+        w.bind(SC.Widget.Events.PLAY, () => {
+          playingCount++;
+          updateBtn();
+          if (seekConfig[idx] && !seekDone[idx]) {
+            seekDone[idx] = true;
+            w.seekTo(seekConfig[idx]);
+          }
+        });
+        w.bind(SC.Widget.Events.PAUSE, () => { playingCount = Math.max(0, playingCount - 1); updateBtn(); });
+        w.bind(SC.Widget.Events.FINISH, () => { playingCount = Math.max(0, playingCount - 1); updateBtn(); seekDone[idx] = false; });
+      });
+    } catch(e) { console.error('initWidgets error:', e); }
+  }
+
+  let iframesLoaded = false;
+  function loadIframes() {
+    if (iframesLoaded) return;
+    iframesLoaded = true;
+    widgetIds.forEach(id => {
+      const el = document.getElementById(id);
+      if (el && el.dataset.src && !el.src) {
+        el.src = el.dataset.src;
+      }
+    });
+    loadSCApi();
+  }
+
+  // Metallic click sound via Web Audio API
+  let audioCtx = null;
+  function playClickSound() {
+    try {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      const ctx = audioCtx;
+      const t = ctx.currentTime;
+
+      // 1. Soft brass "tink" — latch releasing
+      const osc1 = ctx.createOscillator();
+      const g1 = ctx.createGain();
+      const filt1 = ctx.createBiquadFilter();
+      osc1.type = 'sine';
+      osc1.frequency.setValueAtTime(900, t);
+      osc1.frequency.exponentialRampToValueAtTime(350, t + 0.06);
+      filt1.type = 'lowpass';
+      filt1.frequency.setValueAtTime(2000, t);
+      g1.gain.setValueAtTime(0.15, t);
+      g1.gain.exponentialRampToValueAtTime(0.001, t + 0.12);
+      osc1.connect(filt1);
+      filt1.connect(g1);
+      g1.connect(ctx.destination);
+      osc1.start(t);
+      osc1.stop(t + 0.12);
+
+      // 2. Warm resonant thud — hinge opening
+      const osc2 = ctx.createOscillator();
+      const g2 = ctx.createGain();
+      const filt2 = ctx.createBiquadFilter();
+      osc2.type = 'sine';
+      osc2.frequency.setValueAtTime(180, t + 0.05);
+      osc2.frequency.exponentialRampToValueAtTime(80, t + 0.2);
+      filt2.type = 'lowpass';
+      filt2.frequency.setValueAtTime(600, t + 0.05);
+      g2.gain.setValueAtTime(0.12, t + 0.05);
+      g2.gain.exponentialRampToValueAtTime(0.001, t + 0.25);
+      osc2.connect(filt2);
+      filt2.connect(g2);
+      g2.connect(ctx.destination);
+      osc2.start(t + 0.05);
+      osc2.stop(t + 0.25);
+
+      // 3. Subtle high harmonic ring — polished brass overtone
+      const osc3 = ctx.createOscillator();
+      const g3 = ctx.createGain();
+      osc3.type = 'sine';
+      osc3.frequency.setValueAtTime(2400, t + 0.02);
+      osc3.frequency.exponentialRampToValueAtTime(1800, t + 0.15);
+      g3.gain.setValueAtTime(0.04, t + 0.02);
+      g3.gain.exponentialRampToValueAtTime(0.001, t + 0.2);
+      osc3.connect(g3);
+      g3.connect(ctx.destination);
+      osc3.start(t + 0.02);
+      osc3.stop(t + 0.2);
+    } catch(e) {}
+  }
+
+  function togglePlaylist() {
+    playlistOpen = !playlistOpen;
+    document.getElementById('playlistPanel').classList.toggle('open', playlistOpen);
+    document.getElementById('musicBtn').classList.toggle('lid-open', playlistOpen);
+    playClickSound();
+    if (playlistOpen) loadIframes();
+  }
+
+  // ===== VINYL TRACK NAVIGATION =====
+  const vinylTracks = [
+    { icon: '🌅', name: "Ain't No Mountain", cruise: 'SUNSET CRUISE' },
+    { icon: '🐬', name: 'Like It Like That', cruise: 'DOLPHIN WATCHING' },
+    { icon: '🎉', name: 'I Got You (I Feel Good)', cruise: 'CELEBRATION CRUISE' },
+    { icon: '💍', name: "Don't Worry Be Happy", cruise: 'ROMANTIC CRUISE' },
+    { icon: '🏢', name: "Shakin' All Over", cruise: 'CORPORATE EVENT' }
+  ];
+  let currentVinylTrack = 0;
+
+  // Build dots
+  (function() {
+    const dotsEl = document.getElementById('vinylDots');
+    if (!dotsEl) return;
+    for (let i = 0; i < vinylTracks.length; i++) {
+      const d = document.createElement('div');
+      d.className = 'vinyl-dot-ind' + (i === 0 ? ' active' : '');
+      dotsEl.appendChild(d);
+    }
+  })();
+
+  function showVinylTrack(idx) {
+    const wasPlaying = isPlaying;
+    // Pause all
+    widgets.forEach((w, i) => { if (w) try { w.pause(); } catch(e){} });
+    playingCount = 0;
+    currentVinylTrack = idx;
+    const t = vinylTracks[idx];
+    document.getElementById('vTrackIcon').textContent = t.icon;
+    document.getElementById('vTrackNameArc').textContent = t.name;
+    document.getElementById('vTrackCruiseArc').textContent = t.cruise;
+    // Update dots
+    document.querySelectorAll('.vinyl-dot-ind').forEach((d, i) => {
+      d.classList.toggle('active', i === idx);
+    });
+    // Auto-play new track if was playing
+    if (wasPlaying && widgets[idx] && widgetReady[idx]) {
+      seekDone[idx] = false;
+      widgets[idx].play();
+    } else {
+      updateBtn();
+    }
+  }
+
+  function vinylNext() {
+    showVinylTrack((currentVinylTrack + 1) % vinylTracks.length);
+  }
+  function vinylPrev() {
+    showVinylTrack((currentVinylTrack - 1 + vinylTracks.length) % vinylTracks.length);
+  }
+
+  function updateBtn() {
+    isPlaying = playingCount > 0;
+    const btn = document.getElementById('musicBtn');
+    const icon = btn.querySelector('.play-icon');
+    btn.classList.toggle('playing', isPlaying);
+    icon.textContent = isPlaying ? '⏸' : '▶';
+    icon.style.opacity = isPlaying ? '0' : '1';
+    // Spin the whole disc (panel)
+    const panel = document.getElementById('playlistPanel');
+    if (panel) panel.classList.toggle('spinning', isPlaying);
+    // Update vinyl play button
+    const vpb = document.getElementById('vinylPlayBtn');
+    if (vpb) vpb.textContent = isPlaying ? '⏸' : '▶';
+  }
+
+  let _vinylRetry = 0;
+  function vinylTogglePlay() {
+    // Ensure iframes & API are loaded
+    loadIframes();
+    const idx = currentVinylTrack;
+    if (!widgets[idx] || !widgetReady[idx]) {
+      // Widget not ready yet — show loading state and retry
+      const vpb = document.getElementById('vinylPlayBtn');
+      if (vpb) vpb.textContent = '⏳';
+      if (_vinylRetry < 15) {
+        _vinylRetry++;
+        setTimeout(vinylTogglePlay, 600);
+      } else {
+        if (vpb) vpb.textContent = '▶';
+        _vinylRetry = 0;
+      }
+      return;
+    }
+    _vinylRetry = 0;
+    if (isPlaying) {
+      widgets[idx].pause();
+    } else {
+      // Pause all others first
+      widgets.forEach((w, i) => {
+        if (w && i !== idx) { try { w.pause(); } catch(e){} }
+      });
+      playingCount = 0;
+      seekDone[idx] = false;
+      widgets[idx].play();
+    }
+  }
+
+  // Volume control for all widgets
+  let wasPaused = []; // track which widgets were playing before mute
+
+  function applyVolume(val) {
+    val = parseInt(val);
+    widgets.forEach((w, i) => {
+      try {
+        w.setVolume(val);
+        // If volume is 0, pause playing widgets; if restored, resume them
+        if (val === 0) {
+          w.isPaused(function(paused) {
+            if (!paused) {
+              wasPaused[i] = true;
+              w.pause();
+            }
+          });
+        } else if (wasPaused[i]) {
+          wasPaused[i] = false;
+          w.play();
+        }
+      } catch(e) {}
+    });
+  }
+
+  function updateVolumeUI(val) {
+    val = Math.max(0, Math.min(100, parseInt(val)));
+    volSlider.value = val;
+    volSlider.style.setProperty('--val', val + '%');
+    volLevel.textContent = val + '%';
+    applyVolume(val);
+    if (val == 0) {
+      volIconSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
+    } else if (val < 50) {
+      volIconSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>';
+    } else {
+      volIconSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
+    }
+  }
+
+  volSlider.addEventListener('input', function() {
+    const val = parseInt(this.value);
+    lastVolume = val > 0 ? val : lastVolume;
+    updateVolumeUI(val);
+  });
+  volSlider.addEventListener('change', function() {
+    const val = parseInt(this.value);
+    lastVolume = val > 0 ? val : lastVolume;
+    updateVolumeUI(val);
+  });
+  volSlider.addEventListener('touchstart', function(e) { e.stopPropagation(); }, { passive: true });
+  volSlider.addEventListener('touchmove', function(e) { e.stopPropagation(); }, { passive: true });
+
+  function volDown() {
+    const val = Math.max(0, parseInt(volSlider.value) - 10);
+    lastVolume = val > 0 ? val : lastVolume;
+    updateVolumeUI(val);
+  }
+
+  function volUp() {
+    const val = Math.min(100, parseInt(volSlider.value) + 10);
+    lastVolume = val > 0 ? val : lastVolume;
+    updateVolumeUI(val);
+  }
+
+  function toggleMute() {
+    if (parseInt(volSlider.value) > 0) {
+      lastVolume = parseInt(volSlider.value) || 80;
+      updateVolumeUI(0);
+    } else {
+      updateVolumeUI(lastVolume);
+    }
+  }
+
+  // Close playlist on click outside
+  document.addEventListener('click', (e) => {
+    if (playlistOpen && !e.target.closest('#playlistPanel') && !e.target.closest('#musicBtn')) {
+      playlistOpen = false;
+      document.getElementById('playlistPanel').classList.remove('open');
+    }
+  });
+</script>
+
+<script>
+  // Carousel
+  const track = document.getElementById('carouselTrack');
+  const dotsContainer = document.getElementById('carouselDots');
+  const slides = track.querySelectorAll('.carousel-slide');
+  const totalSlides = slides.length;
+  let currentDot = 0;
+
+  // Create dots
+  for (let i = 0; i < totalSlides; i++) {
+    const dot = document.createElement('button');
+    dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+    dot.onclick = () => {
+      slides[i].scrollIntoView({ behavior: 'smooth', inline: 'start', block: 'nearest' });
+    };
+    dotsContainer.appendChild(dot);
+  }
+
+  // Update dots on scroll
+  track.addEventListener('scroll', () => {
+    const scrollLeft = track.scrollLeft;
+    const slideWidth = slides[0].offsetWidth + 20;
+    const idx = Math.round(scrollLeft / slideWidth);
+    if (idx !== currentDot && idx >= 0 && idx < totalSlides) {
+      currentDot = idx;
+      dotsContainer.querySelectorAll('.carousel-dot').forEach((d, i) => {
+        d.classList.toggle('active', i === idx);
+      });
+    }
+  });
+
+  function carouselScroll(dir) {
+    const slideWidth = slides[0].offsetWidth + 20;
+    track.scrollBy({ left: dir * slideWidth, behavior: 'smooth' });
+  }
+
+  // Lightbox
+  function openLightbox(slide) {
+    const img = slide.querySelector('img');
+    document.getElementById('lightboxImg').src = img.src;
+    document.getElementById('lightbox').classList.add('active');
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('active');
+  }
+
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') closeLightbox();
+  });
+</script>
+
+<script>
+  // ===== SUNSET TIME =====
+  fetch('https://api.sunrise-sunset.org/json?lat=34.0522&lng=-118.2437&formatted=0')
+    .then(r => r.json())
+    .then(data => {
+      if (data.status === 'OK') {
+        const fmt = d => new Date(d).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' });
+        const r = data.results;
+
+        document.getElementById('sunriseTime').textContent = fmt(r.sunrise);
+        document.getElementById('solarNoonTime').textContent = fmt(r.solar_noon);
+        document.getElementById('sunsetTime').textContent = fmt(r.sunset);
+        document.getElementById('twilightEndTime').textContent = fmt(r.civil_twilight_end);
+
+        // Golden Hour ≈ 1 hour before sunset
+        const sunsetMs = new Date(r.sunset).getTime();
+        const goldenHour = new Date(sunsetMs - 60 * 60 * 1000);
+        document.getElementById('goldenHourTime').textContent = fmt(goldenHour.toISOString());
+
+        // Day length
+        const secs = parseInt(r.day_length);
+        const h = Math.floor(secs / 3600);
+        const m = Math.floor((secs % 3600) / 60);
+        document.getElementById('dayLength').textContent = h + 'h ' + m + 'min';
+      }
+    }).catch(() => {});
+
+  // ===== NAVBAR: show on scroll, tab switching =====
+  const navbar = document.getElementById('navbar');
+  const allTabs = document.querySelectorAll('.tab-content-wrapper');
+  const allNavLinks = document.querySelectorAll('.nav-links li a');
+  let activeTab = null;
+
+  // Tab switching
+  function showTab(tabName) {
+    // Hide all tabs
+    allTabs.forEach(t => t.classList.remove('active'));
+
+    // Show selected tab
+    const target = document.querySelector(`.tab-content-wrapper[data-tab="${tabName}"]`);
+    if (target) {
+      target.classList.add('active');
+      activeTab = tabName;
+      document.getElementById('siteFooter').style.display = '';
+
+      // Scroll to the section smoothly
+      setTimeout(() => {
+        const section = target.querySelector('section');
+        if (section) {
+          section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 50);
+    }
+
+    // Update active link
+    allNavLinks.forEach(link => {
+      link.classList.remove('active');
+      const href = (link.getAttribute('href') || '').replace('#', '');
+      if (href === tabName) {
+        link.classList.add('active');
+      }
+    });
+  }
+
+  // Intercept nav clicks
+  allNavLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+      const href = link.getAttribute('href');
+      if (!href || !href.startsWith('#')) return;
+      e.preventDefault();
+      const tabName = href.replace('#', '');
+
+      // Direct scroll targets (not tabs)
+      const directIds = ['cruises', 'booking'];
+      if (directIds.includes(tabName)) {
+        const el = document.getElementById(tabName);
+        if (el) el.scrollIntoView({ behavior: 'smooth' });
+      } else {
+        showTab(tabName);
+      }
+
+      // Close mobile menu
+      document.getElementById('navToggle').classList.remove('open');
+      document.getElementById('navLinks').classList.remove('open');
+    });
+  });
+
+  // Logo click — go to hero, close all tabs
+  document.querySelector('.nav-logo').addEventListener('click', (e) => {
+    e.preventDefault();
+    allTabs.forEach(t => t.classList.remove('active'));
+    allNavLinks.forEach(l => l.classList.remove('active'));
+    activeTab = null;
+    document.getElementById('siteFooter').style.display = 'none';
+    document.getElementById('pageContent').scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // Hamburger toggle
+  function toggleNav() {
+    document.getElementById('navToggle').classList.toggle('open');
+    document.getElementById('navLinks').classList.toggle('open');
+  }
+
+  // Handle internal #booking links (from "Book Your Cruise" buttons)
+  document.querySelectorAll('a[href="#availability"]').forEach(btn => {
+    if (!btn.closest('.nav-links')) {
+      btn.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('cruises').scrollIntoView({ behavior: 'smooth' });
+      });
+    }
+  });
+
+  // ===== CRUISE CALCULATOR =====
+  const cruisePricing = {
+    sunset:      { base: 750,  hourly: 200 },
+    dolphin:     { base: 900,  hourly: 220 },
+    celebration: { base: 1200, hourly: 280 },
+    romantic:    { base: 850,  hourly: 200 },
+    corporate:   { base: 1500, hourly: 320 }
+  };
+
+  function updateCalcPrice() {
+    const type = document.getElementById('calcType').value;
+    const duration = parseInt(document.getElementById('calcDuration').value);
+    const guests = parseInt(document.getElementById('calcGuests').value);
+
+    const p = cruisePricing[type];
+    // Base price for 2h, extra hours cost hourly rate
+    let price = p.base;
+    if (duration > 2) {
+      price += (duration - 2) * p.hourly;
+    }
+    // Guest surcharge: +$50 per guest above 6
+    if (guests > 6) {
+      price += (guests - 6) * 50;
+    }
+
+    // Animate price
+    const el = document.getElementById('calcPrice');
+    el.style.transform = 'scale(1.08)';
+    el.textContent = '$' + price.toLocaleString();
+    setTimeout(() => { el.style.transform = 'scale(1)'; }, 200);
+  }
+
+  // ===== VISUAL CALENDAR & AVAILABILITY =====
+  // Booked dates — add dates here as 'YYYY-MM-DD' (or they get added when user books)
+  const bookedDates = [
+    '2026-03-14', '2026-03-15', '2026-03-21', '2026-03-28',
+    '2026-04-04', '2026-04-11', '2026-04-18', '2026-04-25'
+  ];
+
+  // Try to load extra bookings from localStorage
+  const savedBookings = JSON.parse(localStorage.getItem('yachtBookings') || '[]');
+  bookedDates.push(...savedBookings);
+
+  let calYear, calMonth, calSelectedDate = null;
+
+  (function initCalendar() {
+    const today = new Date();
+    calYear = today.getFullYear();
+    calMonth = today.getMonth();
+    renderCalendar();
+  })();
+
+  function renderCalendar() {
+    const months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById('calTitle').textContent = months[calMonth] + ' ' + calYear;
+
+    const firstDay = new Date(calYear, calMonth, 1).getDay();
+    const daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    const today = new Date();
+    today.setHours(0,0,0,0);
+
+    let html = '';
+
+    // Empty cells before first day
+    for (let i = 0; i < firstDay; i++) {
+      html += '<div class="cal-day cal-empty"></div>';
+    }
+
+    for (let d = 1; d <= daysInMonth; d++) {
+      const dateStr = calYear + '-' + String(calMonth + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      const dateObj = new Date(calYear, calMonth, d);
+      const isPast = dateObj < today;
+      const isToday = dateObj.getTime() === today.getTime();
+      const isBooked = bookedDates.includes(dateStr);
+      const isSelected = calSelectedDate === dateStr;
+
+      let cls = 'cal-day';
+      if (isPast) cls += ' cal-past';
+      else if (isBooked) cls += ' cal-booked';
+      if (isToday) cls += ' cal-today';
+      if (isSelected) cls += ' cal-selected';
+      if (!isPast && !isBooked) cls += ' cal-free';
+
+      const clickable = !isPast && !isBooked;
+      html += `<div class="${cls}" ${clickable ? `onclick="selectCalDay('${dateStr}')"` : ''}>${d}</div>`;
+    }
+
+    document.getElementById('calDays').innerHTML = html;
+  }
+
+  function calNav(dir) {
+    calMonth += dir;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    renderCalendar();
+  }
+
+  function selectCalDay(dateStr) {
+    calSelectedDate = dateStr;
+    document.getElementById('availDate').value = dateStr;
+    renderCalendar();
+    checkAvailability();
+  }
+
+  function updateLivePrice() {
+    const cruiseType = document.getElementById('availCruise').value;
+    const duration = parseInt(document.getElementById('availDuration').value);
+    const guests = parseInt(document.getElementById('availGuests').value);
+    const cp = cruisePricing[cruiseType];
+    let price = cp.base;
+    if (duration > 2) price += (duration - 2) * cp.hourly;
+    if (guests > 6) price += (guests - 6) * 50;
+
+    const icons = {sunset:'🌅',dolphin:'🐬',celebration:'🎉',romantic:'💍',corporate:'🏢'};
+    const names = {sunset:'Sunset Cruise',dolphin:'Dolphin Watching',celebration:'Celebration Cruise',romantic:'Romantic Cruise',corporate:'Corporate Event'};
+
+    const el = document.getElementById('livePriceAmount');
+    const detail = document.getElementById('livePriceDetail');
+    el.textContent = '$' + price.toLocaleString();
+    const time = document.getElementById('availTime').value;
+    detail.textContent = icons[cruiseType] + ' ' + names[cruiseType] + ' · ' + time + ' · ' + duration + 'h · ' + guests + ' guests';
+
+    el.classList.add('bump');
+    setTimeout(() => el.classList.remove('bump'), 250);
+  }
+
+  function checkAvailability() {
+    const dateVal = document.getElementById('availDate').value;
+    if (!dateVal) return;
+
+    const result = document.getElementById('availResult');
+    const status = document.getElementById('availStatus');
+    const slots = document.getElementById('availSlots');
+    const note = document.getElementById('availNote');
+    const bookBtn = document.getElementById('availBook');
+    const guests = parseInt(document.getElementById('availGuests').value);
+    const cruiseType = document.getElementById('availCruise').value;
+    const duration = parseInt(document.getElementById('availDuration').value);
+
+    const date = new Date(dateVal + 'T12:00:00');
+    const day = date.getDay();
+    const today = new Date();
+    today.setHours(0,0,0,0);
+    const diff = Math.floor((date - today) / (1000*60*60*24));
+
+    result.classList.remove('available', 'unavailable', 'show');
+
+    // Check if booked
+    if (bookedDates.includes(dateVal)) {
+      setTimeout(() => {
+        result.classList.add('unavailable', 'show');
+        status.textContent = '⚓ Fully Booked';
+        note.textContent = 'This date is reserved — please choose another date';
+        slots.innerHTML = '';
+        bookBtn.style.display = 'none';
+      }, 200);
+      return;
+    }
+
+    setTimeout(() => {
+      let isAvailable = true;
+      let timeSlots = [];
+
+      if (diff < 1) {
+        isAvailable = false;
+      } else if (diff <= 3 && (day === 0 || day === 6)) {
+        isAvailable = true;
+        timeSlots = ['4:00 PM'];
+        if (guests > 8) isAvailable = false;
+      } else if (day === 0 || day === 6) {
+        timeSlots = ['10:00 AM', '2:00 PM', '5:00 PM'];
+        if (guests > 10) timeSlots = ['10:00 AM', '2:00 PM'];
+      } else {
+        timeSlots = ['9:00 AM', '11:00 AM', '2:00 PM', '4:00 PM', '6:00 PM'];
+      }
+
+      if (isAvailable && timeSlots.length > 0) {
+        const cp = cruisePricing[cruiseType];
+        let price = cp.base;
+        if (duration > 2) price += (duration - 2) * cp.hourly;
+        if (guests > 6) price += (guests - 6) * 50;
+
+        const selectedTime = document.getElementById('availTime').value;
+        const timeOk = timeSlots.includes(selectedTime);
+
+        result.classList.add('available', 'show');
+        status.textContent = timeOk ? '✓ Available at ' + selectedTime + '!' : '✓ Available — your time not open, pick below';
+        note.textContent = 'Estimated price: $' + price.toLocaleString();
+        slots.innerHTML = timeSlots.map(t =>
+          `<span class="avail-slot${t === selectedTime ? ' selected' : ''}" onclick="selectSlot(this);document.getElementById('availTime').value=this.textContent.trim();">${t}</span>`
+        ).join('');
+        bookBtn.style.display = 'block';
+      } else {
+        result.classList.add('unavailable', 'show');
+        status.textContent = '✗ Not Available';
+        note.textContent = diff < 1 ? 'Please select a future date' : 'This date is fully booked — try another date or fewer guests';
+        slots.innerHTML = '';
+        bookBtn.style.display = 'none';
+      }
+    }, 300);
+  }
+
+  function selectSlot(el) {
+    document.querySelectorAll('.avail-slot').forEach(s => s.classList.remove('selected'));
+    el.classList.add('selected');
+  }
+
+  // ===== PAYMENT SYSTEM =====
+  let bookingData = {};
+
+  function submitBooking() {
+    const name = document.getElementById('availName').value.trim();
+    const email = document.getElementById('availEmail').value.trim();
+    const phone = document.getElementById('availPhone').value.trim();
+    if (!name || !email) {
+      alert('Please enter your name and email to book.');
+      return;
+    }
+    if (!phone) {
+      alert('Please enter your phone number.');
+      return;
+    }
+    const slot = document.querySelector('.avail-slot.selected');
+    if (!slot) {
+      alert('Please select a time slot.');
+      return;
+    }
+    const dateVal = document.getElementById('availDate').value;
+    const cruiseType = document.getElementById('availCruise').value;
+    const cruise = document.getElementById('availCruise').selectedOptions[0].text;
+    const duration = parseInt(document.getElementById('availDuration').value);
+    const durationText = document.getElementById('availDuration').selectedOptions[0].text;
+    const guests = parseInt(document.getElementById('availGuests').value);
+    const time = slot.textContent.trim();
+
+    const cp = cruisePricing[cruiseType];
+    let price = cp.base;
+    if (duration > 2) price += (duration - 2) * cp.hourly;
+    if (guests > 6) price += (guests - 6) * 50;
+
+    bookingData = { name, email, phone, dateVal, cruise, cruiseType, durationText, guests, time, price };
+
+    // Update payment modal with correct amounts
+    document.getElementById('payAmount').textContent = '$' + price.toLocaleString();
+    const cruiseName = cruise.split('—')[0].split('from')[0].trim();
+    document.getElementById('paySummary').textContent = cruiseName + ' · ' + dateVal + ' at ' + time + ' · ' + guests + ' guests';
+    document.getElementById('payBtn').textContent = 'Pay $' + price.toLocaleString();
+    document.getElementById('cashAmount').textContent = '$' + price.toLocaleString();
+    document.getElementById('cashDeposit').textContent = '$' + Math.round(price * 0.1).toLocaleString();
+
+    // Update crypto display
+    if (typeof updateCryptoDisplay === 'function') updateCryptoDisplay();
+
+    // Reset to card tab
+    switchPayMethod('card');
+
+    // Open payment modal
+    document.getElementById('payOverlay').classList.add('active');
+  }
+
+  function closePayment() {
+    document.getElementById('payOverlay').classList.remove('active');
+  }
+
+  // Card number formatting
+  function formatCardNum(input) {
+    let v = input.value.replace(/\D/g, '').substring(0, 16);
+    let formatted = v.replace(/(.{4})/g, '$1 ').trim();
+    input.value = formatted;
+    detectCardType(v);
+  }
+
+  function detectCardType(num) {
+    const icons = document.querySelectorAll('.pay-card-icon span');
+    icons.forEach(i => i.classList.remove('active'));
+    if (num.startsWith('4')) icons[0].classList.add('active'); // Visa
+    else if (/^5[1-5]/.test(num) || /^2[2-7]/.test(num)) icons[1].classList.add('active'); // MC
+    else if (num.startsWith('3')) icons[2].classList.add('active'); // Amex
+  }
+
+  function formatExpiry(input) {
+    let v = input.value.replace(/\D/g, '').substring(0, 4);
+    if (v.length > 2) v = v.substring(0, 2) + '/' + v.substring(2);
+    input.value = v;
+  }
+
+  function processPayment() {
+    const cardNum = document.getElementById('payCardNum').value.replace(/\s/g, '');
+    const expiry = document.getElementById('payExpiry').value;
+    const cvc = document.getElementById('payCVC').value;
+    const cardName = document.getElementById('payCardName').value.trim();
+
+    if (cardNum.length < 16) { alert('Please enter a valid card number.'); return; }
+    if (expiry.length < 5) { alert('Please enter expiry date (MM/YY).'); return; }
+    if (cvc.length < 3) { alert('Please enter CVC code.'); return; }
+    if (!cardName) { alert('Please enter cardholder name.'); return; }
+
+    // Simulate payment processing
+    const btn = document.getElementById('payBtn');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="pay-spinner"></span> Processing...';
+
+    setTimeout(() => {
+      completeBooking('card');
+    }, 2200);
+  }
+
+  // ===== SEND BOOKING TO API =====
+  function sendBookingToAPI(payMethod) {
+    const d = bookingData;
+    fetch('/yacht/api/book', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        name: d.name,
+        email: d.email,
+        phone: d.phone || '',
+        date: d.dateVal,
+        cruise: d.cruise,
+        cruiseType: d.cruiseType || '',
+        time: d.time,
+        duration: d.durationText,
+        guests: d.guests,
+        price: d.price,
+        paymentMethod: payMethod
+      })
+    }).catch(() => {});
+  }
+
+  function completeBooking(payMethod) {
+    // Save to API
+    sendBookingToAPI(payMethod);
+
+    // Mark date as booked locally
+    bookedDates.push(bookingData.dateVal);
+    savedBookings.push(bookingData.dateVal);
+    localStorage.setItem('yachtBookings', JSON.stringify(savedBookings));
+    renderCalendar();
+
+    // Close modal
+    closePayment();
+
+    // Reset availability result and form fields
+    document.getElementById('availResult').classList.remove('available', 'unavailable', 'show');
+    document.getElementById('availName').value = '';
+    document.getElementById('availEmail').value = '';
+    document.getElementById('availPhone').value = '';
+    const bookBtn = document.querySelector('#availBook .btn');
+    if (bookBtn) { bookBtn.disabled = false; bookBtn.textContent = '🟡 Book This Date'; }
+
+    // Show success
+    const d = bookingData;
+    alert(`✅ Payment successful!\n\nThank you, ${d.name}!\n\n${d.cruise.split('—')[0].trim()}\n📅 ${d.dateVal} at ${d.time}\n⏱ ${d.durationText} · ${d.guests} guests\n💰 $${d.price.toLocaleString()} via ${payMethod}\n\nConfirmation sent to ${d.email}\n\n⚓ See you at the marina!`);
+  }
+
+  // ===== CRYPTO PAYMENT =====
+  const cryptoData = {
+    btc:  { symbol: 'BTC',  rate: 96200,  addr: 'bc1qyacht0gorgeous0pay0btc000000000000' },
+    eth:  { symbol: 'ETH',  rate: 3450,   addr: '0xYacht0Gorgeous0Pay0ETH0000000000000000' },
+    usdt: { symbol: 'USDT', rate: 1,      addr: 'TYacht0Gorgeous0Pay0USDT00000000000' },
+    sol:  { symbol: 'SOL',  rate: 148,    addr: 'YachtGorgeous0Pay0SOL000000000000000000000' }
+  };
+  let selectedCrypto = 'btc';
+
+  function switchPayMethod(method) {
+    document.querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.pay-method').forEach(m => m.classList.remove('active'));
+    const tabs = document.querySelectorAll('.pay-tab');
+    if (method === 'card') {
+      tabs[0].classList.add('active');
+      document.getElementById('payMethodCard').classList.add('active');
+    } else if (method === 'crypto') {
+      tabs[1].classList.add('active');
+      document.getElementById('payMethodCrypto').classList.add('active');
+      updateCryptoDisplay();
+    } else {
+      tabs[2].classList.add('active');
+      document.getElementById('payMethodCash').classList.add('active');
+      const price = bookingData.price || 750;
+      document.getElementById('cashAmount').textContent = '$' + price.toLocaleString();
+      document.getElementById('cashDeposit').textContent = Math.round(price * 0.1).toLocaleString();
+    }
+  }
+
+  function selectCrypto(coin, e) {
+    selectedCrypto = coin;
+    document.querySelectorAll('.crypto-coin').forEach(c => c.classList.remove('selected'));
+    (e || event).currentTarget.classList.add('selected');
+    updateCryptoDisplay();
+  }
+
+  function updateCryptoDisplay() {
+    const c = cryptoData[selectedCrypto];
+    const price = bookingData.price || 750;
+    const amount = (price / c.rate).toFixed(selectedCrypto === 'usdt' ? 2 : 6);
+    document.getElementById('cryptoAmt').textContent = amount + ' ' + c.symbol;
+    document.getElementById('cryptoUsd').textContent = '≈ $' + price.toLocaleString();
+    document.getElementById('cryptoAddr').textContent = c.addr;
+  }
+
+  function copyCryptoAddr(e) {
+    const addr = document.getElementById('cryptoAddr').textContent;
+    navigator.clipboard.writeText(addr).then(() => {
+      const btn = (e || event).currentTarget;
+      btn.textContent = '✅ Copied!';
+      setTimeout(() => { btn.textContent = '📋 Copy Address'; }, 1500);
+    });
+  }
+
+  function processCryptoPayment() {
+    const txId = document.getElementById('cryptoTxId').value.trim();
+    if (!txId) { alert('Please enter your wallet address or transaction ID.'); return; }
+
+    const btn = document.getElementById('payBtnCrypto');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="pay-spinner"></span> Verifying...';
+
+    setTimeout(() => {
+      completeBooking('crypto');
+      btn.disabled = false;
+      btn.innerHTML = '₿ Confirm Payment';
+    }, 2500);
+  }
+
+  // ===== CASH PAYMENT =====
+  function processCashPayment() {
+    const phone = document.getElementById('cashPhone').value.trim();
+    if (!phone) { alert('Please enter your phone number for confirmation.'); return; }
+
+    const btn = document.getElementById('payBtnCash');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="pay-spinner"></span> Reserving...';
+
+    setTimeout(() => {
+      // Save phone from cash form to bookingData
+      bookingData.phone = bookingData.phone || phone;
+      completeBooking('cash');
+      btn.disabled = false;
+      btn.innerHTML = '💵 Reserve — Pay at Marina';
+    }, 1800);
+  }
+</script>
+
+<!-- Payment Modal -->
+<div class="pay-overlay" id="payOverlay" onclick="if(event.target===this)closePayment()">
+  <div class="pay-modal">
+    <button class="pay-close" onclick="closePayment()">✕</button>
+    <div class="pay-title">⚓ Secure Payment</div>
+    <div class="pay-amount" id="payAmount">$750</div>
+    <div style="text-align:center; font-size:0.7rem; color:rgba(232,212,176,0.45); margin:-14px 0 18px; letter-spacing:0.06em;" id="paySummary"></div>
+
+    <div class="pay-tabs">
+      <button class="pay-tab active" onclick="switchPayMethod('card')">💳 Card</button>
+      <button class="pay-tab" onclick="switchPayMethod('crypto')">₿ Crypto</button>
+      <button class="pay-tab" onclick="switchPayMethod('cash')">💵 Cash</button>
+    </div>
+
+    <!-- Card Payment -->
+    <div class="pay-method active" id="payMethodCard">
+      <div class="pay-card-icon">
+        <span>VISA</span>
+        <span>MC</span>
+        <span>AMEX</span>
+      </div>
+      <div class="pay-field">
+        <label>Card Number</label>
+        <input type="text" id="payCardNum" placeholder="4242 4242 4242 4242" inputmode="numeric" oninput="formatCardNum(this)" maxlength="19" autocomplete="cc-number">
+      </div>
+      <div class="pay-row">
+        <div class="pay-field">
+          <label>Expiry</label>
+          <input type="text" id="payExpiry" placeholder="MM/YY" inputmode="numeric" oninput="formatExpiry(this)" maxlength="5" autocomplete="cc-exp">
+        </div>
+        <div class="pay-field">
+          <label>CVC</label>
+          <input type="text" id="payCVC" placeholder="123" inputmode="numeric" maxlength="4" autocomplete="cc-csc" oninput="this.value=this.value.replace(/\D/g,'')">
+        </div>
+      </div>
+      <div class="pay-field">
+        <label>Cardholder Name</label>
+        <input type="text" id="payCardName" placeholder="JOHN SMITH" autocomplete="cc-name" style="text-transform:uppercase;">
+      </div>
+      <button class="pay-btn" id="payBtn" onclick="processPayment()">💳 Pay $750</button>
+    </div>
+
+    <!-- Crypto Payment -->
+    <div class="pay-method" id="payMethodCrypto">
+      <div class="crypto-coins">
+        <div class="crypto-coin selected" onclick="selectCrypto('btc', event)">
+          <span class="coin-icon">₿</span>
+          <span class="coin-name">BTC</span>
+        </div>
+        <div class="crypto-coin" onclick="selectCrypto('eth', event)">
+          <span class="coin-icon">Ξ</span>
+          <span class="coin-name">ETH</span>
+        </div>
+        <div class="crypto-coin" onclick="selectCrypto('usdt', event)">
+          <span class="coin-icon">₮</span>
+          <span class="coin-name">USDT</span>
+        </div>
+        <div class="crypto-coin" onclick="selectCrypto('sol', event)">
+          <span class="coin-icon">◎</span>
+          <span class="coin-name">SOL</span>
+        </div>
+      </div>
+      <div class="crypto-amount">
+        <div class="amt" id="cryptoAmt">0.0078 BTC</div>
+        <div class="usd" id="cryptoUsd">≈ $750</div>
+      </div>
+      <div class="crypto-addr">
+        <div class="crypto-addr-label">Send to address</div>
+        <div class="crypto-addr-val" id="cryptoAddr">bc1qyacht0gorgeous0pay0addr00000000</div>
+        <button class="crypto-copy-btn" onclick="copyCryptoAddr(event)">📋 Copy Address</button>
+      </div>
+      <div class="pay-field">
+        <label>Your Wallet / Transaction ID (for confirmation)</label>
+        <input type="text" id="cryptoTxId" placeholder="0x... or txid" style="font-family:monospace; font-size:0.8rem;">
+      </div>
+      <button class="pay-btn" id="payBtnCrypto" onclick="processCryptoPayment()">₿ Confirm Payment</button>
+    </div>
+
+    <!-- Cash Payment -->
+    <div class="pay-method" id="payMethodCash">
+      <div style="text-align:center; margin-bottom:16px;">
+        <div style="font-size:2.5rem; margin-bottom:8px;">💵</div>
+        <div style="color:#e8d4b0; font-size:0.9rem; margin-bottom:4px;">Pay Cash on Board</div>
+        <div style="color:rgba(232,212,176,0.45); font-size:0.7rem; line-height:1.5;">
+          Pay the captain directly when you arrive at the marina.<br>
+          We accept USD cash. Exact change appreciated.
+        </div>
+      </div>
+      <div style="background:rgba(212,175,55,0.08); border:1px solid rgba(212,175,55,0.15); border-radius:10px; padding:14px; margin-bottom:16px;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+          <span style="color:rgba(232,212,176,0.5); font-size:0.75rem;">Amount due</span>
+          <span style="color:#D4AF37; font-size:0.95rem; font-weight:700;" id="cashAmount">$750</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:6px;">
+          <span style="color:rgba(232,212,176,0.5); font-size:0.75rem;">Where</span>
+          <span style="color:#e8d4b0; font-size:0.75rem;">Marina del Rey, Dock B</span>
+        </div>
+        <div style="display:flex; justify-content:space-between;">
+          <span style="color:rgba(232,212,176,0.5); font-size:0.75rem;">When</span>
+          <span style="color:#e8d4b0; font-size:0.75rem;" id="cashWhen">15 min before departure</span>
+        </div>
+      </div>
+      <div style="background:rgba(46,204,113,0.06); border:1px solid rgba(46,204,113,0.15); border-radius:8px; padding:10px; text-align:center; margin-bottom:16px;">
+        <span style="color:rgba(46,204,113,0.8); font-size:0.7rem;">💡 10% deposit ($<span id="cashDeposit">75</span>) required to hold your date</span>
+      </div>
+      <div class="pay-field">
+        <label>Phone Number (for confirmation)</label>
+        <input type="tel" id="cashPhone" placeholder="+1 (310) 555-0123" inputmode="tel">
+      </div>
+      <button class="pay-btn" id="payBtnCash" onclick="processCashPayment()">💵 Reserve — Pay at Marina</button>
+    </div>
+
+    <div class="pay-secure">🔒 SSL Encrypted · Secure Payment</div>
+  </div>
+</div>
+
+</div><!-- /pageContent -->
+</body>
+</html>
