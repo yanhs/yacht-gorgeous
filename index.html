@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Yacht Gorgeous</title>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;1,300&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&display=swap" rel="stylesheet">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -47,7 +47,7 @@
   .welcome-bg {
     position: absolute;
     inset: 0;
-    background: url('https://yanhs.stream/tgimg/54d1d7f12fde4300b0495acd8f759b95.jpg') center center/cover no-repeat;
+    background: url('https://yanhs.stream/tgimg/7e94e9ac6e294c21b5cefe41626667e3.jpg') center center/cover no-repeat;
   }
 
   .welcome-bg::after {
@@ -56,9 +56,9 @@
     inset: 0;
     background: linear-gradient(
       to bottom,
-      rgba(10, 14, 26, 0.45) 0%,
-      rgba(10, 14, 26, 0.35) 60%,
-      rgba(10, 14, 26, 0.85) 90%,
+      rgba(10, 14, 26, 0.55) 0%,
+      rgba(10, 14, 26, 0.35) 50%,
+      rgba(10, 14, 26, 0.75) 85%,
       #0a1a35 100%
     );
   }
@@ -68,30 +68,31 @@
     z-index: 2;
     text-align: center;
     padding: 0 20px;
-    margin-top: 0;
+    margin-top: -8vh;
   }
 
   .welcome-text h1 {
-    color: #e8d4b0;
+    font-family: 'Playfair Display', serif;
+    color: #F5F5F5;
     font-size: clamp(2.2rem, 6vw, 4.5rem);
-    font-weight: 300;
-    letter-spacing: 0.06em;
+    font-weight: 500;
+    letter-spacing: 2px;
     line-height: 1.2;
-    text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+    text-shadow: 0px 4px 20px rgba(0,0,0,0.4);
     animation: fadeInUp 1.5s ease-out;
   }
 
   .welcome-text h1 span {
     color: #D4AF37;
-    font-weight: 400;
+    font-weight: 600;
     font-style: italic;
   }
 
   .welcome-line {
-    width: 80px;
+    width: 120px;
     height: 1px;
-    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
-    margin: 24px auto;
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent);
+    margin: 20px auto;
     animation: fadeInUp 1.5s ease-out 0.3s both;
   }
 
@@ -115,10 +116,13 @@
   }
 
   .steering-wheel {
-    width: 60px;
-    height: 60px;
-    animation: bounce 2s ease-in-out infinite, wheelSpin 20s linear infinite;
+    width: 44px;
+    height: 44px;
+    animation: wheelSpin 20s linear infinite;
     will-change: transform;
+    filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
+    opacity: 0.85;
+    margin-top: 1.2em;
   }
 
   .steering-wheel:hover {
@@ -2197,17 +2201,7 @@
     border-bottom: none;
   }
 
-  .nav-rope {
-    width: 100%;
-    height: 5px;
-    background: repeating-linear-gradient(
-      45deg,
-      #D4AF37 0px,
-      #D4AF37 6px,
-      #a8862a 6px,
-      #a8862a 12px
-    );
-  }
+  .nav-rope { display:none!important; height:0!important; overflow:hidden!important; max-height:0!important; visibility:hidden!important; }
 
   /* ===== TAB SECTIONS ===== */
   .tab-content-wrapper {
@@ -2660,6 +2654,9 @@
     opacity: 0;
     pointer-events: none;
     transition: opacity 0.3s;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 0;
   }
   .pay-overlay.active {
     opacity: 1;
@@ -2672,8 +2669,11 @@
     padding: 28px 24px;
     width: 90%;
     max-width: 400px;
+    max-height: 90vh;
+    overflow-y: auto;
     position: relative;
     box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+    margin: auto;
   }
   .pay-close {
     position: absolute;
@@ -2776,6 +2776,56 @@
     font-size: 0.65rem;
     letter-spacing: 0.08em;
   }
+
+  /* ===== MY BOOKINGS CARDS ===== */
+  .mb-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,175,55,0.15);
+    border-radius: 10px;
+    padding: 14px;
+    margin-bottom: 10px;
+  }
+  .mb-card-date {
+    color: #D4AF37;
+    font-size: 0.85rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .mb-card-cruise {
+    color: #e8d4b0;
+    font-size: 0.8rem;
+    margin-bottom: 6px;
+  }
+  .mb-card-details {
+    color: rgba(232,212,176,0.5);
+    font-size: 0.7rem;
+    line-height: 1.6;
+  }
+  .mb-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.65rem;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-weight: 600;
+  }
+  .mb-badge-new {
+    background: rgba(52,152,219,0.15);
+    color: rgba(52,152,219,0.9);
+    border: 1px solid rgba(52,152,219,0.25);
+  }
+  .mb-badge-confirmed {
+    background: rgba(46,204,113,0.12);
+    color: rgba(46,204,113,0.9);
+    border: 1px solid rgba(46,204,113,0.25);
+  }
+  .mb-badge-cancelled {
+    background: rgba(231,76,60,0.12);
+    color: rgba(231,76,60,0.8);
+    border: 1px solid rgba(231,76,60,0.2);
+  }
+
   /* Payment method tabs */
   .pay-tabs {
     display: flex;
@@ -3323,25 +3373,25 @@
       <li><a href="#gallery">Gallery</a></li>
       <li><a href="#reviews">Reviews</a></li>
       <li><a href="#captain">Captain</a></li>
+      <li><a href="#" onclick="openMyBookings(); return false;">My Bookings</a></li>
+      <li><a href="/yacht/admin.html" style="opacity:0.45; font-size:0.75em;" title="Captain's Dashboard">&#x2699;</a></li>
       <li><a class="nav-cta" href="#booking">Book Now</a></li>
     </ul>
   </div>
-  <div class="nav-rope"></div>
 </nav>
-
+<script>document.querySelectorAll('.nav-rope').forEach(e=>e.remove());</script>
 <div id="pageContent">
 
 <!-- ===== Screen 1 — Welcome ===== -->
 <section class="welcome">
   <div class="welcome-bg"></div>
   <div class="welcome-text">
-    <h1>Welcome Aboard <span>Gorgeous</span></h1>
-    <p style="font-family:'Cormorant Garamond',serif; font-size:clamp(1rem, 2.5vw, 1.4rem); letter-spacing:0.08em; color:rgba(232,220,200,0.6); margin-top:0.6em; font-style:italic; font-weight:300;">Sail. Relax. Enjoy.</p>
+    <h1>Discover Freedom<br>on the Water</h1>
+    <p style="font-family:'Playfair Display',serif; font-size:clamp(0.85rem, 2.2vw, 1.1rem); letter-spacing:3px; text-transform:uppercase; color:rgba(255,255,255,0.75); margin-top:1em; font-weight:400; text-shadow:0px 2px 10px rgba(0,0,0,0.3);">Premium Yacht Experience</p>
     <div class="welcome-line"></div>
-    <svg class="steering-wheel" viewBox="0 0 100 100" fill="none" stroke="#D4AF37" stroke-width="2"><circle cx="50" cy="50" r="35"/><circle cx="50" cy="50" r="8"/><line x1="50" y1="15" x2="50" y2="42"/><line x1="50" y1="58" x2="50" y2="85"/><line x1="15" y1="50" x2="42" y2="50"/><line x1="58" y1="50" x2="85" y2="50"/><line x1="25" y1="25" x2="44" y2="44"/><line x1="56" y1="56" x2="75" y2="75"/><line x1="75" y1="25" x2="56" y2="44"/><line x1="44" y1="56" x2="25" y2="75"/></svg>
-    <a href="#cruises" class="btn" style="margin-top:1.5em; font-size:1.15rem; padding: 14px 40px;">🟡 Book Your Cruise</a>
+    <a href="#cruises" style="display:inline-block; margin-top:1.5em; font-family:'Playfair Display',serif; font-size:1.1rem; font-weight:500; letter-spacing:1.5px; color:#1a1a1a; text-decoration:none; background:linear-gradient(135deg, #D4AF37, #F2D27A); border-radius:40px; padding:18px 42px; box-shadow:0px 12px 30px rgba(0,0,0,0.25); transition:transform 0.3s, box-shadow 0.3s;">Book Your Cruise</a>
   </div>
-  <div class="welcome-scroll" onclick="document.getElementById('cruises').scrollIntoView({behavior:'smooth'})" style="cursor:pointer;">
+  <div class="welcome-scroll" onclick="document.getElementById('cruises').scrollIntoView({behavior:'smooth'})" style="cursor:pointer; opacity:0.1;">
     <svg class="seagull" viewBox="0 0 50 20" fill="none">
       <g class="wing-left" style="transform-origin:25px 12px">
         <path d="M25 12 C20 8, 12 3, 4 6 C2 7, 0 10, 0 12" stroke="rgba(255,255,255,0.9)" stroke-width="1.8" fill="none"/>
@@ -4315,7 +4365,7 @@
     volSlider.style.setProperty('--val', val + '%');
     volLevel.textContent = val + '%';
     applyVolume(val);
-    if (val == 0) {
+    if (val === 0) {
       volIconSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/>';
     } else if (val < 50) {
       volIconSvg.innerHTML = '<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>';
@@ -4422,30 +4472,25 @@
 
 <script>
   // ===== SUNSET TIME =====
-  fetch('https://api.sunrise-sunset.org/json?lat=34.0522&lng=-118.2437&formatted=0')
+  fetch('https://api.sunrisesunset.io/json?lat=34.0522&lng=-118.2437')
     .then(r => r.json())
     .then(data => {
       if (data.status === 'OK') {
-        const fmt = d => new Date(d).toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', timeZone: 'America/Los_Angeles' });
         const r = data.results;
+        // Format "7:02:04 AM" → "7:02 AM"
+        const fmt = t => t.replace(/:\d{2}\s/, ' ');
 
         document.getElementById('sunriseTime').textContent = fmt(r.sunrise);
         document.getElementById('solarNoonTime').textContent = fmt(r.solar_noon);
+        document.getElementById('goldenHourTime').textContent = fmt(r.golden_hour);
         document.getElementById('sunsetTime').textContent = fmt(r.sunset);
-        document.getElementById('twilightEndTime').textContent = fmt(r.civil_twilight_end);
+        document.getElementById('twilightEndTime').textContent = fmt(r.dusk);
 
-        // Golden Hour ≈ 1 hour before sunset
-        const sunsetMs = new Date(r.sunset).getTime();
-        const goldenHour = new Date(sunsetMs - 60 * 60 * 1000);
-        document.getElementById('goldenHourTime').textContent = fmt(goldenHour.toISOString());
-
-        // Day length
-        const secs = parseInt(r.day_length);
-        const h = Math.floor(secs / 3600);
-        const m = Math.floor((secs % 3600) / 60);
-        document.getElementById('dayLength').textContent = h + 'h ' + m + 'min';
+        // Day length "12:01:08" → "12h 1min"
+        const parts = r.day_length.split(':');
+        document.getElementById('dayLength').textContent = parseInt(parts[0]) + 'h ' + parseInt(parts[1]) + 'min';
       }
-    }).catch(() => {});
+    }).catch(err => console.error('Sunset API error:', err));
 
   // ===== NAVBAR: show on scroll, tab switching =====
   const navbar = document.getElementById('navbar');
@@ -4566,15 +4611,6 @@
   }
 
   // ===== VISUAL CALENDAR & AVAILABILITY =====
-  // Booked dates — add dates here as 'YYYY-MM-DD' (or they get added when user books)
-  const bookedDates = [
-    '2026-03-14', '2026-03-15', '2026-03-21', '2026-03-28',
-    '2026-04-04', '2026-04-11', '2026-04-18', '2026-04-25'
-  ];
-
-  // Try to load extra bookings from localStorage
-  const savedBookings = JSON.parse(localStorage.getItem('yachtBookings') || '[]');
-  bookedDates.push(...savedBookings);
 
   let calYear, calMonth, calSelectedDate = null;
 
@@ -4594,33 +4630,39 @@
     const today = new Date();
     today.setHours(0,0,0,0);
 
-    let html = '';
+    // Build calendar grid immediately (all future dates as free), then update with booked data
+    function buildGrid(bookedDates) {
+      let html = '';
+      for (let i = 0; i < firstDay; i++) {
+        html += '<div class="cal-day cal-empty"></div>';
+      }
+      for (let d = 1; d <= daysInMonth; d++) {
+        const dateStr = calYear + '-' + String(calMonth + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+        const dateObj = new Date(calYear, calMonth, d);
+        const isPast = dateObj < today;
+        const isToday = dateObj.getTime() === today.getTime();
+        const isSelected = calSelectedDate === dateStr;
+        const isBooked = bookedDates.includes(dateStr);
 
-    // Empty cells before first day
-    for (let i = 0; i < firstDay; i++) {
-      html += '<div class="cal-day cal-empty"></div>';
+        let cls = 'cal-day';
+        if (isPast && !isBooked) cls += ' cal-past';
+        if (isToday) cls += ' cal-today';
+        if (isSelected) cls += ' cal-selected';
+        if (isBooked) cls += ' cal-booked';
+        else if (!isPast) cls += ' cal-free';
+
+        const clickable = !isPast;
+        html += `<div class="${cls}" ${clickable ? `onclick="selectCalDay('${dateStr}')"` : ''}>${d}</div>`;
+      }
+      document.getElementById('calDays').innerHTML = html;
     }
 
-    for (let d = 1; d <= daysInMonth; d++) {
-      const dateStr = calYear + '-' + String(calMonth + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
-      const dateObj = new Date(calYear, calMonth, d);
-      const isPast = dateObj < today;
-      const isToday = dateObj.getTime() === today.getTime();
-      const isBooked = bookedDates.includes(dateStr);
-      const isSelected = calSelectedDate === dateStr;
-
-      let cls = 'cal-day';
-      if (isPast) cls += ' cal-past';
-      else if (isBooked) cls += ' cal-booked';
-      if (isToday) cls += ' cal-today';
-      if (isSelected) cls += ' cal-selected';
-      if (!isPast && !isBooked) cls += ' cal-free';
-
-      const clickable = !isPast && !isBooked;
-      html += `<div class="${cls}" ${clickable ? `onclick="selectCalDay('${dateStr}')"` : ''}>${d}</div>`;
-    }
-
-    document.getElementById('calDays').innerHTML = html;
+    // Render immediately with no booked info, then fetch and re-render
+    buildGrid([]);
+    fetch('/yacht/api/booked-dates?year=' + calYear + '&month=' + (calMonth + 1) + '&_t=' + Date.now())
+      .then(r => r.json())
+      .then(dates => buildGrid(dates))
+      .catch(() => {}); // keep free view on error
   }
 
   function calNav(dir) {
@@ -4659,9 +4701,30 @@
     setTimeout(() => el.classList.remove('bump'), 250);
   }
 
+  // Convert '2:00 PM' -> 14, '11:00 AM' -> 11, etc.
+  function parseTimeH(t) {
+    const m = t.match(/(\d+):(\d+)\s*(AM|PM)/i);
+    if (!m) return 0;
+    let h = parseInt(m[1]), min = parseInt(m[2]);
+    if (m[3].toUpperCase() === 'PM' && h !== 12) h += 12;
+    if (m[3].toUpperCase() === 'AM' && h === 12) h = 0;
+    return h + min / 60;
+  }
+
   function checkAvailability() {
     const dateVal = document.getElementById('availDate').value;
-    if (!dateVal) return;
+    if (!dateVal) {
+      const result = document.getElementById('availResult');
+      const status = document.getElementById('availStatus');
+      const note = document.getElementById('availNote');
+      document.getElementById('availSlots').innerHTML = '';
+      document.getElementById('availBook').style.display = 'none';
+      result.classList.remove('available');
+      result.classList.add('unavailable', 'show');
+      status.textContent = '📅 Select a Date';
+      note.textContent = 'Please tap a date on the calendar above';
+      return;
+    }
 
     const result = document.getElementById('availResult');
     const status = document.getElementById('availStatus');
@@ -4680,59 +4743,80 @@
 
     result.classList.remove('available', 'unavailable', 'show');
 
-    // Check if booked
-    if (bookedDates.includes(dateVal)) {
+    if (diff < 1) {
       setTimeout(() => {
         result.classList.add('unavailable', 'show');
-        status.textContent = '⚓ Fully Booked';
-        note.textContent = 'This date is reserved — please choose another date';
+        status.textContent = '✗ Not Available';
+        note.textContent = 'Please select a future date';
         slots.innerHTML = '';
         bookBtn.style.display = 'none';
       }, 200);
       return;
     }
 
-    setTimeout(() => {
-      let isAvailable = true;
-      let timeSlots = [];
+    // Fetch booked slots from server, then filter
+    fetch('/yacht/api/slots?date=' + dateVal)
+      .then(r => r.json())
+      .then(bookedSlots => {
+        // Generate candidate time slots based on day
+        let timeSlots = [];
+        if (diff <= 3 && (day === 0 || day === 6)) {
+          timeSlots = ['4:00 PM'];
+          if (guests > 8) timeSlots = [];
+        } else if (day === 0 || day === 6) {
+          timeSlots = ['10:00 AM', '2:00 PM', '5:00 PM'];
+          if (guests > 10) timeSlots = ['10:00 AM', '2:00 PM'];
+        } else {
+          timeSlots = ['9:00 AM', '11:00 AM', '2:00 PM', '4:00 PM', '6:00 PM'];
+        }
 
-      if (diff < 1) {
-        isAvailable = false;
-      } else if (diff <= 3 && (day === 0 || day === 6)) {
-        isAvailable = true;
-        timeSlots = ['4:00 PM'];
-        if (guests > 8) isAvailable = false;
-      } else if (day === 0 || day === 6) {
-        timeSlots = ['10:00 AM', '2:00 PM', '5:00 PM'];
-        if (guests > 10) timeSlots = ['10:00 AM', '2:00 PM'];
-      } else {
-        timeSlots = ['9:00 AM', '11:00 AM', '2:00 PM', '4:00 PM', '6:00 PM'];
-      }
+        // Filter out slots that would overlap with existing bookings
+        timeSlots = timeSlots.filter(t => {
+          const newStart = parseTimeH(t);
+          const newEnd = newStart + duration;
+          for (const bs of bookedSlots) {
+            // Overlap: newStart < existingEnd && existingStart < newEnd
+            if (newStart < bs.endH && bs.startH < newEnd) return false;
+          }
+          return true;
+        });
 
-      if (isAvailable && timeSlots.length > 0) {
-        const cp = cruisePricing[cruiseType];
-        let price = cp.base;
-        if (duration > 2) price += (duration - 2) * cp.hourly;
-        if (guests > 6) price += (guests - 6) * 50;
+        if (timeSlots.length > 0) {
+          const cp = cruisePricing[cruiseType];
+          let price = cp.base;
+          if (duration > 2) price += (duration - 2) * cp.hourly;
+          if (guests > 6) price += (guests - 6) * 50;
 
-        const selectedTime = document.getElementById('availTime').value;
-        const timeOk = timeSlots.includes(selectedTime);
+          const selectedTime = document.getElementById('availTime').value;
+          const timeOk = timeSlots.includes(selectedTime);
+          const activeSlot = timeOk ? selectedTime : timeSlots[0];
 
-        result.classList.add('available', 'show');
-        status.textContent = timeOk ? '✓ Available at ' + selectedTime + '!' : '✓ Available — your time not open, pick below';
-        note.textContent = 'Estimated price: $' + price.toLocaleString();
-        slots.innerHTML = timeSlots.map(t =>
-          `<span class="avail-slot${t === selectedTime ? ' selected' : ''}" onclick="selectSlot(this);document.getElementById('availTime').value=this.textContent.trim();">${t}</span>`
-        ).join('');
-        bookBtn.style.display = 'block';
-      } else {
+          result.classList.add('available', 'show');
+          status.textContent = timeOk ? '✓ Available at ' + selectedTime + '!' : '✓ Available! We set ' + activeSlot + ' for you — tap to change';
+          note.textContent = 'Estimated price: $' + price.toLocaleString();
+          slots.innerHTML = timeSlots.map(t =>
+            `<span class="avail-slot${t === activeSlot ? ' selected' : ''}" onclick="selectSlot(this);document.getElementById('availTime').value=this.textContent.trim();">${t}</span>`
+          ).join('');
+          bookBtn.style.display = 'block';
+        } else {
+          result.classList.add('unavailable', 'show');
+          status.textContent = '⚓ Fully Booked';
+          note.textContent = bookedSlots.length > 0
+            ? 'All time slots taken for this date — try another date or shorter duration'
+            : 'This date is fully booked — try another date or fewer guests';
+          slots.innerHTML = '';
+          bookBtn.style.display = 'none';
+        }
+      })
+      .catch(err => {
+        console.error('Availability API error:', err);
+        // Fallback if API unreachable
         result.classList.add('unavailable', 'show');
-        status.textContent = '✗ Not Available';
-        note.textContent = diff < 1 ? 'Please select a future date' : 'This date is fully booked — try another date or fewer guests';
+        status.textContent = '⚠️ Could not check';
+        note.textContent = 'Please try again';
         slots.innerHTML = '';
         bookBtn.style.display = 'none';
-      }
-    }, 300);
+      });
   }
 
   function selectSlot(el) {
@@ -4843,7 +4927,7 @@
   // ===== SEND BOOKING TO API =====
   function sendBookingToAPI(payMethod) {
     const d = bookingData;
-    fetch('/yacht/api/book', {
+    return fetch('/yacht/api/book', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
@@ -4859,33 +4943,37 @@
         price: d.price,
         paymentMethod: payMethod
       })
-    }).catch(() => {});
+    }).then(r => {
+      if (r.status === 409) {
+        return r.json().then(data => { throw new Error(data.message || 'Time slot conflict'); });
+      }
+      if (!r.ok) throw new Error('Booking failed');
+      return r.json();
+    });
   }
 
   function completeBooking(payMethod) {
-    // Save to API
-    sendBookingToAPI(payMethod);
+    sendBookingToAPI(payMethod).then(() => {
+      // Close modal
+      closePayment();
 
-    // Mark date as booked locally
-    bookedDates.push(bookingData.dateVal);
-    savedBookings.push(bookingData.dateVal);
-    localStorage.setItem('yachtBookings', JSON.stringify(savedBookings));
-    renderCalendar();
+      // Reset availability result and form fields
+      document.getElementById('availResult').classList.remove('available', 'unavailable', 'show');
+      document.getElementById('availName').value = '';
+      document.getElementById('availEmail').value = '';
+      document.getElementById('availPhone').value = '';
+      const bookBtn = document.querySelector('#availBook .btn');
+      if (bookBtn) { bookBtn.disabled = false; bookBtn.textContent = '🟡 Request Booking'; }
 
-    // Close modal
-    closePayment();
-
-    // Reset availability result and form fields
-    document.getElementById('availResult').classList.remove('available', 'unavailable', 'show');
-    document.getElementById('availName').value = '';
-    document.getElementById('availEmail').value = '';
-    document.getElementById('availPhone').value = '';
-    const bookBtn = document.querySelector('#availBook .btn');
-    if (bookBtn) { bookBtn.disabled = false; bookBtn.textContent = '🟡 Book This Date'; }
-
-    // Show success
-    const d = bookingData;
-    alert(`✅ Payment successful!\n\nThank you, ${d.name}!\n\n${d.cruise.split('—')[0].trim()}\n📅 ${d.dateVal} at ${d.time}\n⏱ ${d.durationText} · ${d.guests} guests\n💰 $${d.price.toLocaleString()} via ${payMethod}\n\nConfirmation sent to ${d.email}\n\n⚓ See you at the marina!`);
+      // Show success
+      const d = bookingData;
+      alert(`✅ Booking confirmed!\n\nThank you, ${d.name}!\n\n${d.cruise.split('—')[0].trim()}\n📅 ${d.dateVal} at ${d.time}\n⏱ ${d.durationText} · ${d.guests} guests\n💰 $${d.price.toLocaleString()} via ${payMethod}\n\nConfirmation sent to ${d.email}\n\n⚓ See you at the marina!`);
+    }).catch(err => {
+      closePayment();
+      alert('⚠️ ' + err.message + '\n\nPlease choose a different time slot.');
+      // Re-check availability to refresh slots
+      checkAvailability();
+    });
   }
 
   // ===== CRYPTO PAYMENT =====
@@ -5091,6 +5179,120 @@
     <div class="pay-secure">🔒 SSL Encrypted · Secure Payment</div>
   </div>
 </div>
+
+<!-- My Bookings Modal -->
+<div class="pay-overlay" id="myBookingsOverlay" onclick="if(event.target===this)closeMyBookings()">
+  <div class="pay-modal" style="max-width:480px;">
+    <button class="pay-close" onclick="closeMyBookings()">&#x2715;</button>
+    <div class="pay-title">&#x2693; My Bookings</div>
+
+    <!-- Email lookup form -->
+    <div id="mbLookup">
+      <div style="text-align:center; margin-bottom:16px;">
+        <div style="font-size:2.2rem; margin-bottom:8px;">&#x1F6F3;</div>
+        <div style="color:rgba(232,212,176,0.5); font-size:0.75rem; line-height:1.5;">
+          Enter your email to view your bookings
+        </div>
+      </div>
+      <div class="pay-field">
+        <label>Email Address</label>
+        <input type="email" id="mbEmail" placeholder="your@email.com"
+               onkeydown="if(event.key==='Enter')lookupBookings()">
+      </div>
+      <button class="pay-btn" onclick="lookupBookings()">&#x1F50D; Find My Bookings</button>
+    </div>
+
+    <!-- Loading state -->
+    <div id="mbLoading" style="display:none; text-align:center; padding:30px 0;">
+      <span class="pay-spinner"></span>
+      <div style="color:rgba(232,212,176,0.5); font-size:0.8rem; margin-top:10px;">Searching bookings...</div>
+    </div>
+
+    <!-- Results -->
+    <div id="mbResults" style="display:none;">
+      <div id="mbCount" style="text-align:center; color:rgba(232,212,176,0.5); font-size:0.7rem; margin-bottom:12px; letter-spacing:0.05em;"></div>
+      <div id="mbList" style="max-height:55vh; overflow-y:auto;"></div>
+      <button class="pay-btn" style="margin-top:14px; background:transparent; border:1px solid rgba(212,175,55,0.2); font-size:0.8rem;"
+              onclick="document.getElementById('mbResults').style.display='none';document.getElementById('mbLookup').style.display='block';">
+        &#x2190; Look Up Another Email
+      </button>
+    </div>
+
+    <!-- No results -->
+    <div id="mbEmpty" style="display:none; text-align:center; padding:30px 0;">
+      <div style="font-size:2rem; margin-bottom:10px;">&#x1F50D;</div>
+      <div style="color:rgba(232,212,176,0.6); font-size:0.85rem; margin-bottom:6px;">No bookings found</div>
+      <div style="color:rgba(232,212,176,0.35); font-size:0.7rem;">Check the email address and try again</div>
+      <button class="pay-btn" style="margin-top:16px; background:transparent; border:1px solid rgba(212,175,55,0.2); font-size:0.8rem;"
+              onclick="document.getElementById('mbEmpty').style.display='none';document.getElementById('mbLookup').style.display='block';">
+        &#x2190; Try Again
+      </button>
+    </div>
+  </div>
+</div>
+
+<script>
+function openMyBookings() {
+  document.getElementById('mbLookup').style.display = 'block';
+  document.getElementById('mbLoading').style.display = 'none';
+  document.getElementById('mbResults').style.display = 'none';
+  document.getElementById('mbEmpty').style.display = 'none';
+  // Pre-fill email from booking form if available
+  var formEmail = document.getElementById('availEmail');
+  if (formEmail && formEmail.value) {
+    document.getElementById('mbEmail').value = formEmail.value;
+  }
+  document.getElementById('myBookingsOverlay').classList.add('active');
+}
+
+function closeMyBookings() {
+  document.getElementById('myBookingsOverlay').classList.remove('active');
+}
+
+function lookupBookings() {
+  var email = document.getElementById('mbEmail').value.trim();
+  if (!email) { document.getElementById('mbEmail').focus(); return; }
+
+  document.getElementById('mbLookup').style.display = 'none';
+  document.getElementById('mbLoading').style.display = 'block';
+  document.getElementById('mbResults').style.display = 'none';
+  document.getElementById('mbEmpty').style.display = 'none';
+
+  fetch('/yacht/api/my-bookings?email=' + encodeURIComponent(email))
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      document.getElementById('mbLoading').style.display = 'none';
+      if (!data.length) {
+        document.getElementById('mbEmpty').style.display = 'block';
+        return;
+      }
+      document.getElementById('mbCount').textContent = data.length + ' booking' + (data.length > 1 ? 's' : '') + ' found';
+      document.getElementById('mbList').innerHTML = data.map(function(b) {
+        var badgeClass = b.status === 'confirmed' ? 'mb-badge-confirmed'
+          : b.status === 'cancelled' ? 'mb-badge-cancelled'
+          : 'mb-badge-new';
+        var statusLabel = b.status === 'confirmed' ? 'Confirmed' : b.status === 'cancelled' ? 'Cancelled' : 'Pending';
+        var price = b.price ? '$' + parseInt(b.price).toLocaleString() : '';
+        return '<div class="mb-card">' +
+          '<div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:6px;">' +
+            '<div class="mb-card-date">' + b.date + ' &middot; ' + b.time + '</div>' +
+            '<span class="mb-badge ' + badgeClass + '">' + statusLabel + '</span>' +
+          '</div>' +
+          '<div class="mb-card-cruise">' + b.cruise + '</div>' +
+          '<div class="mb-card-details">' +
+            '&#x23F1; ' + b.duration + ' &middot; &#x1F465; ' + b.guests + ' guests' +
+            (price ? ' &middot; &#x1F4B0; ' + price : '') +
+          '</div>' +
+        '</div>';
+      }).join('');
+      document.getElementById('mbResults').style.display = 'block';
+    })
+    .catch(function() {
+      document.getElementById('mbLoading').style.display = 'none';
+      document.getElementById('mbEmpty').style.display = 'block';
+    });
+}
+</script>
 
 </div><!-- /pageContent -->
 </body>

@@ -32,5 +32,39 @@
     "paymentMethod": "request",
     "status": "new",
     "notes": ""
+  },
+  {
+    "id": 1773741261613,
+    "timestamp": "2026-03-17T09:54:21.613860",
+    "name": "Test",
+    "email": "t@t.com",
+    "phone": "+1",
+    "date": "2026-03-20",
+    "cruise": "Sunset",
+    "cruiseType": "sunset",
+    "time": "4:00 PM",
+    "duration": "2 hours",
+    "guests": 2,
+    "price": 750,
+    "paymentMethod": "card",
+    "status": "new",
+    "notes": ""
+  },
+  {
+    "id": 1773741373668,
+    "timestamp": "2026-03-17T09:56:13.668161",
+    "name": "К",
+    "email": "g@t.vg. CC",
+    "phone": "333665599",
+    "date": "2026-03-18",
+    "cruise": "🌅 Sunset Cruise — from $750",
+    "cruiseType": "sunset",
+    "time": "11:00 AM",
+    "duration": "2 hours",
+    "guests": 2,
+    "price": 750,
+    "paymentMethod": "cash",
+    "status": "new",
+    "notes": ""
   }
 ]

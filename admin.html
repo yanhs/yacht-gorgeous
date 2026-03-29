@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Captain's Dashboard — Yacht Gorgeous</title>
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -12,37 +13,39 @@
     font-family: Georgia, serif;
     min-height: 100vh;
   }
-  /* Header */
   .header {
     background: rgba(10,26,53,0.95);
     border-bottom: 1px solid rgba(212,175,55,0.15);
-    padding: 16px 24px;
+    padding: 14px 20px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     position: sticky;
     top: 0;
     z-index: 100;
+    backdrop-filter: blur(10px);
   }
-  .header h1 {
-    font-size: 1.1rem;
+  .header h1 { font-size: 1rem; color: #D4AF37; letter-spacing: 0.1em; }
+  .header h1 span { color: #e8d4b0; font-weight: 400; font-size: 0.8rem; }
+  .header-actions { display: flex; gap: 8px; align-items: center; }
+  .btn-sm {
+    background: rgba(212,175,55,0.12);
+    border: 1px solid rgba(212,175,55,0.25);
     color: #D4AF37;
-    letter-spacing: 0.1em;
-  }
-  .header h1 span { color: #e8d4b0; font-weight: 400; font-size: 0.85rem; }
-  .header-actions { display: flex; gap: 10px; }
-  .btn-refresh {
-    background: rgba(212,175,55,0.15);
-    border: 1px solid rgba(212,175,55,0.3);
-    color: #D4AF37;
-    padding: 8px 16px;
+    padding: 7px 14px;
     border-radius: 6px;
     cursor: pointer;
     font-family: Georgia, serif;
-    font-size: 0.8rem;
+    font-size: 0.75rem;
     transition: background 0.2s;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
   }
-  .btn-refresh:hover { background: rgba(212,175,55,0.25); }
+  .btn-sm:hover { background: rgba(212,175,55,0.25); }
+  .btn-sm.danger { border-color: rgba(231,76,60,0.3); color: rgba(231,76,60,0.8); }
+  .btn-sm.danger:hover { background: rgba(231,76,60,0.15); }
 
   /* Login */
   .login-screen {
@@ -93,57 +96,137 @@
   /* Stats */
   .stats {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 12px;
-    padding: 20px 24px;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 10px;
+    padding: 16px 20px;
   }
   .stat-card {
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(212,175,55,0.1);
     border-radius: 12px;
-    padding: 16px;
+    padding: 14px;
     text-align: center;
   }
-  .stat-num {
-    font-size: 1.8rem;
-    color: #D4AF37;
-    font-weight: 700;
-    line-height: 1.2;
-  }
-  .stat-label {
-    font-size: 0.7rem;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    opacity: 0.6;
-    margin-top: 4px;
-  }
+  .stat-num { font-size: 1.6rem; color: #D4AF37; font-weight: 700; line-height: 1.2; }
+  .stat-label { font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; opacity: 0.5; margin-top: 3px; }
 
-  /* Filters */
-  .filters {
-    padding: 0 24px 12px;
+  /* Calendar */
+  .cal-wrap { padding: 0 20px 14px; }
+  .cal-box {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212,175,55,0.1);
+    border-radius: 12px;
+    padding: 14px;
+  }
+  .cal-header {
     display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 10px;
   }
-  .filter-btn {
-    padding: 6px 14px;
-    border-radius: 20px;
+  .cal-title { font-size: 0.9rem; color: #D4AF37; font-weight: 600; letter-spacing: 0.04em; }
+  .cal-nav {
+    background: rgba(212,175,55,0.1);
     border: 1px solid rgba(212,175,55,0.2);
-    background: transparent;
-    color: #e8d4b0;
-    font-family: Georgia, serif;
-    font-size: 0.75rem;
+    color: #D4AF37;
+    width: 30px; height: 30px;
+    border-radius: 6px;
     cursor: pointer;
-    transition: all 0.2s;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+    font-family: Georgia, serif;
   }
-  .filter-btn.active {
-    background: rgba(212,175,55,0.2);
-    border-color: #D4AF37;
+  .cal-nav:hover { background: rgba(212,175,55,0.25); }
+  .cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+  }
+  .cal-dow {
+    text-align: center;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: rgba(232,212,176,0.4);
+    padding: 4px 0 6px;
+  }
+  .cal-cell {
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.78rem;
+    border-radius: 6px;
+    position: relative;
+    cursor: default;
+    transition: all 0.15s;
+  }
+  .cal-cell.empty { visibility: hidden; }
+  .cal-cell.past { color: rgba(232,212,176,0.2); }
+  .cal-cell.today { border: 1px solid #D4AF37; color: #D4AF37; font-weight: 700; }
+  .cal-cell.has-booking { background: rgba(212,175,55,0.2); color: #D4AF37; font-weight: 600; cursor: pointer; }
+  .cal-cell.has-booking:hover { background: rgba(212,175,55,0.35); }
+  .cal-cell.selected { background: #D4AF37 !important; color: #0a1a35 !important; font-weight: 700; }
+  .cal-cell .cal-dot {
+    position: absolute;
+    bottom: 3px; left: 50%;
+    transform: translateX(-50%);
+    display: flex; gap: 2px;
+  }
+  .cal-cell .cal-dot span { width: 4px; height: 4px; border-radius: 50%; background: #D4AF37; }
+  .cal-cell.new-status .cal-dot span { background: #e74c3c; }
+  .cal-legend {
+    display: flex; gap: 14px;
+    justify-content: center;
+    margin-top: 10px;
+    font-size: 0.6rem; opacity: 0.5;
+  }
+  .cal-legend span::before {
+    content: '';
+    display: inline-block;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    margin-right: 4px;
+    vertical-align: middle;
+  }
+  .cal-legend .lg-booked::before { background: rgba(212,175,55,0.4); }
+  .cal-legend .lg-today::before { border: 1px solid #D4AF37; background: transparent; }
+  .cal-legend .lg-new::before { background: #e74c3c; }
+
+  /* Filter bar */
+  .filter-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 20px;
+    font-size: 0.8rem;
+  }
+  .filter-bar .filter-info {
+    color: rgba(232,212,176,0.5);
+    font-size: 0.75rem;
+    letter-spacing: 0.04em;
+  }
+  .filter-bar .filter-info strong {
     color: #D4AF37;
   }
+  .btn-clear-filter {
+    background: rgba(212,175,55,0.1);
+    border: 1px solid rgba(212,175,55,0.2);
+    color: #D4AF37;
+    padding: 5px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-family: Georgia, serif;
+    font-size: 0.7rem;
+    display: none;
+  }
+  .btn-clear-filter:hover { background: rgba(212,175,55,0.2); }
 
   /* Bookings */
-  .bookings { padding: 0 24px 40px; }
+  .bookings { padding: 0 20px 40px; }
   .booking-card {
     background: rgba(255,255,255,0.03);
     border: 1px solid rgba(212,175,55,0.1);
@@ -153,59 +236,60 @@
     transition: border-color 0.2s;
   }
   .booking-card:hover { border-color: rgba(212,175,55,0.3); }
-  .booking-card.today { border-left: 3px solid #D4AF37; }
-  .booking-card.past { opacity: 0.5; }
-
-  .bc-top {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 10px;
-  }
-  .bc-cruise {
-    font-size: 1rem;
-    font-weight: 600;
-    color: #D4AF37;
-  }
-  .bc-price {
-    font-size: 1rem;
-    font-weight: 700;
-    color: #D4AF37;
-  }
-  .bc-date {
-    font-size: 0.85rem;
-    opacity: 0.8;
-    margin-bottom: 8px;
-  }
-  .bc-client {
-    font-size: 0.85rem;
-    margin-bottom: 4px;
-  }
+  .booking-card.status-today { border-left: 3px solid #D4AF37; }
+  .booking-card.status-past { opacity: 0.6; }
+  .booking-card.status-cancelled { opacity: 0.4; border-left: 3px solid rgba(231,76,60,0.4); }
+  .bc-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
+  .bc-cruise { font-size: 0.95rem; font-weight: 600; color: #D4AF37; }
+  .bc-price { font-size: 0.95rem; font-weight: 700; color: #D4AF37; }
+  .bc-date { font-size: 0.8rem; opacity: 0.7; margin-bottom: 8px; }
+  .bc-client { font-size: 0.82rem; margin-bottom: 3px; }
   .bc-client strong { color: #fff; }
-  .bc-details {
-    font-size: 0.75rem;
-    opacity: 0.6;
-    margin-bottom: 10px;
-  }
-  .bc-badge {
+  .bc-details { font-size: 0.72rem; opacity: 0.6; margin-bottom: 8px; display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+
+  /* Status badge */
+  .bc-status {
     display: inline-block;
-    padding: 2px 8px;
+    padding: 3px 10px;
     border-radius: 10px;
     font-size: 0.65rem;
     text-transform: uppercase;
     letter-spacing: 0.05em;
     font-weight: 600;
   }
-  .bc-badge.card { background: rgba(52,152,219,0.2); color: #5dade2; }
-  .bc-badge.crypto { background: rgba(243,156,18,0.2); color: #f39c12; }
-  .bc-badge.cash { background: rgba(46,204,113,0.2); color: #2ecc71; }
+  .bc-status.s-new {
+    background: rgba(52,152,219,0.15);
+    color: rgba(52,152,219,0.9);
+    border: 1px solid rgba(52,152,219,0.25);
+  }
+  .bc-status.s-confirmed {
+    background: rgba(46,204,113,0.12);
+    color: rgba(46,204,113,0.9);
+    border: 1px solid rgba(46,204,113,0.25);
+  }
+  .bc-status.s-cancelled {
+    background: rgba(231,76,60,0.12);
+    color: rgba(231,76,60,0.8);
+    border: 1px solid rgba(231,76,60,0.2);
+  }
+  /* Payment badge */
+  .bc-pay {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 0.6rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    opacity: 0.7;
+  }
+  .bc-pay.p-card { background: rgba(52,152,219,0.15); color: #5dade2; }
+  .bc-pay.p-crypto { background: rgba(243,156,18,0.15); color: #f39c12; }
+  .bc-pay.p-cash { background: rgba(46,204,113,0.15); color: #2ecc71; }
+  .bc-pay.p-request { background: rgba(155,89,182,0.15); color: #bb8fce; }
 
   .bc-actions {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-    margin-top: 10px;
-    padding-top: 10px;
+    display: flex; gap: 6px; flex-wrap: wrap;
+    margin-top: 10px; padding-top: 10px;
     border-top: 1px solid rgba(212,175,55,0.08);
   }
   .bc-action {
@@ -214,34 +298,37 @@
     border: 1px solid rgba(212,175,55,0.15);
     background: rgba(212,175,55,0.05);
     color: #e8d4b0;
-    font-size: 0.72rem;
+    font-size: 0.7rem;
     text-decoration: none;
     cursor: pointer;
     font-family: Georgia, serif;
     transition: background 0.2s;
   }
   .bc-action:hover { background: rgba(212,175,55,0.15); }
-
-  .empty-state {
-    text-align: center;
-    padding: 60px 20px;
-    opacity: 0.5;
+  .bc-action.act-confirm {
+    border-color: rgba(46,204,113,0.3);
+    color: rgba(46,204,113,0.9);
   }
+  .bc-action.act-confirm:hover { background: rgba(46,204,113,0.15); }
+  .bc-action.act-cancel {
+    border-color: rgba(231,76,60,0.3);
+    color: rgba(231,76,60,0.8);
+  }
+  .bc-action.act-cancel:hover { background: rgba(231,76,60,0.12); }
+
+  .empty-state { text-align: center; padding: 60px 20px; opacity: 0.5; }
   .empty-state .emoji { font-size: 3rem; margin-bottom: 12px; }
+  .loading { text-align: center; padding: 60px 20px; color: #D4AF37; }
 
-  .loading {
-    text-align: center;
-    padding: 60px 20px;
-    color: #D4AF37;
-  }
-
-  /* Dashboard wrapper */
   .dashboard { display: none; }
 
   @media (max-width: 500px) {
     .stats { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    .header h1 { font-size: 0.9rem; }
-    .bc-actions { gap: 6px; }
+    .header h1 { font-size: 0.85rem; }
+    .header h1 span { display: none; }
+    .bc-actions { gap: 5px; }
+    .cal-cell { font-size: 0.7rem; }
+    .btn-sm { padding: 6px 10px; font-size: 0.7rem; }
   }
 </style>
 </head>
@@ -253,7 +340,7 @@
     <h2>⚓ Captain's Dashboard</h2>
     <p>Yacht Gorgeous — Admin Panel</p>
     <input type="password" id="passInput" placeholder="Enter access code" onkeydown="if(event.key==='Enter')doLogin()">
-    <button onclick="doLogin()">Enter Bridge 🚢</button>
+    <button onclick="doLogin()">Enter Bridge 🛥️</button>
     <div class="login-error" id="loginError">Wrong code. Try again.</div>
   </div>
 </div>
@@ -263,34 +350,39 @@
   <div class="header">
     <h1>⚓ CAPTAIN'S LOG <span>— Yacht Gorgeous</span></h1>
     <div class="header-actions">
-      <button class="btn-refresh" onclick="loadBookings()">↻ Refresh</button>
+      <a class="btn-sm" href="/yacht/">🛥️ Site</a>
+      <button class="btn-sm" onclick="loadBookings()">↻ Refresh</button>
+      <button class="btn-sm danger" onclick="doLogout()">Logout</button>
     </div>
   </div>
 
   <div class="stats" id="stats">
-    <div class="stat-card">
-      <div class="stat-num" id="statTotal">0</div>
-      <div class="stat-label">Total Bookings</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num" id="statUpcoming">0</div>
-      <div class="stat-label">Upcoming</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num" id="statGuests">0</div>
-      <div class="stat-label">Total Guests</div>
-    </div>
-    <div class="stat-card">
-      <div class="stat-num" id="statRevenue">$0</div>
-      <div class="stat-label">Revenue</div>
+    <div class="stat-card"><div class="stat-num" id="statTotal">0</div><div class="stat-label">Total</div></div>
+    <div class="stat-card"><div class="stat-num" id="statUpcoming">0</div><div class="stat-label">Upcoming</div></div>
+    <div class="stat-card"><div class="stat-num" id="statNew">0</div><div class="stat-label">Pending</div></div>
+    <div class="stat-card"><div class="stat-num" id="statGuests">0</div><div class="stat-label">Guests</div></div>
+    <div class="stat-card"><div class="stat-num" id="statRevenue">$0</div><div class="stat-label">Revenue</div></div>
+  </div>
+
+  <div class="cal-wrap">
+    <div class="cal-box">
+      <div class="cal-header">
+        <button class="cal-nav" onclick="calNav(-1)">&#x2039;</button>
+        <div class="cal-title" id="calTitle"></div>
+        <button class="cal-nav" onclick="calNav(1)">&#x203A;</button>
+      </div>
+      <div class="cal-grid" id="calGrid"></div>
+      <div class="cal-legend">
+        <span class="lg-booked">Booked</span>
+        <span class="lg-today">Today</span>
+        <span class="lg-new">New request</span>
+      </div>
     </div>
   </div>
 
-  <div class="filters">
-    <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">All</button>
-    <button class="filter-btn" data-filter="upcoming" onclick="setFilter('upcoming')">Upcoming</button>
-    <button class="filter-btn" data-filter="today" onclick="setFilter('today')">Today</button>
-    <button class="filter-btn" data-filter="past" onclick="setFilter('past')">Past</button>
+  <div class="filter-bar">
+    <div class="filter-info" id="filterInfo"></div>
+    <button class="btn-clear-filter" id="btnClearFilter" onclick="clearFilter()">Show All</button>
   </div>
 
   <div class="bookings" id="bookingsList">
@@ -302,126 +394,256 @@
   const API = '/yacht/api';
   const ADMIN_KEY = 'gorgeous2026';
   let allBookings = [];
-  let currentFilter = 'all';
+  let calYear, calMonth, calSelectedDate = null;
 
-  // Login
+  // ===== LOGIN / LOGOUT =====
   function doLogin() {
     const pass = document.getElementById('passInput').value;
     if (pass === ADMIN_KEY) {
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('dashboard').style.display = 'block';
       sessionStorage.setItem('yacht_admin', '1');
-      loadBookings();
+      startDashboard();
     } else {
       document.getElementById('loginError').style.display = 'block';
     }
   }
 
-  // Auto-login if already authenticated this session
+  function doLogout() {
+    sessionStorage.removeItem('yacht_admin');
+    document.getElementById('dashboard').style.display = 'none';
+    document.getElementById('loginScreen').style.display = 'flex';
+    document.getElementById('passInput').value = '';
+    document.getElementById('loginError').style.display = 'none';
+  }
+
   if (sessionStorage.getItem('yacht_admin') === '1') {
     document.getElementById('loginScreen').style.display = 'none';
     document.getElementById('dashboard').style.display = 'block';
+    startDashboard();
+  }
+
+  function startDashboard() {
+    const d = new Date();
+    calYear = d.getFullYear();
+    calMonth = d.getMonth();
     loadBookings();
   }
 
-  // Load bookings from API
+  // ===== LOAD BOOKINGS =====
   async function loadBookings() {
-    document.getElementById('bookingsList').innerHTML = '<div class="loading">Loading bookings...</div>';
+    document.getElementById('bookingsList').innerHTML = '<div class="loading">Loading...</div>';
     try {
       const res = await fetch(API + '/bookings', {
         headers: { 'X-Admin-Key': ADMIN_KEY }
       });
       if (!res.ok) throw new Error('Failed');
       allBookings = await res.json();
-      allBookings.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+      allBookings.sort(function(a, b) { return (b.date || '').localeCompare(a.date || ''); });
       updateStats();
+      renderCalendar();
       renderBookings();
     } catch (e) {
       document.getElementById('bookingsList').innerHTML =
-        '<div class="empty-state"><div class="emoji">⚠️</div><p>Could not load bookings</p></div>';
+        '<div class="empty-state"><div class="emoji">&#x26A0;&#xFE0F;</div><p>Could not load bookings</p></div>';
     }
   }
 
-  // Stats
-  function updateStats() {
-    const today = new Date().toISOString().slice(0, 10);
-    const upcoming = allBookings.filter(b => b.date >= today);
-    const totalGuests = allBookings.reduce((s, b) => s + (parseInt(b.guests) || 0), 0);
-    const totalRev = allBookings.reduce((s, b) => s + (parseFloat(b.price) || 0), 0);
+  // ===== CHANGE STATUS =====
+  async function changeStatus(bookingId, newStatus) {
+    try {
+      const res = await fetch(API + '/booking/' + bookingId, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Admin-Key': ADMIN_KEY
+        },
+        body: JSON.stringify({ status: newStatus })
+      });
+      if (!res.ok) throw new Error('Failed');
+      await loadBookings();
+    } catch (e) {
+      alert('Error updating status: ' + e.message);
+    }
+  }
 
+  // ===== STATS =====
+  function updateStats() {
+    var today = new Date().toISOString().slice(0, 10);
+    var active = allBookings.filter(function(b) { return b.status !== 'cancelled'; });
+    var upcoming = active.filter(function(b) { return b.date >= today; });
+    var pending = allBookings.filter(function(b) { return b.status === 'new'; });
+    var totalGuests = active.reduce(function(s, b) { return s + (parseInt(b.guests) || 0); }, 0);
+    var totalRev = active.reduce(function(s, b) { return s + (parseFloat(b.price) || 0); }, 0);
     document.getElementById('statTotal').textContent = allBookings.length;
     document.getElementById('statUpcoming').textContent = upcoming.length;
+    document.getElementById('statNew').textContent = pending.length;
     document.getElementById('statGuests').textContent = totalGuests;
     document.getElementById('statRevenue').textContent = '$' + totalRev.toLocaleString();
   }
 
-  // Filter
-  function setFilter(f) {
-    currentFilter = f;
-    document.querySelectorAll('.filter-btn').forEach(b => {
-      b.classList.toggle('active', b.dataset.filter === f);
-    });
+  // ===== CALENDAR =====
+  function calNav(dir) {
+    calMonth += dir;
+    if (calMonth > 11) { calMonth = 0; calYear++; }
+    if (calMonth < 0) { calMonth = 11; calYear--; }
+    calSelectedDate = null;
+    renderCalendar();
     renderBookings();
   }
 
-  // Render
-  function renderBookings() {
-    const today = new Date().toISOString().slice(0, 10);
-    let list = allBookings;
+  function renderCalendar() {
+    var months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    document.getElementById('calTitle').textContent = months[calMonth] + ' ' + calYear;
 
-    if (currentFilter === 'upcoming') list = list.filter(b => b.date >= today);
-    else if (currentFilter === 'today') list = list.filter(b => b.date === today);
-    else if (currentFilter === 'past') list = list.filter(b => b.date < today);
+    var firstDay = new Date(calYear, calMonth, 1).getDay();
+    var daysInMonth = new Date(calYear, calMonth + 1, 0).getDate();
+    var today = new Date();
+    today.setHours(0,0,0,0);
+
+    var dateMap = {};
+    allBookings.forEach(function(b) {
+      if (!b.date || b.status === 'cancelled') return;
+      if (!dateMap[b.date]) dateMap[b.date] = [];
+      dateMap[b.date].push(b);
+    });
+
+    var html = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat']
+      .map(function(d) { return '<div class="cal-dow">' + d + '</div>'; }).join('');
+
+    for (var i = 0; i < firstDay; i++) html += '<div class="cal-cell empty"></div>';
+
+    for (var d = 1; d <= daysInMonth; d++) {
+      var ds = calYear + '-' + String(calMonth + 1).padStart(2, '0') + '-' + String(d).padStart(2, '0');
+      var dateObj = new Date(calYear, calMonth, d);
+      var isPast = dateObj < today;
+      var isToday = dateObj.getTime() === today.getTime();
+      var bookings = dateMap[ds] || [];
+      var hasNew = bookings.some(function(b) { return b.status === 'new'; });
+      var isSelected = calSelectedDate === ds;
+
+      var cls = 'cal-cell';
+      if (isPast && !bookings.length) cls += ' past';
+      if (isToday) cls += ' today';
+      if (bookings.length) cls += ' has-booking';
+      if (hasNew) cls += ' new-status';
+      if (isSelected) cls += ' selected';
+
+      var dots = bookings.length
+        ? '<div class="cal-dot">' + bookings.map(function() { return '<span></span>'; }).join('') + '</div>'
+        : '';
+      var onclick = bookings.length ? 'onclick="calSelectDate(\'' + ds + '\')"' : '';
+      html += '<div class="' + cls + '" ' + onclick + '>' + d + dots + '</div>';
+    }
+
+    document.getElementById('calGrid').innerHTML = html;
+  }
+
+  function calSelectDate(ds) {
+    calSelectedDate = (calSelectedDate === ds) ? null : ds;
+    renderCalendar();
+    renderBookings();
+  }
+
+  function clearFilter() {
+    calSelectedDate = null;
+    renderCalendar();
+    renderBookings();
+  }
+
+  // ===== RENDER BOOKINGS =====
+  function renderBookings() {
+    var today = new Date().toISOString().slice(0, 10);
+    var list = allBookings;
+
+    if (calSelectedDate) {
+      list = list.filter(function(b) { return b.date === calSelectedDate; });
+    }
+
+    // Update filter bar
+    var filterInfo = document.getElementById('filterInfo');
+    var btnClear = document.getElementById('btnClearFilter');
+    if (calSelectedDate) {
+      filterInfo.innerHTML = 'Showing <strong>' + list.length + '</strong> booking' + (list.length !== 1 ? 's' : '') + ' on <strong>' + calSelectedDate + '</strong>';
+      btnClear.style.display = 'inline-block';
+    } else {
+      filterInfo.innerHTML = '<strong>' + list.length + '</strong> booking' + (list.length !== 1 ? 's' : '') + ' total';
+      btnClear.style.display = 'none';
+    }
 
     if (list.length === 0) {
       document.getElementById('bookingsList').innerHTML =
-        '<div class="empty-state"><div class="emoji">🛥️</div><p>No bookings found</p></div>';
+        calSelectedDate
+          ? '<div class="empty-state"><div class="emoji">&#x1F6F3;</div><p>No bookings on this date</p></div>'
+          : '<div class="empty-state"><div class="emoji">&#x1F6F3;</div><p>No bookings yet</p></div>';
       return;
     }
 
-    const html = list.map(b => {
-      const isPast = b.date < today;
-      const isToday = b.date === today;
-      const cls = isToday ? 'today' : (isPast ? 'past' : '');
-      const payBadge = b.paymentMethod || 'card';
-      const cruiseName = (b.cruise || '').split('—')[0].split('from')[0].trim();
+    var html = list.map(function(b) {
+      var isPast = b.date < today;
+      var isToday = b.date === today;
+      var isCancelled = b.status === 'cancelled';
+      var cls = isCancelled ? 'status-cancelled' : (isToday ? 'status-today' : (isPast ? 'status-past' : ''));
+      var payMethod = b.paymentMethod || 'card';
+      var cruiseName = (b.cruise || '').split('—')[0].split('from')[0].trim();
 
-      // Format date nicely
-      let dateStr = b.date || 'N/A';
+      var dateStr = b.date || 'N/A';
       try {
-        const d = new Date(b.date + 'T12:00:00');
-        dateStr = d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
+        var dt = new Date(b.date + 'T12:00:00');
+        dateStr = dt.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric', year: 'numeric' });
       } catch(e) {}
 
-      // Action links
-      const emailSubject = encodeURIComponent(`Yacht Gorgeous — Your ${cruiseName} on ${b.date}`);
-      const emailBody = encodeURIComponent(`Hi ${b.name},\n\nThank you for booking with Yacht Gorgeous!\n\nYour ${cruiseName}:\n📅 ${b.date} at ${b.time}\n⏱ ${b.duration} · ${b.guests} guests\n💰 $${parseFloat(b.price).toLocaleString()}\n\nSee you at the marina!\n\nCaptain Ian`);
-      const phoneClean = (b.phone || '').replace(/[^+\d]/g, '');
+      // Status badge
+      var statusClass = b.status === 'confirmed' ? 's-confirmed' : (b.status === 'cancelled' ? 's-cancelled' : 's-new');
+      var statusLabel = b.status === 'confirmed' ? 'Confirmed' : (b.status === 'cancelled' ? 'Cancelled' : 'Pending');
 
-      let actions = `<a class="bc-action" href="mailto:${b.email}?subject=${emailSubject}&body=${emailBody}">✉️ Email</a>`;
+      // Payment badge
+      var payClass = 'p-' + payMethod;
+
+      // Contact actions
+      var emailSubject = encodeURIComponent('Yacht Gorgeous \u2014 Your ' + cruiseName + ' on ' + b.date);
+      var emailBody = encodeURIComponent('Hi ' + b.name + ',\n\nThank you for booking with Yacht Gorgeous!\n\nYour ' + cruiseName + ':\n\uD83D\uDCC5 ' + b.date + ' at ' + b.time + '\n\u23F1 ' + b.duration + ' \u00B7 ' + b.guests + ' guests\n\uD83D\uDCB0 $' + parseFloat(b.price).toLocaleString() + '\n\nSee you at the marina!\n\nCaptain Ian');
+      var phoneClean = (b.phone || '').replace(/[^+\d]/g, '');
+
+      var actions = '';
+      // Status change buttons
+      if (b.status === 'new') {
+        actions += '<span class="bc-action act-confirm" onclick="changeStatus(' + b.id + ',\'confirmed\')">&#x2705; Confirm</span>';
+        actions += '<span class="bc-action act-cancel" onclick="changeStatus(' + b.id + ',\'cancelled\')">&#x274C; Cancel</span>';
+      } else if (b.status === 'confirmed') {
+        actions += '<span class="bc-action act-cancel" onclick="changeStatus(' + b.id + ',\'cancelled\')">&#x274C; Cancel</span>';
+      } else if (b.status === 'cancelled') {
+        actions += '<span class="bc-action act-confirm" onclick="changeStatus(' + b.id + ',\'new\')">&#x21A9; Restore</span>';
+      }
+      // Contact actions
+      actions += '<a class="bc-action" href="mailto:' + b.email + '?subject=' + emailSubject + '&body=' + emailBody + '">&#x2709;&#xFE0F; Email</a>';
       if (phoneClean) {
-        actions += `<a class="bc-action" href="tel:${phoneClean}">📞 Call</a>`;
-        actions += `<a class="bc-action" href="https://wa.me/${phoneClean.replace('+','')}" target="_blank">💬 WhatsApp</a>`;
+        actions += '<a class="bc-action" href="tel:' + phoneClean + '">&#x1F4DE; Call</a>';
+        actions += '<a class="bc-action" href="https://wa.me/' + phoneClean.replace('+','') + '" target="_blank">&#x1F4AC; WhatsApp</a>';
       }
 
-      return `<div class="booking-card ${cls}">
-        <div class="bc-top">
-          <div class="bc-cruise">${cruiseName}</div>
-          <div class="bc-price">$${parseFloat(b.price || 0).toLocaleString()}</div>
-        </div>
-        <div class="bc-date">📅 ${dateStr} · ${b.time || ''} · ${b.duration || ''}</div>
-        <div class="bc-client"><strong>${b.name || 'N/A'}</strong></div>
-        <div class="bc-client">📧 ${b.email || '—'} ${b.phone ? '· 📱 ' + b.phone : ''}</div>
-        <div class="bc-details">👥 ${b.guests || '?'} guests · <span class="bc-badge ${payBadge}">💳 ${payBadge}</span> · ${b.status || 'confirmed'}</div>
-        <div class="bc-actions">${actions}</div>
-      </div>`;
+      return '<div class="booking-card ' + cls + '">' +
+        '<div class="bc-top">' +
+          '<div class="bc-cruise">' + cruiseName + '</div>' +
+          '<div class="bc-price">$' + parseFloat(b.price || 0).toLocaleString() + '</div>' +
+        '</div>' +
+        '<div class="bc-date">&#x1F4C5; ' + dateStr + ' &middot; ' + (b.time || '') + ' &middot; ' + (b.duration || '') + '</div>' +
+        '<div class="bc-client"><strong>' + (b.name || 'N/A') + '</strong></div>' +
+        '<div class="bc-client">&#x1F4E7; ' + (b.email || '\u2014') + (b.phone ? ' &middot; &#x1F4F1; ' + b.phone : '') + '</div>' +
+        '<div class="bc-details">' +
+          '&#x1F465; ' + (b.guests || '?') + ' guests &middot; ' +
+          '<span class="bc-pay ' + payClass + '">&#x1F4B3; ' + payMethod + '</span> &middot; ' +
+          '<span class="bc-status ' + statusClass + '">' + statusLabel + '</span>' +
+        '</div>' +
+        '<div class="bc-actions">' + actions + '</div>' +
+      '</div>';
     }).join('');
 
     document.getElementById('bookingsList').innerHTML = html;
   }
 
   // Auto-refresh every 60s
-  setInterval(() => {
+  setInterval(function() {
     if (document.getElementById('dashboard').style.display === 'block') {
       loadBookings();
     }
