@@ -1,0 +1,101 @@
+/* ===== CAPTAIN ===== */
+  .captain {
+    background: #0a1a35;
+    padding: 80px 20px;
+  }
+
+  .captain-inner {
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: clamp(30px, 6vw, 70px);
+  }
+
+  .captain-photo {
+    flex-shrink: 0;
+    position: relative;
+  }
+
+  .captain-porthole {
+    width: clamp(200px, 28vw, 300px);
+    height: clamp(200px, 28vw, 300px);
+    border-radius: 50%;
+    position: relative;
+    background: conic-gradient(
+      from 0deg,
+      #8B7340, #c4a85a, #6b5a30, #a8924a,
+      #8B7340, #c4a85a, #6b5a30, #a8924a,
+      #8B7340
+    );
+    padding: 12px;
+    box-shadow:
+      0 0 30px rgba(0,0,0,0.5),
+      inset 0 0 20px rgba(0,0,0,0.3);
+  }
+
+  .captain-porthole .porthole-glass {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.4);
+    position: relative;
+  }
+
+  .captain-porthole .porthole-glass img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center 20%;
+    display: block;
+  }
+
+  .captain-wheel {
+    position: absolute;
+    bottom: -10px;
+    right: -10px;
+    width: 60px;
+    height: 60px;
+    animation: wheelSpin 20s linear infinite;
+    will-change: transform;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.5));
+  }
+
+  .captain-label {
+    text-align: center;
+    margin-top: 14px;
+    color: rgba(200, 195, 185, 0.45);
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .captain-text h3 {
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+
+  .captain-text h4 {
+    color: #e8d4b0;
+    font-size: clamp(1.1rem, 2vw, 1.4rem);
+    font-weight: 400;
+    margin-bottom: 1em;
+    font-style: italic;
+  }
+
+  .captain-text p {
+    color: rgba(200, 195, 185, 0.7);
+    font-size: clamp(0.95rem, 1.6vw, 1.1rem);
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .captain-inner {
+      flex-direction: column;
+      text-align: center;
+    }
+  }

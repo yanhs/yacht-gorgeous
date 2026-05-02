@@ -1,0 +1,210 @@
+/* ===== TOURS ===== */
+  .tours {
+    background: #0a1a35;
+    padding: 80px 20px;
+  }
+
+  .tours h3 {
+    text-align: center;
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+
+  .tours > p {
+    text-align: center;
+    color: rgba(200, 195, 185, 0.55);
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    margin-bottom: 50px;
+    line-height: 1.6;
+  }
+
+  .tours-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 24px;
+  }
+
+  .tour-card {
+    position: relative;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212, 175, 55, 0.12);
+    border-radius: 16px;
+    padding: 36px 24px 30px;
+    text-align: center;
+    transition: all 0.4s ease;
+    overflow: hidden;
+  }
+
+  .tour-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, #D4AF37, transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  .tour-card:hover {
+    border-color: rgba(212, 175, 55, 0.35);
+    background: rgba(212, 175, 55, 0.05);
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(0,0,0,0.3), 0 0 20px rgba(212, 175, 55, 0.08);
+  }
+
+  .tour-card:hover::before {
+    opacity: 1;
+  }
+
+  .tour-icon {
+    font-size: 3rem;
+    margin-bottom: 18px;
+    display: block;
+  }
+
+  .tour-card h4 {
+    color: #e8d4b0;
+    font-size: 1.15rem;
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 10px;
+  }
+
+  .tour-card .tour-detail {
+    color: rgba(200, 195, 185, 0.5);
+    font-size: 0.9rem;
+    line-height: 1.6;
+    margin-bottom: 18px;
+  }
+
+  .tour-card .tour-btn {
+    display: inline-block;
+    padding: 10px 24px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    border-radius: 30px;
+    color: #D4AF37;
+    font-family: 'Georgia', serif;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    background: transparent;
+    cursor: pointer;
+  }
+
+  .tour-card .tour-btn:hover {
+    background: rgba(212, 175, 55, 0.12);
+    border-color: rgba(212, 175, 55, 0.6);
+    box-shadow: 0 0 16px rgba(212, 175, 55, 0.15);
+  }
+
+  @media (max-width: 600px) {
+    .tours-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .tour-card {
+      padding: 28px 16px 24px;
+    }
+
+    .tour-icon {
+      font-size: 2.4rem;
+    }
+  }
+
+  @media (max-width: 400px) {
+    .tours-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+
+
+  /* ===== SAFETY & POLICIES ===== */
+  .safety-policies {
+    padding: 60px 20px 50px;
+    background: linear-gradient(180deg, #0a1a35 0%, #0d2240 100%);
+    color: #c8b89a;
+  }
+
+  .sp-title {
+    text-align: center;
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.8rem;
+    color: #D4AF37;
+    letter-spacing: 0.08em;
+    margin-bottom: 40px;
+  }
+
+  .sp-block {
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .sp-subtitle {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.25rem;
+    color: #e8d4b0;
+    margin-bottom: 16px;
+    letter-spacing: 0.03em;
+  }
+
+  .sp-intro {
+    font-size: 0.9rem;
+    line-height: 1.7;
+    color: rgba(200, 184, 154, 0.8);
+    margin-bottom: 20px;
+  }
+
+  .sp-intro strong {
+    color: #D4AF37;
+  }
+
+  .sp-list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px;
+  }
+
+  .sp-list li {
+    font-size: 0.85rem;
+    line-height: 1.6;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(212, 175, 55, 0.06);
+    color: rgba(200, 184, 154, 0.75);
+  }
+
+  .sp-list li:last-child {
+    border-bottom: none;
+  }
+
+  .sp-divider {
+    max-width: 700px;
+    margin: 30px auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.2), transparent);
+  }
+
+  .sp-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.05rem;
+    color: #D4AF37;
+    margin: 24px 0 10px;
+    letter-spacing: 0.03em;
+  }
+
+  .sp-text {
+    font-size: 0.85rem;
+    line-height: 1.7;
+    color: rgba(200, 184, 154, 0.75);
+  }
+
+  .sp-text strong {
+    color: #e8d4b0;
+  }

@@ -1,0 +1,184 @@
+/* ===== SCREEN 1 — Welcome ===== */
+  .welcome {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: #0a0e1a;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .welcome-bg {
+    position: absolute;
+    inset: 0;
+    background: url('https://yanhs.stream/tgimg/7e94e9ac6e294c21b5cefe41626667e3.jpg') center center/cover no-repeat;
+  }
+
+  .welcome-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to bottom,
+      rgba(10, 14, 26, 0.55) 0%,
+      rgba(10, 14, 26, 0.35) 50%,
+      rgba(10, 14, 26, 0.75) 85%,
+      #0a1a35 100%
+    );
+  }
+
+  .welcome-text {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    padding: 0 20px;
+    margin-top: -8vh;
+  }
+
+  .welcome-text h1 {
+    font-family: 'Playfair Display', serif;
+    color: #F5F5F5;
+    font-size: clamp(2.2rem, 6vw, 4.5rem);
+    font-weight: 500;
+    letter-spacing: 2px;
+    line-height: 1.2;
+    text-shadow: 0px 4px 20px rgba(0,0,0,0.4);
+    animation: fadeInUp 1.5s ease-out;
+  }
+
+  .welcome-text h1 span {
+    color: #D4AF37;
+    font-weight: 600;
+    font-style: italic;
+  }
+
+  .welcome-line {
+    width: 120px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212,175,55,0.4), transparent);
+    margin: 20px auto;
+    animation: fadeInUp 1.5s ease-out 0.3s both;
+  }
+
+  .welcome-sub {
+    color: rgba(232, 220, 200, 0.85);
+    font-size: clamp(1.1rem, 2.5vw, 1.4rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    animation: fadeInUp 1.5s ease-out 0.5s both;
+    text-shadow: 0 0 20px rgba(0,0,0,0.5);
+  }
+
+  /* Steering wheel scroll hint */
+  .scroll-hint {
+    display: block;
+    margin: 24px auto;
+    width: 60px;
+    z-index: 2;
+    animation: fadeInUp 1.5s ease-out 0.6s both;
+    cursor: pointer;
+  }
+
+  .steering-wheel {
+    width: 44px;
+    height: 44px;
+    animation: wheelSpin 20s linear infinite;
+    will-change: transform;
+    filter: drop-shadow(0 0 6px rgba(212, 175, 55, 0.5));
+    opacity: 0.85;
+    margin-top: 1.2em;
+  }
+
+  .steering-wheel:hover {
+    animation: bounce 2s ease-in-out infinite, wheelSpin 3s linear infinite;
+  }
+
+  .welcome-scroll {
+    position: absolute;
+    bottom: 30px;
+    right: 20px;
+    z-index: 2;
+    width: 80px;
+    height: 50px;
+    cursor: pointer;
+  }
+
+  .seagull {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 42px;
+    height: auto;
+    animation: gull1 6s ease-in-out infinite;
+  }
+
+  .seagull2 {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 32px;
+    height: auto;
+    animation: gull2 6.5s ease-in-out infinite;
+  }
+
+  @keyframes gull1 {
+    0%   { transform: translate(0, 0) rotate(-3deg); }
+    20%  { transform: translate(5px, -4px) rotate(0deg); }
+    40%  { transform: translate(2px, 2px) rotate(-5deg); }
+    60%  { transform: translate(-3px, -2px) rotate(-1deg); }
+    80%  { transform: translate(-1px, 3px) rotate(-4deg); }
+    100% { transform: translate(0, 0) rotate(-3deg); }
+  }
+
+  @keyframes gull2 {
+    0%   { transform: translate(0, 0) rotate(3deg); }
+    18%  { transform: translate(-3px, 3px) rotate(0deg); }
+    38%  { transform: translate(4px, -2px) rotate(5deg); }
+    58%  { transform: translate(2px, 4px) rotate(1deg); }
+    78%  { transform: translate(-4px, -1px) rotate(4deg); }
+    100% { transform: translate(0, 0) rotate(3deg); }
+  }
+
+  .wing-left {
+    animation: flapLeft 2.8s ease-in-out infinite;
+  }
+  .wing-right {
+    animation: flapRight 2.8s ease-in-out infinite;
+  }
+  .seagull2 .wing-left {
+    animation-duration: 3.2s;
+  }
+  .seagull2 .wing-right {
+    animation-duration: 3.2s;
+  }
+
+  @keyframes flapLeft {
+    0%   { transform: rotate(0deg); }
+    30%  { transform: rotate(6deg); }
+    60%  { transform: rotate(-3deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  @keyframes flapRight {
+    0%   { transform: rotate(0deg); }
+    30%  { transform: rotate(-6deg); }
+    60%  { transform: rotate(3deg); }
+    100% { transform: rotate(0deg); }
+  }
+
+  @keyframes fadeInUp {
+    0%   { opacity: 0; transform: translateY(30px); }
+    100% { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50%      { transform: translateY(10px); }
+  }
+
+  @keyframes wheelSpin {
+    0%   { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+  }

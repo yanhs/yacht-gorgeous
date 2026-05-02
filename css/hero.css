@@ -1,0 +1,175 @@
+/* ===== SVG WAVE TRANSITIONS (bottom of hero) ===== */
+  @keyframes waveScroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ===== SCREEN 2 — Hero ===== */
+  .hero {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+  }
+
+  .hero-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      90deg,
+      rgba(10, 8, 18, 0.75) 0%,
+      rgba(10, 8, 18, 0.55) 30%,
+      rgba(10, 8, 18, 0.1) 55%,
+      transparent 70%
+    );
+  }
+
+  .hero-content {
+    position: absolute;
+    top: 50%;
+    left: clamp(30px, 6vw, 80px);
+    transform: translateY(-50%);
+    max-width: 480px;
+  }
+
+  .hero-content h2 {
+    color: #e8d4b0;
+    font-size: clamp(1.8rem, 4vw, 3.2rem);
+    font-weight: 400;
+    line-height: 1.2;
+    letter-spacing: 0.04em;
+    margin-bottom: 0.6em;
+    text-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  }
+
+  .hero-content p {
+    color: rgba(200, 190, 175, 0.85);
+    font-size: clamp(0.95rem, 1.8vw, 1.15rem);
+    line-height: 1.6;
+    letter-spacing: 0.02em;
+    margin-bottom: 2em;
+    text-shadow: 0 1px 6px rgba(0,0,0,0.4);
+  }
+
+  .btn {
+    display: inline-block;
+    padding: 14px 36px;
+    color: #0B1D3A;
+    background: #D4AF37;
+    border: none;
+    border-radius: 40px;
+    font-family: 'Georgia', serif;
+    font-size: clamp(0.9rem, 1.5vw, 1.05rem);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.3s ease, transform 0.3s ease;
+    box-shadow: 0 4px 20px rgba(200, 160, 80, 0.3);
+  }
+
+  .btn:hover {
+    background: #E6C55A;
+    box-shadow:
+      0 6px 28px rgba(212, 175, 55, 0.45),
+      0 0 40px rgba(212, 175, 55, 0.25);
+    transform: translateY(-2px) scale(1.04);
+  }
+
+  .scroll-down {
+    margin-top: 24px;
+    color: rgba(200, 190, 175, 0.45);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    animation: bounce 2s ease-in-out infinite;
+  }
+
+  /* About highlights */
+  .about-highlights {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px 24px;
+    margin-top: 20px;
+  }
+
+  .about-highlights span {
+    color: rgba(212, 175, 55, 0.8);
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+  }
+
+  @media (max-width: 768px) {
+    .about-highlights {
+      justify-content: center;
+    }
+  }
+
+  /* Hero bottom waves */
+  .wave {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 200%;
+    height: 80px;
+    pointer-events: none;
+  }
+
+  .wave svg { width: 100%; height: 100%; }
+
+  .wave-1 { animation: waveScroll 8s linear infinite; opacity: 0.3; will-change: transform; }
+  .wave-2 { animation: waveScroll 11s linear infinite reverse; bottom: 6px; opacity: 0.2; will-change: transform; }
+
+  /* ===== ROPE ACCENT (thin rope under titles) ===== */
+  .rope-accent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    max-width: 300px;
+    margin: 16px auto 0;
+    gap: 12px;
+  }
+
+  .rope-accent svg { width: 100%; height: 12px; }
+
+  .rope-accent .rope-knot-sm {
+    flex-shrink: 0;
+    width: 20px;
+    height: 20px;
+  }
+
+  /* ===== ROPE DIVIDER ===== */
+  .rope-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 50px 20px;
+    background: #0a1a35;
+  }
+
+  .rope-line {
+    flex: 1;
+    max-width: 300px;
+    height: 12px;
+    position: relative;
+  }
+
+  .rope-line svg { width: 100%; height: 100%; }
+
+  .rope-knot {
+    margin: 0 20px;
+    flex-shrink: 0;
+  }
+
+  .rope-knot svg {
+    width: 40px;
+    height: 40px;
+  }

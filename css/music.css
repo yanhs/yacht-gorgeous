@@ -1,0 +1,379 @@
+/* ===== PORTHOLE MUSIC BUTTON ===== */
+  /* ===== PORTHOLE WITH HINGED LID ===== */
+  .porthole-wrapper {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    width: 70px;
+    height: 70px;
+    z-index: 1000;
+    cursor: pointer;
+    perspective: 400px;
+    display: none;
+  }
+
+  /* Glass window (behind lid) */
+  .porthole-glass {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    border: 3px solid #8a7a55;
+    background: #1a1a1a;
+    box-shadow: 0 0 12px rgba(212,175,55,0.2), inset 0 0 10px rgba(0,0,0,0.5);
+    overflow: hidden;
+    position: relative;
+  }
+
+  .porthole-glass img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  .porthole-glass .play-icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 18px;
+    color: rgba(255,255,255,0.9);
+    text-shadow: 0 0 8px rgba(0,0,0,0.8);
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+
+  /* Brass lid — hinged at top */
+  .porthole-lid {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    transform-origin: top center;
+    transform: rotateX(0deg);
+    transition: transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+    z-index: 2;
+    pointer-events: none;
+  }
+
+  .porthole-lid-face {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      #7a6a45, #b89850, #7a6a45, #5b4e2a,
+      #7a6a45, #b89850, #7a6a45, #5b4e2a,
+      #7a6a45
+    );
+    border: 3px solid #6b5e3a;
+    box-shadow: 0 3px 12px rgba(0,0,0,0.5), inset 0 0 20px rgba(0,0,0,0.25);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .porthole-lid-face::before {
+    content: '🎵';
+    font-size: 20px;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5));
+  }
+
+  /* 4 bolt dots on the lid */
+  .lid-bolt {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #c4a860, #6b5e3a);
+    box-shadow: inset 0 1px 1px rgba(255,255,255,0.3), 0 1px 2px rgba(0,0,0,0.4);
+  }
+  .lid-bolt.bt { top: 6px; left: 50%; transform: translateX(-50%); }
+  .lid-bolt.bb { bottom: 6px; left: 50%; transform: translateX(-50%); }
+  .lid-bolt.bl { left: 6px; top: 50%; transform: translateY(-50%); }
+  .lid-bolt.br { right: 6px; top: 50%; transform: translateY(-50%); }
+
+  /* Hinge piece at top */
+  .porthole-hinge {
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 8px;
+    background: linear-gradient(180deg, #a89460, #6b5e3a);
+    border-radius: 4px 4px 0 0;
+    border: 1px solid #5a4e2a;
+    z-index: 3;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4);
+  }
+
+  /* Latch at bottom */
+  .porthole-latch {
+    position: absolute;
+    bottom: -3px;
+    left: 50%;
+    transform: translateX(-50%) rotate(0deg);
+    width: 12px;
+    height: 7px;
+    background: linear-gradient(180deg, #a89460, #7a6a45);
+    border-radius: 0 0 3px 3px;
+    border: 1px solid #5a4e2a;
+    z-index: 3;
+    transition: transform 0.3s ease;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3);
+  }
+
+  /* ---- OPEN STATE ---- */
+  .porthole-wrapper.lid-open .porthole-lid {
+    transform: rotateX(-170deg);
+  }
+
+  .porthole-wrapper.lid-open .porthole-latch {
+    transform: translateX(-50%) rotate(90deg) translateY(4px);
+  }
+
+  /* Hover effect */
+  .porthole-wrapper:hover .porthole-glass {
+    box-shadow: 0 0 20px rgba(212,175,55,0.35), inset 0 0 10px rgba(0,0,0,0.5);
+  }
+
+  /* Playing glow on the glass */
+  .porthole-wrapper.playing .porthole-glass {
+    animation: portholeGlow 2s ease-in-out infinite;
+    will-change: box-shadow;
+  }
+
+  .porthole-wrapper.playing .play-icon {
+    opacity: 0;
+  }
+
+  @keyframes portholeGlow {
+    0%, 100% { box-shadow: 0 0 15px rgba(212,175,55,0.3), inset 0 0 10px rgba(0,0,0,0.4); }
+    50% { box-shadow: 0 0 25px rgba(212,175,55,0.6), 0 0 40px rgba(212,175,55,0.15), inset 0 0 10px rgba(0,0,0,0.4); }
+  }
+
+  /* ===== VINYL PLAYLIST PANEL ===== */
+  .playlist-panel {
+    position: fixed;
+    bottom: 170px;
+    right: 20px;
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    border: 3px solid rgba(212,175,55,0.3);
+    padding: 0;
+    z-index: 999;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.6);
+    transform: translateY(20px) scale(0.8);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s, transform 0.35s;
+    overflow: hidden;
+  }
+  .playlist-panel.open {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+    pointer-events: all;
+  }
+
+  /* Spinning background image via pseudo-element */
+  .playlist-panel::before {
+    content: '';
+    position: absolute;
+    top: -5px; left: -5px; right: -5px; bottom: -5px;
+    background: url('https://yanhs.stream/tgimg/13d2ba95b7ea48a381a7c1258ecfbac1.jpg') center/cover no-repeat;
+    border-radius: 50%;
+    z-index: 0;
+    transition: transform 0.3s;
+  }
+  .playlist-panel.spinning::before {
+    animation: vinylSpin 6s linear infinite;
+  }
+
+  .vinyl-overlay {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: radial-gradient(circle, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 45%, rgba(0,0,0,0.45) 100%);
+    border-radius: 50%;
+    padding: 20px 15px;
+  }
+
+  /* Vinyl record - hidden, panel IS the record now */
+  .vinyl-wrap {
+    display: none;
+  }
+  .vinyl {
+    display: none;
+  }
+
+  @keyframes vinylSpin {
+    to { transform: rotate(360deg); }
+  }
+
+  /* Play button on disc */
+  .vinyl-play-btn {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.5);
+    border: 2px solid rgba(212,175,55,0.5);
+    color: #D4AF37;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    margin: 2px auto 4px;
+    transition: background 0.2s, transform 0.15s;
+    text-shadow: 0 1px 3px rgba(0,0,0,0.5);
+  }
+  .vinyl-play-btn:hover {
+    background: rgba(212,175,55,0.25);
+    transform: scale(1.1);
+  }
+
+  /* Circular text around the disc — on the blue ring */
+  .vinyl-circle-text {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+    pointer-events: none;
+  }
+
+  /* Emoji icon centered */
+  .vinyl-track-icon {
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 2px;
+    line-height: 1;
+    filter: drop-shadow(0 1px 3px rgba(0,0,0,0.5));
+  }
+
+  /* Navigation — prev/next at edges of disc */
+  .vinyl-nav-btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    border: 1px solid rgba(212,175,55,0.35);
+    background: rgba(0,0,0,0.5);
+    color: #D4AF37;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background 0.2s;
+    z-index: 3;
+  }
+  .vinyl-nav-left { left: 4px; }
+  .vinyl-nav-right { right: 4px; }
+  .vinyl-nav-btn:hover {
+    background: rgba(212,175,55,0.3);
+  }
+  .vinyl-dots {
+    display: flex;
+    gap: 5px;
+    margin-top: 4px;
+  }
+  .vinyl-dot-ind {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: rgba(212,175,55,0.2);
+    transition: background 0.3s;
+  }
+  .vinyl-dot-ind.active {
+    background: #D4AF37;
+  }
+
+  /* Volume */
+  .vinyl-vol {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-top: 4px;
+    width: 130px;
+  }
+  .vinyl-vol .vol-icon {
+    width: 13px; height: 13px; flex-shrink: 0; cursor: pointer;
+  }
+  .vinyl-vol .vol-icon svg {
+    width: 13px; height: 13px; fill: none; stroke: #D4AF37;
+    stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; opacity: 0.8;
+  }
+  .vinyl-vol input[type="range"] {
+    -webkit-appearance: none; appearance: none; flex: 1; height: 3px; border-radius: 2px;
+    background: linear-gradient(90deg, #D4AF37 0%, #D4AF37 var(--val, 80%), rgba(255,255,255,0.12) var(--val, 80%), rgba(255,255,255,0.12) 100%);
+    outline: none; cursor: pointer;
+  }
+  .vinyl-vol input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none; width: 10px; height: 10px; border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #fff8e8, #D4AF37 50%, #a8862a);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4); cursor: pointer;
+  }
+  .vinyl-vol input[type="range"]::-moz-range-thumb {
+    width: 10px; height: 10px; border: none; border-radius: 50%;
+    background: radial-gradient(circle at 40% 35%, #fff8e8, #D4AF37 50%, #a8862a);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.4); cursor: pointer;
+  }
+  .vinyl-vol .vol-pct {
+    font-size: 0.45rem; color: #D4AF37; min-width: 20px; text-align: center; opacity: 0.7;
+  }
+
+  @media (max-width: 600px) {
+    .porthole-wrapper {
+      width: 58px;
+      height: 58px;
+      bottom: 15px;
+      right: 15px;
+    }
+    .playlist-panel {
+      right: 10px;
+      bottom: 120px;
+      width: 150px;
+      height: 150px;
+    }
+  }
+
+  .anchor-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    gap: 20px;
+  }
+
+  .anchor-divider .divider-line {
+    flex: 1;
+    max-width: 200px;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 55, 0.25), transparent);
+  }
+
+  .anchor-divider .anchor-icon {
+    color: rgba(212, 175, 55, 0.35);
+    font-size: 1.4rem;
+  }
+
+  /* Journey narrative hints */
+  .journey-hint {
+    text-align: center;
+    padding: 30px 20px;
+    color: rgba(200, 195, 185, 0.3);
+    font-size: 0.8rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+  }

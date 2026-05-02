@@ -1,0 +1,120 @@
+/* ===== REVIEWS ===== */
+  .reviews {
+    background: #0a1a35;
+    padding: 80px 20px;
+  }
+
+  .reviews h3 {
+    text-align: center;
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 50px;
+  }
+
+  .reviews-grid {
+    max-width: 900px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 24px;
+  }
+
+  .review-card {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(212, 175, 55, 0.1);
+    border-radius: 16px;
+    padding: 32px 28px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+
+  .review-card:hover {
+    border-color: rgba(212, 175, 55, 0.25);
+    transform: translateY(-4px);
+  }
+
+  .review-stars {
+    color: #D4AF37;
+    font-size: 1.2rem;
+    letter-spacing: 0.1em;
+    margin-bottom: 18px;
+  }
+
+  .review-card blockquote {
+    color: rgba(200, 195, 185, 0.75);
+    font-size: 1rem;
+    font-style: italic;
+    line-height: 1.7;
+    margin-bottom: 18px;
+  }
+
+  .review-card cite {
+    color: rgba(212, 175, 55, 0.6);
+    font-size: 0.9rem;
+    font-style: normal;
+    letter-spacing: 0.05em;
+  }
+
+  /* ===== ROMANTIC ===== */
+  .romantic {
+    background: #0a1a35;
+    padding: 80px 20px;
+    text-align: center;
+  }
+
+  .romantic h3 {
+    color: #D4AF37;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 400;
+    letter-spacing: 0.04em;
+    margin-bottom: 12px;
+  }
+
+  .romantic > p {
+    color: rgba(200, 195, 185, 0.6);
+    font-size: clamp(0.9rem, 1.6vw, 1.05rem);
+    margin-bottom: 30px;
+    line-height: 1.6;
+    max-width: 550px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .romantic-features {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    flex-wrap: wrap;
+    margin-bottom: 36px;
+  }
+
+  .romantic-features span {
+    color: rgba(212, 175, 55, 0.8);
+    font-size: 1.05rem;
+    letter-spacing: 0.03em;
+  }
+
+  /* ===== NAUTICAL DIVIDERS ===== */
+
+  /* Photo wave divider — rope */
+  .wave-photo {
+    position: relative;
+    height: 30px;
+    overflow: hidden;
+    background: transparent;
+  }
+  .wave-photo img {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    width: 100%;
+    height: 120px;
+    object-fit: cover;
+    object-position: center 35%;
+    transform: translateY(-50%);
+    opacity: 0.35;
+    -webkit-mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 35%, rgba(0,0,0,0.8) 65%, transparent 100%);
+    mask-image: linear-gradient(to bottom, transparent 0%, rgba(0,0,0,0.8) 35%, rgba(0,0,0,0.8) 65%, transparent 100%);
+  }
